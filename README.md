@@ -6,6 +6,14 @@ This project is a fork of Slingscold:
 
   * http://sourceforge.net/projects/slingscold/
 
+## KNOWN BUGS / TODOS
+
+* Missing background transparency
+* Can't scroll with the middle button
+* Redundant items in the list of applications
+* Icons with wrong size
+* Several warnings during the compilation process
+
 ## Compilation
 
 Enter inside the *build* folder and execute `cmake ..` and after `make`.
