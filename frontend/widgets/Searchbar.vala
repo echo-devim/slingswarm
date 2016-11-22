@@ -97,7 +97,7 @@ namespace Slingshot.Frontend {
             
             // Connect signals and callbacks
             this.buffer.changed.connect (on_changed);
-            this.expose_event.connect (this.draw_background);
+            this.draw.connect (this.draw_background);
             this.realize.connect (() => {
 				this.hint (); // hint it
 			});
@@ -140,10 +140,10 @@ namespace Slingshot.Frontend {
             this.changed ();
         }
         
-        private bool draw_background (Gtk.Widget widget, Gdk.EventExpose event) {
+        private bool draw_background (Gtk.Widget widget, Cairo.Context ctx) {
             Gtk.Allocation size;
             widget.get_allocation (out size);
-            var context = Gdk.cairo_create (widget.window);
+            var context = Gdk.cairo_create (widget.get_window ());
             
             // Draw bottom white border
             Slingshot.Frontend.Utilities.draw_rounded_rectangle (context, 12, -0.5, size);

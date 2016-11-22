@@ -29,7 +29,6 @@
 #include <cairo.h>
 #include <float.h>
 #include <math.h>
-#include <gdk/gdk.h>
 #include <stdlib.h>
 #include <string.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>

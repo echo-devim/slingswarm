@@ -14,11 +14,13 @@
 #include <gdk/gdk.h>
 #include <float.h>
 #include <math.h>
+#include <cairo.h>
 #include <gio/gdesktopappinfo.h>
 #include <gio/gio.h>
 #include <stdio.h>
-#include <cairo.h>
-#include <unique/unique.h>
+#include <unique/uniqueapp.h>
+#include <unique/uniqueenumtypes.h>
+#include <unique/uniquemessage.h>
 
 
 #define ELEMENTARY_WIDGETS_TYPE_COMPOSITED_WINDOW (elementary_widgets_composited_window_get_type ())
@@ -91,6 +93,7 @@ typedef struct _SlingshotFrontendIndicatorsPrivate SlingshotFrontendIndicatorsPr
 #define _g_error_free0(var) ((var == NULL) ? NULL : (var = (g_error_free (var), NULL)))
 #define _cairo_pattern_destroy0(var) ((var == NULL) ? NULL : (var = (cairo_pattern_destroy (var), NULL)))
 #define _cairo_destroy0(var) ((var == NULL) ? NULL : (var = (cairo_destroy (var), NULL)))
+#define __vala_GdkEventButton_free0(var) ((var == NULL) ? NULL : (var = (_vala_GdkEventButton_free (var), NULL)))
 #define _g_list_free0(var) ((var == NULL) ? NULL : (var = (g_list_free (var), NULL)))
 #define _unique_message_data_free0(var) ((var == NULL) ? NULL : (var = (unique_message_data_free (var), NULL)))
 
@@ -184,8 +187,8 @@ static void slingshot_window_update_pages (SlingshotWindow* self, GeeArrayList* 
 static gboolean __lambda20_ (SlingshotWindow* self);
 void slingshot_window_destroy (SlingshotWindow* self);
 static gboolean ___lambda20__gtk_widget_button_release_event (GtkWidget* _sender, GdkEventButton* event, gpointer self);
-static gboolean slingshot_window_draw_background (SlingshotWindow* self, GtkWidget* widget, GdkEventExpose* event);
-static gboolean _slingshot_window_draw_background_gtk_widget_expose_event (GtkWidget* _sender, GdkEventExpose* event, gpointer self);
+static gboolean slingshot_window_draw_background (SlingshotWindow* self, GtkWidget* widget, cairo_t* ctx);
+static gboolean _slingshot_window_draw_background_gtk_widget_draw (GtkWidget* _sender, cairo_t* cr, gpointer self);
 static gboolean __lambda21_ (SlingshotWindow* self);
 static gboolean ___lambda21__gtk_widget_focus_out_event (GtkWidget* _sender, GdkEventFocus* event, gpointer self);
 static Block1Data* block1_data_ref (Block1Data* _data1_);
@@ -207,6 +210,7 @@ void slingshot_frontend_indicators_set_active_no_signal (SlingshotFrontendIndica
 static void slingshot_window_page_left (SlingshotWindow* self);
 static void slingshot_window_page_right (SlingshotWindow* self);
 static gboolean slingshot_window_real_key_press_event (GtkWidget* base, GdkEventKey* event);
+static void _vala_GdkEventButton_free (GdkEventButton* self);
 void slingshot_frontend_searchbar_set_text (SlingshotFrontendSearchbar* self, const gchar* value);
 static gboolean slingshot_window_real_scroll_event (GtkWidget* base, GdkEventScroll* event);
 const gchar* gdk_scroll_direction_to_string (GdkScrollDirection self);
@@ -279,9 +283,9 @@ static gboolean ___lambda20__gtk_widget_button_release_event (GtkWidget* _sender
 }
 
 
-static gboolean _slingshot_window_draw_background_gtk_widget_expose_event (GtkWidget* _sender, GdkEventExpose* event, gpointer self) {
+static gboolean _slingshot_window_draw_background_gtk_widget_draw (GtkWidget* _sender, cairo_t* cr, gpointer self) {
 	gboolean result;
-	result = slingshot_window_draw_background ((SlingshotWindow*) self, _sender, event);
+	result = slingshot_window_draw_background ((SlingshotWindow*) self, _sender, cr);
 	return result;
 }
 
@@ -382,7 +386,7 @@ SlingshotWindow* slingshot_window_construct (GType object_type) {
 	gtk_window_set_skip_pager_hint ((GtkWindow*) self, TRUE);
 	gtk_window_set_skip_taskbar_hint ((GtkWindow*) self, TRUE);
 	gtk_window_set_type_hint ((GtkWindow*) self, GDK_WINDOW_TYPE_HINT_NORMAL);
-	gtk_window_maximize ((GtkWindow*) self);
+	gtk_window_fullscreen ((GtkWindow*) self);
 	gtk_window_stick ((GtkWindow*) self);
 	gtk_window_set_keep_above ((GtkWindow*) self, TRUE);
 	_tmp1_ = gdk_screen_get_default ();
@@ -635,7 +639,7 @@ SlingshotWindow* slingshot_window_construct (GType object_type) {
 	_tmp95_ = self->pages;
 	slingshot_frontend_indicators_set_active (_tmp95_, 0);
 	g_signal_connect_object ((GtkWidget*) self, "button-release-event", (GCallback) ___lambda20__gtk_widget_button_release_event, self, 0);
-	g_signal_connect_object ((GtkWidget*) self, "expose-event", (GCallback) _slingshot_window_draw_background_gtk_widget_expose_event, self, 0);
+	g_signal_connect_object ((GtkWidget*) self, "draw", (GCallback) _slingshot_window_draw_background_gtk_widget_draw, self, 0);
 	g_signal_connect_object ((GtkWidget*) self, "focus-out-event", (GCallback) ___lambda21__gtk_widget_focus_out_event, self, 0);
 	_g_object_unref0 (pages_wrapper);
 	_g_object_unref0 (bottom);
@@ -1524,7 +1528,7 @@ static void slingshot_window_page_right (SlingshotWindow* self) {
 }
 
 
-static gboolean slingshot_window_draw_background (SlingshotWindow* self, GtkWidget* widget, GdkEventExpose* event) {
+static gboolean slingshot_window_draw_background (SlingshotWindow* self, GtkWidget* widget, cairo_t* ctx) {
 	gboolean result = FALSE;
 	GtkAllocation size = {0};
 	GtkWidget* _tmp0_ = NULL;
@@ -1547,13 +1551,13 @@ static gboolean slingshot_window_draw_background (SlingshotWindow* self, GtkWidg
 	cairo_pattern_t* _tmp15_ = NULL;
 	g_return_val_if_fail (self != NULL, FALSE);
 	g_return_val_if_fail (widget != NULL, FALSE);
-	g_return_val_if_fail (event != NULL, FALSE);
+	g_return_val_if_fail (ctx != NULL, FALSE);
 	_tmp0_ = widget;
 	gtk_widget_get_allocation (_tmp0_, &_tmp1_);
 	size = _tmp1_;
 	_tmp2_ = widget;
-	_tmp3_ = _tmp2_->window;
-	_tmp4_ = gdk_cairo_create ((GdkDrawable*) _tmp3_);
+	_tmp3_ = gtk_widget_get_window (_tmp2_);
+	_tmp4_ = gdk_cairo_create (_tmp3_);
 	context = _tmp4_;
 	_tmp5_ = size;
 	_tmp6_ = _tmp5_.x;
@@ -1576,6 +1580,11 @@ static gboolean slingshot_window_draw_background (SlingshotWindow* self, GtkWidg
 	_cairo_pattern_destroy0 (linear_gradient);
 	_cairo_destroy0 (context);
 	return result;
+}
+
+
+static void _vala_GdkEventButton_free (GdkEventButton* self) {
+	g_boxed_free (gdk_event_get_type (), self);
 }
 
 
@@ -1653,7 +1662,7 @@ static gchar* string_slice (const gchar* self, glong start, glong end) {
 static gboolean slingshot_window_real_key_press_event (GtkWidget* base, GdkEventKey* event) {
 	SlingshotWindow * self;
 	gboolean result = FALSE;
-	GdkEventKey _tmp0_ = {0};
+	GdkEventKey* _tmp0_ = NULL;
 	guint _tmp1_ = 0U;
 	const gchar* _tmp2_ = NULL;
 	const gchar* _tmp3_ = NULL;
@@ -1669,11 +1678,11 @@ static gboolean slingshot_window_real_key_press_event (GtkWidget* base, GdkEvent
 	static GQuark _tmp4_label8 = 0;
 	static GQuark _tmp4_label9 = 0;
 	static GQuark _tmp4_label10 = 0;
-	GdkEventKey _tmp57_ = {0};
+	GdkEventKey* _tmp58_ = NULL;
 	self = (SlingshotWindow*) base;
 	g_return_val_if_fail (event != NULL, FALSE);
-	_tmp0_ = *event;
-	_tmp1_ = _tmp0_.keyval;
+	_tmp0_ = event;
+	_tmp1_ = _tmp0_->keyval;
 	_tmp2_ = gdk_keyval_name (_tmp1_);
 	_tmp3_ = _tmp2_;
 	_tmp5_ = (NULL == _tmp3_) ? 0 : g_quark_from_string (_tmp3_);
@@ -1724,11 +1733,14 @@ static gboolean slingshot_window_real_key_press_event (GtkWidget* base, GdkEvent
 				_tmp8_ = _tmp7_;
 				if (_tmp8_ >= 1) {
 					GtkWidget* _tmp9_ = NULL;
-					GdkEventButton _tmp10_ = {0};
-					gboolean _tmp11_ = FALSE;
+					GdkEvent* _tmp10_ = NULL;
+					GdkEventButton* _tmp11_ = NULL;
+					gboolean _tmp12_ = FALSE;
 					_tmp9_ = gtk_window_get_focus ((GtkWindow*) self);
-					memset (&_tmp10_, 0, sizeof (GdkEventButton));
-					g_signal_emit_by_name (_tmp9_, "button-release-event", &_tmp10_, &_tmp11_);
+					_tmp10_ = gdk_event_new (GDK_BUTTON_PRESS);
+					_tmp11_ = (GdkEventButton*) _tmp10_;
+					g_signal_emit_by_name (_tmp9_, "button-release-event", _tmp11_, &_tmp12_);
+					__vala_GdkEventButton_free0 (_tmp11_);
 				}
 				result = TRUE;
 				return result;
@@ -1738,36 +1750,36 @@ static gboolean slingshot_window_real_key_press_event (GtkWidget* base, GdkEvent
 		switch (0) {
 			default:
 			{
-				SlingshotFrontendSearchbar* _tmp12_ = NULL;
 				SlingshotFrontendSearchbar* _tmp13_ = NULL;
-				gchar* _tmp14_ = NULL;
+				SlingshotFrontendSearchbar* _tmp14_ = NULL;
 				gchar* _tmp15_ = NULL;
 				gchar* _tmp16_ = NULL;
-				SlingshotFrontendSearchbar* _tmp17_ = NULL;
-				gchar* _tmp18_ = NULL;
+				gchar* _tmp17_ = NULL;
+				SlingshotFrontendSearchbar* _tmp18_ = NULL;
 				gchar* _tmp19_ = NULL;
 				gchar* _tmp20_ = NULL;
-				gint _tmp21_ = 0;
+				gchar* _tmp21_ = NULL;
 				gint _tmp22_ = 0;
-				gchar* _tmp23_ = NULL;
+				gint _tmp23_ = 0;
 				gchar* _tmp24_ = NULL;
-				_tmp12_ = self->searchbar;
+				gchar* _tmp25_ = NULL;
 				_tmp13_ = self->searchbar;
-				_tmp14_ = slingshot_frontend_searchbar_get_text (_tmp13_);
-				_tmp15_ = _tmp14_;
+				_tmp14_ = self->searchbar;
+				_tmp15_ = slingshot_frontend_searchbar_get_text (_tmp14_);
 				_tmp16_ = _tmp15_;
-				_tmp17_ = self->searchbar;
-				_tmp18_ = slingshot_frontend_searchbar_get_text (_tmp17_);
-				_tmp19_ = _tmp18_;
+				_tmp17_ = _tmp16_;
+				_tmp18_ = self->searchbar;
+				_tmp19_ = slingshot_frontend_searchbar_get_text (_tmp18_);
 				_tmp20_ = _tmp19_;
-				_tmp21_ = strlen (_tmp20_);
-				_tmp22_ = _tmp21_;
-				_tmp23_ = string_slice (_tmp16_, (glong) 0, (glong) (((gint) _tmp22_) - 1));
-				_tmp24_ = _tmp23_;
-				slingshot_frontend_searchbar_set_text (_tmp12_, _tmp24_);
-				_g_free0 (_tmp24_);
-				_g_free0 (_tmp20_);
-				_g_free0 (_tmp16_);
+				_tmp21_ = _tmp20_;
+				_tmp22_ = strlen (_tmp21_);
+				_tmp23_ = _tmp22_;
+				_tmp24_ = string_slice (_tmp17_, (glong) 0, (glong) (((gint) _tmp23_) - 1));
+				_tmp25_ = _tmp24_;
+				slingshot_frontend_searchbar_set_text (_tmp13_, _tmp25_);
+				_g_free0 (_tmp25_);
+				_g_free0 (_tmp21_);
+				_g_free0 (_tmp17_);
 				result = TRUE;
 				return result;
 			}
@@ -1777,35 +1789,35 @@ static gboolean slingshot_window_real_key_press_event (GtkWidget* base, GdkEvent
 			default:
 			{
 				gint current_item = 0;
-				SlingshotFrontendGrid* _tmp25_ = NULL;
-				GList* _tmp26_ = NULL;
+				SlingshotFrontendGrid* _tmp26_ = NULL;
 				GList* _tmp27_ = NULL;
-				GtkWidget* _tmp28_ = NULL;
-				gint _tmp29_ = 0;
+				GList* _tmp28_ = NULL;
+				GtkWidget* _tmp29_ = NULL;
 				gint _tmp30_ = 0;
 				gint _tmp31_ = 0;
-				SlingshotFrontendGrid* _tmp32_ = NULL;
-				guint _tmp33_ = 0U;
+				gint _tmp32_ = 0;
+				SlingshotFrontendGrid* _tmp33_ = NULL;
 				guint _tmp34_ = 0U;
-				SlingshotFrontendGrid* _tmp35_ = NULL;
-				guint _tmp36_ = 0U;
+				guint _tmp35_ = 0U;
+				SlingshotFrontendGrid* _tmp36_ = NULL;
 				guint _tmp37_ = 0U;
-				_tmp25_ = self->grid;
-				_tmp26_ = gtk_container_get_children ((GtkContainer*) _tmp25_);
-				_tmp27_ = _tmp26_;
-				_tmp28_ = gtk_window_get_focus ((GtkWindow*) self);
-				_tmp29_ = g_list_index (_tmp27_, _tmp28_);
-				_tmp30_ = _tmp29_;
-				_g_list_free0 (_tmp27_);
-				current_item = _tmp30_;
-				_tmp31_ = current_item;
-				_tmp32_ = self->grid;
-				g_object_get ((GtkTable*) _tmp32_, "n-columns", &_tmp33_, NULL);
-				_tmp34_ = _tmp33_;
-				_tmp35_ = self->grid;
-				g_object_get ((GtkTable*) _tmp35_, "n-columns", &_tmp36_, NULL);
-				_tmp37_ = _tmp36_;
-				if ((_tmp31_ % _tmp34_) == (_tmp37_ - 1)) {
+				guint _tmp38_ = 0U;
+				_tmp26_ = self->grid;
+				_tmp27_ = gtk_container_get_children ((GtkContainer*) _tmp26_);
+				_tmp28_ = _tmp27_;
+				_tmp29_ = gtk_window_get_focus ((GtkWindow*) self);
+				_tmp30_ = g_list_index (_tmp28_, _tmp29_);
+				_tmp31_ = _tmp30_;
+				_g_list_free0 (_tmp28_);
+				current_item = _tmp31_;
+				_tmp32_ = current_item;
+				_tmp33_ = self->grid;
+				g_object_get ((GtkTable*) _tmp33_, "n-columns", &_tmp34_, NULL);
+				_tmp35_ = _tmp34_;
+				_tmp36_ = self->grid;
+				g_object_get ((GtkTable*) _tmp36_, "n-columns", &_tmp37_, NULL);
+				_tmp38_ = _tmp37_;
+				if ((_tmp32_ % _tmp35_) == (_tmp38_ - 1)) {
 					slingshot_window_page_left (self);
 					result = TRUE;
 					return result;
@@ -1818,29 +1830,29 @@ static gboolean slingshot_window_real_key_press_event (GtkWidget* base, GdkEvent
 			default:
 			{
 				gint current_item = 0;
-				SlingshotFrontendGrid* _tmp38_ = NULL;
-				GList* _tmp39_ = NULL;
+				SlingshotFrontendGrid* _tmp39_ = NULL;
 				GList* _tmp40_ = NULL;
-				GtkWidget* _tmp41_ = NULL;
-				gint _tmp42_ = 0;
+				GList* _tmp41_ = NULL;
+				GtkWidget* _tmp42_ = NULL;
 				gint _tmp43_ = 0;
 				gint _tmp44_ = 0;
-				SlingshotFrontendGrid* _tmp45_ = NULL;
-				guint _tmp46_ = 0U;
+				gint _tmp45_ = 0;
+				SlingshotFrontendGrid* _tmp46_ = NULL;
 				guint _tmp47_ = 0U;
-				_tmp38_ = self->grid;
-				_tmp39_ = gtk_container_get_children ((GtkContainer*) _tmp38_);
-				_tmp40_ = _tmp39_;
-				_tmp41_ = gtk_window_get_focus ((GtkWindow*) self);
-				_tmp42_ = g_list_index (_tmp40_, _tmp41_);
-				_tmp43_ = _tmp42_;
-				_g_list_free0 (_tmp40_);
-				current_item = _tmp43_;
-				_tmp44_ = current_item;
-				_tmp45_ = self->grid;
-				g_object_get ((GtkTable*) _tmp45_, "n-columns", &_tmp46_, NULL);
-				_tmp47_ = _tmp46_;
-				if ((_tmp44_ % _tmp47_) == ((guint) 0)) {
+				guint _tmp48_ = 0U;
+				_tmp39_ = self->grid;
+				_tmp40_ = gtk_container_get_children ((GtkContainer*) _tmp39_);
+				_tmp41_ = _tmp40_;
+				_tmp42_ = gtk_window_get_focus ((GtkWindow*) self);
+				_tmp43_ = g_list_index (_tmp41_, _tmp42_);
+				_tmp44_ = _tmp43_;
+				_g_list_free0 (_tmp41_);
+				current_item = _tmp44_;
+				_tmp45_ = current_item;
+				_tmp46_ = self->grid;
+				g_object_get ((GtkTable*) _tmp46_, "n-columns", &_tmp47_, NULL);
+				_tmp48_ = _tmp47_;
+				if ((_tmp45_ % _tmp48_) == ((guint) 0)) {
 					slingshot_window_page_right (self);
 					result = TRUE;
 					return result;
@@ -1859,33 +1871,33 @@ static gboolean slingshot_window_real_key_press_event (GtkWidget* base, GdkEvent
 		switch (0) {
 			default:
 			{
-				SlingshotFrontendSearchbar* _tmp48_ = NULL;
 				SlingshotFrontendSearchbar* _tmp49_ = NULL;
-				gchar* _tmp50_ = NULL;
+				SlingshotFrontendSearchbar* _tmp50_ = NULL;
 				gchar* _tmp51_ = NULL;
 				gchar* _tmp52_ = NULL;
-				GdkEventKey _tmp53_ = {0};
-				const gchar* _tmp54_ = NULL;
-				gchar* _tmp55_ = NULL;
+				gchar* _tmp53_ = NULL;
+				GdkEventKey* _tmp54_ = NULL;
+				const gchar* _tmp55_ = NULL;
 				gchar* _tmp56_ = NULL;
-				_tmp48_ = self->searchbar;
+				gchar* _tmp57_ = NULL;
 				_tmp49_ = self->searchbar;
-				_tmp50_ = slingshot_frontend_searchbar_get_text (_tmp49_);
-				_tmp51_ = _tmp50_;
+				_tmp50_ = self->searchbar;
+				_tmp51_ = slingshot_frontend_searchbar_get_text (_tmp50_);
 				_tmp52_ = _tmp51_;
-				_tmp53_ = *event;
-				_tmp54_ = _tmp53_.string;
-				_tmp55_ = g_strconcat (_tmp52_, _tmp54_, NULL);
-				_tmp56_ = _tmp55_;
-				slingshot_frontend_searchbar_set_text (_tmp48_, _tmp56_);
-				_g_free0 (_tmp56_);
-				_g_free0 (_tmp52_);
+				_tmp53_ = _tmp52_;
+				_tmp54_ = event;
+				_tmp55_ = _tmp54_->string;
+				_tmp56_ = g_strconcat (_tmp53_, _tmp55_, NULL);
+				_tmp57_ = _tmp56_;
+				slingshot_frontend_searchbar_set_text (_tmp49_, _tmp57_);
+				_g_free0 (_tmp57_);
+				_g_free0 (_tmp53_);
 				break;
 			}
 		}
 	}
-	_tmp57_ = *event;
-	GTK_WIDGET_CLASS (slingshot_window_parent_class)->key_press_event ((GtkWidget*) G_TYPE_CHECK_INSTANCE_CAST (self, ELEMENTARY_WIDGETS_TYPE_COMPOSITED_WINDOW, ElementaryWidgetsCompositedWindow), &_tmp57_);
+	_tmp58_ = event;
+	GTK_WIDGET_CLASS (slingshot_window_parent_class)->key_press_event ((GtkWidget*) G_TYPE_CHECK_INSTANCE_CAST (self, ELEMENTARY_WIDGETS_TYPE_COMPOSITED_WINDOW, ElementaryWidgetsCompositedWindow), _tmp58_);
 	result = FALSE;
 	return result;
 }
@@ -1894,7 +1906,7 @@ static gboolean slingshot_window_real_key_press_event (GtkWidget* base, GdkEvent
 static gboolean slingshot_window_real_scroll_event (GtkWidget* base, GdkEventScroll* event) {
 	SlingshotWindow * self;
 	gboolean result = FALSE;
-	GdkEventScroll _tmp0_ = {0};
+	GdkEventScroll* _tmp0_ = NULL;
 	GdkScrollDirection _tmp1_ = 0;
 	GEnumValue* _tmp2_;
 	const gchar* _tmp3_ = NULL;
@@ -1905,9 +1917,9 @@ static gboolean slingshot_window_real_scroll_event (GtkWidget* base, GdkEventScr
 	static GQuark _tmp4_label3 = 0;
 	self = (SlingshotWindow*) base;
 	g_return_val_if_fail (event != NULL, FALSE);
-	_tmp0_ = *event;
-	_tmp1_ = _tmp0_.direction;
-	_tmp2_ = g_enum_get_value (g_type_class_ref (GDK_TYPE_SCROLL_DIRECTION), _tmp1_);
+	_tmp0_ = event;
+	_tmp1_ = _tmp0_->direction;
+	_tmp2_ = g_enum_get_value (g_type_class_ref (gdk_scroll_direction_get_type ()), _tmp1_);
 	_tmp3_ = (_tmp2_ != NULL) ? _tmp2_->value_name : NULL;
 	_tmp5_ = (NULL == _tmp3_) ? 0 : g_quark_from_string (_tmp3_);
 	if ((_tmp5_ == ((0 != _tmp4_label0) ? _tmp4_label0 : (_tmp4_label0 = g_quark_from_static_string ("GDK_SCROLL_UP")))) || (_tmp5_ == ((0 != _tmp4_label1) ? _tmp4_label1 : (_tmp4_label1 = g_quark_from_static_string ("GDK_SCROLL_LEFT"))))) {
@@ -1937,7 +1949,7 @@ void slingshot_window_destroy (SlingshotWindow* self) {
 	g_return_if_fail (self != NULL);
 	_tmp0_ = wnck_screen_get_default ();
 	wnck_screen_toggle_showing_desktop (_tmp0_, FALSE);
-	GTK_OBJECT_CLASS (slingshot_window_parent_class)->destroy ((GtkObject*) G_TYPE_CHECK_INSTANCE_CAST (self, ELEMENTARY_WIDGETS_TYPE_COMPOSITED_WINDOW, ElementaryWidgetsCompositedWindow));
+	GTK_WIDGET_CLASS (slingshot_window_parent_class)->destroy ((GtkWidget*) G_TYPE_CHECK_INSTANCE_CAST (self, ELEMENTARY_WIDGETS_TYPE_COMPOSITED_WINDOW, ElementaryWidgetsCompositedWindow));
 	gtk_main_quit ();
 }
 
@@ -2002,40 +2014,38 @@ gint _vala_main (gchar** args, int args_length1) {
 	UniqueApp* _tmp0_ = NULL;
 	UniqueApp* _tmp1_ = NULL;
 	gboolean _tmp2_ = FALSE;
-	gboolean _tmp3_ = FALSE;
 	gtk_init (&args_length1, &args);
 	_tmp0_ = unique_app_new ("org.elementary.slingshot", NULL);
 	app = _tmp0_;
 	_tmp1_ = app;
-	g_object_get (_tmp1_, "is-running", &_tmp2_, NULL);
-	_tmp3_ = _tmp2_;
-	if (_tmp3_) {
+	_tmp2_ = unique_app_is_running (_tmp1_);
+	if (_tmp2_) {
 		UniqueCommand command = 0;
-		UniqueApp* _tmp4_ = NULL;
-		UniqueCommand _tmp5_ = 0;
+		UniqueApp* _tmp3_ = NULL;
+		UniqueCommand _tmp4_ = 0;
+		UniqueMessageData* _tmp5_ = NULL;
 		UniqueMessageData* _tmp6_ = NULL;
-		UniqueMessageData* _tmp7_ = NULL;
 		command = UNIQUE_NEW;
-		_tmp4_ = app;
-		_tmp5_ = command;
-		_tmp6_ = unique_message_data_new ();
-		_tmp7_ = _tmp6_;
-		unique_app_send_message (_tmp4_, (gint) _tmp5_, _tmp7_);
-		_unique_message_data_free0 (_tmp7_);
+		_tmp3_ = app;
+		_tmp4_ = command;
+		_tmp5_ = unique_message_data_new ();
+		_tmp6_ = _tmp5_;
+		unique_app_send_message (_tmp3_, (gint) _tmp4_, _tmp6_);
+		_unique_message_data_free0 (_tmp6_);
 	} else {
 		SlingshotWindow* main_win = NULL;
+		SlingshotWindow* _tmp7_ = NULL;
 		SlingshotWindow* _tmp8_ = NULL;
-		SlingshotWindow* _tmp9_ = NULL;
-		UniqueApp* _tmp10_ = NULL;
-		SlingshotWindow* _tmp11_ = NULL;
-		_tmp8_ = slingshot_window_new ();
-		g_object_ref_sink (_tmp8_);
-		main_win = _tmp8_;
-		_tmp9_ = main_win;
-		gtk_widget_show_all ((GtkWidget*) _tmp9_);
-		_tmp10_ = app;
-		_tmp11_ = main_win;
-		unique_app_watch_window (_tmp10_, (GtkWindow*) _tmp11_);
+		UniqueApp* _tmp9_ = NULL;
+		SlingshotWindow* _tmp10_ = NULL;
+		_tmp7_ = slingshot_window_new ();
+		g_object_ref_sink (_tmp7_);
+		main_win = _tmp7_;
+		_tmp8_ = main_win;
+		gtk_widget_show_all ((GtkWidget*) _tmp8_);
+		_tmp9_ = app;
+		_tmp10_ = main_win;
+		unique_app_watch_window (_tmp9_, (GtkWindow*) _tmp10_);
 		gtk_main ();
 		_g_object_unref0 (main_win);
 	}

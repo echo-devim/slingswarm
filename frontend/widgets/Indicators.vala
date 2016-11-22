@@ -59,7 +59,7 @@ namespace Slingshot.Frontend {
             this.children.append(indicator);
 
 
-            this.expose_event.connect(draw_background);
+            this.draw.connect(draw_background);
             indicator.button_release_event.connect( () => {
 
                 this.set_active(this.children.index(indicator));
@@ -123,10 +123,10 @@ namespace Slingshot.Frontend {
             current_frame = 0;
         }
 
-        protected bool draw_background (Gtk.Widget widget, Gdk.EventExpose event) {
+        protected bool draw_background (Gtk.Widget widget, Cairo.Context ctx) {
             Gtk.Allocation size;
             widget.get_allocation (out size);
-            var context = Gdk.cairo_create (widget.window);
+            var context = Gdk.cairo_create (widget.get_window ());
 
 
             double d = (double) this.animation_frames;

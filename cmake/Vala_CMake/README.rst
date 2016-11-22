@@ -116,7 +116,7 @@ example to every of the optional sections::
         source2.vala
         source3.vala
     PACKAGES
-        gtk+-2.0
+        gtk+-3.0
         gio-1.0
         posix
     OPTIONS

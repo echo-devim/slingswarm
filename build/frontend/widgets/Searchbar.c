@@ -70,8 +70,8 @@ void slingshot_frontend_searchbar_hint (SlingshotFrontendSearchbar* self);
 static gboolean ___lambda10__gtk_widget_button_release_event (GtkWidget* _sender, GdkEventButton* event, gpointer self);
 static void slingshot_frontend_searchbar_on_changed (SlingshotFrontendSearchbar* self);
 static void _slingshot_frontend_searchbar_on_changed_gtk_text_buffer_changed (GtkTextBuffer* _sender, gpointer self);
-static gboolean slingshot_frontend_searchbar_draw_background (SlingshotFrontendSearchbar* self, GtkWidget* widget, GdkEventExpose* event);
-static gboolean _slingshot_frontend_searchbar_draw_background_gtk_widget_expose_event (GtkWidget* _sender, GdkEventExpose* event, gpointer self);
+static gboolean slingshot_frontend_searchbar_draw_background (SlingshotFrontendSearchbar* self, GtkWidget* widget, cairo_t* ctx);
+static gboolean _slingshot_frontend_searchbar_draw_background_gtk_widget_draw (GtkWidget* _sender, cairo_t* cr, gpointer self);
 static void __lambda11_ (SlingshotFrontendSearchbar* self);
 static void ___lambda11__gtk_widget_realize (GtkWidget* _sender, gpointer self);
 static void slingshot_frontend_searchbar_grey_out (SlingshotFrontendSearchbar* self);
@@ -120,9 +120,9 @@ static void _slingshot_frontend_searchbar_on_changed_gtk_text_buffer_changed (Gt
 }
 
 
-static gboolean _slingshot_frontend_searchbar_draw_background_gtk_widget_expose_event (GtkWidget* _sender, GdkEventExpose* event, gpointer self) {
+static gboolean _slingshot_frontend_searchbar_draw_background_gtk_widget_draw (GtkWidget* _sender, cairo_t* cr, gpointer self) {
 	gboolean result;
-	result = slingshot_frontend_searchbar_draw_background ((SlingshotFrontendSearchbar*) self, _sender, event);
+	result = slingshot_frontend_searchbar_draw_background ((SlingshotFrontendSearchbar*) self, _sender, cr);
 	return result;
 }
 
@@ -270,7 +270,7 @@ SlingshotFrontendSearchbar* slingshot_frontend_searchbar_construct (GType object
 	gtk_box_pack_end ((GtkBox*) wrapper, (GtkWidget*) clear_icon_wrapper, FALSE, TRUE, (guint) 3);
 	_tmp29_ = self->priv->buffer;
 	g_signal_connect_object (_tmp29_, "changed", (GCallback) _slingshot_frontend_searchbar_on_changed_gtk_text_buffer_changed, self, 0);
-	g_signal_connect_object ((GtkWidget*) self, "expose-event", (GCallback) _slingshot_frontend_searchbar_draw_background_gtk_widget_expose_event, self, 0);
+	g_signal_connect_object ((GtkWidget*) self, "draw", (GCallback) _slingshot_frontend_searchbar_draw_background_gtk_widget_draw, self, 0);
 	g_signal_connect_object ((GtkWidget*) self, "realize", (GCallback) ___lambda11__gtk_widget_realize, self, 0);
 	_gtk_icon_source_free0 (icon_source);
 	_gtk_icon_set_unref0 (icon_set);
@@ -370,7 +370,7 @@ static void slingshot_frontend_searchbar_on_changed (SlingshotFrontendSearchbar*
 }
 
 
-static gboolean slingshot_frontend_searchbar_draw_background (SlingshotFrontendSearchbar* self, GtkWidget* widget, GdkEventExpose* event) {
+static gboolean slingshot_frontend_searchbar_draw_background (SlingshotFrontendSearchbar* self, GtkWidget* widget, cairo_t* ctx) {
 	gboolean result = FALSE;
 	GtkAllocation size = {0};
 	GtkWidget* _tmp0_ = NULL;
@@ -408,13 +408,13 @@ static gboolean slingshot_frontend_searchbar_draw_background (SlingshotFrontendS
 	GtkAllocation _tmp29_ = {0};
 	g_return_val_if_fail (self != NULL, FALSE);
 	g_return_val_if_fail (widget != NULL, FALSE);
-	g_return_val_if_fail (event != NULL, FALSE);
+	g_return_val_if_fail (ctx != NULL, FALSE);
 	_tmp0_ = widget;
 	gtk_widget_get_allocation (_tmp0_, &_tmp1_);
 	size = _tmp1_;
 	_tmp2_ = widget;
-	_tmp3_ = _tmp2_->window;
-	_tmp4_ = gdk_cairo_create ((GdkDrawable*) _tmp3_);
+	_tmp3_ = gtk_widget_get_window (_tmp2_);
+	_tmp4_ = gdk_cairo_create (_tmp3_);
 	context = _tmp4_;
 	_tmp5_ = size;
 	slingshot_frontend_utilities_draw_rounded_rectangle (context, (gdouble) 12, -0.5, &_tmp5_);
@@ -587,7 +587,7 @@ GType slingshot_frontend_searchbar_get_type (void) {
 	if (g_once_init_enter (&slingshot_frontend_searchbar_type_id__volatile)) {
 		static const GTypeInfo g_define_type_info = { sizeof (SlingshotFrontendSearchbarClass), (GBaseInitFunc) NULL, (GBaseFinalizeFunc) NULL, (GClassInitFunc) slingshot_frontend_searchbar_class_init, (GClassFinalizeFunc) NULL, NULL, sizeof (SlingshotFrontendSearchbar), 0, (GInstanceInitFunc) slingshot_frontend_searchbar_instance_init, NULL };
 		GType slingshot_frontend_searchbar_type_id;
-		slingshot_frontend_searchbar_type_id = g_type_register_static (GTK_TYPE_HBOX, "SlingshotFrontendSearchbar", &g_define_type_info, 0);
+		slingshot_frontend_searchbar_type_id = g_type_register_static (gtk_hbox_get_type (), "SlingshotFrontendSearchbar", &g_define_type_info, 0);
 		g_once_init_leave (&slingshot_frontend_searchbar_type_id__volatile, slingshot_frontend_searchbar_type_id);
 	}
 	return slingshot_frontend_searchbar_type_id__volatile;

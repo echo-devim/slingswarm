@@ -10,8 +10,8 @@
 #include <math.h>
 #include <stdlib.h>
 #include <string.h>
-#include <gdk/gdk.h>
 #include <cairo.h>
+#include <gdk/gdk.h>
 
 
 #define SLINGSHOT_FRONTEND_TYPE_APP_ITEM (slingshot_frontend_app_item_get_type ())
@@ -73,10 +73,10 @@ enum  {
 #define SLINGSHOT_FRONTEND_APP_ITEM_RUN_LENGTH ((gint) (SLINGSHOT_FRONTEND_APP_ITEM_DURATION / SLINGSHOT_FRONTEND_APP_ITEM_FPS))
 SlingshotFrontendAppItem* slingshot_frontend_app_item_new (gint size);
 SlingshotFrontendAppItem* slingshot_frontend_app_item_construct (GType object_type, gint size);
-static gboolean slingshot_frontend_app_item_draw_icon (SlingshotFrontendAppItem* self, GtkWidget* widget, GdkEventExpose* event);
-static gboolean _slingshot_frontend_app_item_draw_icon_gtk_widget_expose_event (GtkWidget* _sender, GdkEventExpose* event, gpointer self);
-static gboolean slingshot_frontend_app_item_draw_background (SlingshotFrontendAppItem* self, GtkWidget* widget, GdkEventExpose* event);
-static gboolean _slingshot_frontend_app_item_draw_background_gtk_widget_expose_event (GtkWidget* _sender, GdkEventExpose* event, gpointer self);
+static gboolean slingshot_frontend_app_item_draw_icon (SlingshotFrontendAppItem* self, GtkWidget* widget, cairo_t* ctx);
+static gboolean _slingshot_frontend_app_item_draw_icon_gtk_widget_draw (GtkWidget* _sender, cairo_t* cr, gpointer self);
+static gboolean slingshot_frontend_app_item_draw_background (SlingshotFrontendAppItem* self, GtkWidget* widget, cairo_t* ctx);
+static gboolean _slingshot_frontend_app_item_draw_background_gtk_widget_draw (GtkWidget* _sender, cairo_t* cr, gpointer self);
 static gboolean __lambda5_ (SlingshotFrontendAppItem* self);
 void slingshot_frontend_app_item_focus_in (SlingshotFrontendAppItem* self);
 static gboolean ___lambda5__gtk_widget_focus_in_event (GtkWidget* _sender, GdkEventFocus* event, gpointer self);
@@ -94,16 +94,16 @@ void slingshot_frontend_utilities_draw_rounded_rectangle (cairo_t* context, gdou
 static void slingshot_frontend_app_item_finalize (GObject* obj);
 
 
-static gboolean _slingshot_frontend_app_item_draw_icon_gtk_widget_expose_event (GtkWidget* _sender, GdkEventExpose* event, gpointer self) {
+static gboolean _slingshot_frontend_app_item_draw_icon_gtk_widget_draw (GtkWidget* _sender, cairo_t* cr, gpointer self) {
 	gboolean result;
-	result = slingshot_frontend_app_item_draw_icon ((SlingshotFrontendAppItem*) self, _sender, event);
+	result = slingshot_frontend_app_item_draw_icon ((SlingshotFrontendAppItem*) self, _sender, cr);
 	return result;
 }
 
 
-static gboolean _slingshot_frontend_app_item_draw_background_gtk_widget_expose_event (GtkWidget* _sender, GdkEventExpose* event, gpointer self) {
+static gboolean _slingshot_frontend_app_item_draw_background_gtk_widget_draw (GtkWidget* _sender, cairo_t* cr, gpointer self) {
 	gboolean result;
-	result = slingshot_frontend_app_item_draw_background ((SlingshotFrontendAppItem*) self, _sender, event);
+	result = slingshot_frontend_app_item_draw_background ((SlingshotFrontendAppItem*) self, _sender, cr);
 	return result;
 }
 
@@ -159,10 +159,10 @@ SlingshotFrontendAppItem* slingshot_frontend_app_item_construct (GType object_ty
 	_g_object_unref0 (self->priv->wrapper);
 	self->priv->wrapper = _tmp3_;
 	_tmp4_ = self->priv->wrapper;
-	g_signal_connect_object ((GtkWidget*) _tmp4_, "expose-event", (GCallback) _slingshot_frontend_app_item_draw_icon_gtk_widget_expose_event, self, 0);
+	g_signal_connect_object ((GtkWidget*) _tmp4_, "draw", (GCallback) _slingshot_frontend_app_item_draw_icon_gtk_widget_draw, self, 0);
 	_tmp5_ = self->priv->wrapper;
 	gtk_container_add ((GtkContainer*) self, (GtkWidget*) _tmp5_);
-	g_signal_connect_object ((GtkWidget*) self, "expose-event", (GCallback) _slingshot_frontend_app_item_draw_background_gtk_widget_expose_event, self, 0);
+	g_signal_connect_object ((GtkWidget*) self, "draw", (GCallback) _slingshot_frontend_app_item_draw_background_gtk_widget_draw, self, 0);
 	g_signal_connect_object ((GtkWidget*) self, "focus-in-event", (GCallback) ___lambda5__gtk_widget_focus_in_event, self, 0);
 	g_signal_connect_object ((GtkWidget*) self, "focus-out-event", (GCallback) ___lambda7__gtk_widget_focus_out_event, self, 0);
 	return self;
@@ -293,7 +293,7 @@ void slingshot_frontend_app_item_focus_out (SlingshotFrontendAppItem* self) {
 }
 
 
-static gboolean slingshot_frontend_app_item_draw_icon (SlingshotFrontendAppItem* self, GtkWidget* widget, GdkEventExpose* event) {
+static gboolean slingshot_frontend_app_item_draw_icon (SlingshotFrontendAppItem* self, GtkWidget* widget, cairo_t* ctx) {
 	gboolean result = FALSE;
 	GtkAllocation size = {0};
 	GtkWidget* _tmp0_ = NULL;
@@ -341,13 +341,13 @@ static gboolean slingshot_frontend_app_item_draw_icon (SlingshotFrontendAppItem*
 	const gchar* _tmp40_ = NULL;
 	g_return_val_if_fail (self != NULL, FALSE);
 	g_return_val_if_fail (widget != NULL, FALSE);
-	g_return_val_if_fail (event != NULL, FALSE);
+	g_return_val_if_fail (ctx != NULL, FALSE);
 	_tmp0_ = widget;
 	gtk_widget_get_allocation (_tmp0_, &_tmp1_);
 	size = _tmp1_;
 	_tmp2_ = widget;
-	_tmp3_ = _tmp2_->window;
-	_tmp4_ = gdk_cairo_create ((GdkDrawable*) _tmp3_);
+	_tmp3_ = gtk_widget_get_window (_tmp2_);
+	_tmp4_ = gdk_cairo_create (_tmp3_);
 	context = _tmp4_;
 	_tmp5_ = self->priv->icon;
 	_tmp6_ = size;
@@ -403,7 +403,7 @@ static gboolean slingshot_frontend_app_item_draw_icon (SlingshotFrontendAppItem*
 }
 
 
-static gboolean slingshot_frontend_app_item_draw_background (SlingshotFrontendAppItem* self, GtkWidget* widget, GdkEventExpose* event) {
+static gboolean slingshot_frontend_app_item_draw_background (SlingshotFrontendAppItem* self, GtkWidget* widget, cairo_t* ctx) {
 	gboolean result = FALSE;
 	GtkAllocation size = {0};
 	GtkWidget* _tmp0_ = NULL;
@@ -418,13 +418,13 @@ static gboolean slingshot_frontend_app_item_draw_background (SlingshotFrontendAp
 	gboolean _tmp8_ = FALSE;
 	g_return_val_if_fail (self != NULL, FALSE);
 	g_return_val_if_fail (widget != NULL, FALSE);
-	g_return_val_if_fail (event != NULL, FALSE);
+	g_return_val_if_fail (ctx != NULL, FALSE);
 	_tmp0_ = widget;
 	gtk_widget_get_allocation (_tmp0_, &_tmp1_);
 	size = _tmp1_;
 	_tmp2_ = widget;
-	_tmp3_ = _tmp2_->window;
-	_tmp4_ = gdk_cairo_create ((GdkDrawable*) _tmp3_);
+	_tmp3_ = gtk_widget_get_window (_tmp2_);
+	_tmp4_ = gdk_cairo_create (_tmp3_);
 	context = _tmp4_;
 	_tmp5_ = self->priv->current_frame;
 	if (_tmp5_ > 1) {
@@ -651,7 +651,7 @@ GType slingshot_frontend_app_item_get_type (void) {
 	if (g_once_init_enter (&slingshot_frontend_app_item_type_id__volatile)) {
 		static const GTypeInfo g_define_type_info = { sizeof (SlingshotFrontendAppItemClass), (GBaseInitFunc) NULL, (GBaseFinalizeFunc) NULL, (GClassInitFunc) slingshot_frontend_app_item_class_init, (GClassFinalizeFunc) NULL, NULL, sizeof (SlingshotFrontendAppItem), 0, (GInstanceInitFunc) slingshot_frontend_app_item_instance_init, NULL };
 		GType slingshot_frontend_app_item_type_id;
-		slingshot_frontend_app_item_type_id = g_type_register_static (GTK_TYPE_EVENT_BOX, "SlingshotFrontendAppItem", &g_define_type_info, 0);
+		slingshot_frontend_app_item_type_id = g_type_register_static (gtk_event_box_get_type (), "SlingshotFrontendAppItem", &g_define_type_info, 0);
 		g_once_init_leave (&slingshot_frontend_app_item_type_id__volatile, slingshot_frontend_app_item_type_id);
 	}
 	return slingshot_frontend_app_item_type_id__volatile;

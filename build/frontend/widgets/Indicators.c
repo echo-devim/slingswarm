@@ -9,9 +9,9 @@
 #include <string.h>
 #include <gdk/gdk.h>
 #include <pango/pango.h>
+#include <cairo.h>
 #include <math.h>
 #include <float.h>
-#include <cairo.h>
 
 
 #define SLINGSHOT_FRONTEND_TYPE_INDICATORS (slingshot_frontend_indicators_get_type ())
@@ -74,8 +74,8 @@ void slingshot_frontend_indicators_append (SlingshotFrontendIndicators* self, co
 static Block2Data* block2_data_ref (Block2Data* _data2_);
 static void block2_data_unref (void * _userdata_);
 GtkAlignment* slingshot_frontend_utilities_wrap_alignment (GtkWidget* widget, gint top, gint right, gint bottom, gint left);
-gboolean slingshot_frontend_indicators_draw_background (SlingshotFrontendIndicators* self, GtkWidget* widget, GdkEventExpose* event);
-static gboolean _slingshot_frontend_indicators_draw_background_gtk_widget_expose_event (GtkWidget* _sender, GdkEventExpose* event, gpointer self);
+gboolean slingshot_frontend_indicators_draw_background (SlingshotFrontendIndicators* self, GtkWidget* widget, cairo_t* ctx);
+static gboolean _slingshot_frontend_indicators_draw_background_gtk_widget_draw (GtkWidget* _sender, cairo_t* cr, gpointer self);
 static gboolean __lambda12_ (Block2Data* _data2_);
 void slingshot_frontend_indicators_set_active (SlingshotFrontendIndicators* self, gint index);
 static gboolean ___lambda12__gtk_widget_button_release_event (GtkWidget* _sender, GdkEventButton* event, gpointer self);
@@ -137,9 +137,9 @@ static gpointer _g_object_ref0 (gpointer self) {
 }
 
 
-static gboolean _slingshot_frontend_indicators_draw_background_gtk_widget_expose_event (GtkWidget* _sender, GdkEventExpose* event, gpointer self) {
+static gboolean _slingshot_frontend_indicators_draw_background_gtk_widget_draw (GtkWidget* _sender, cairo_t* cr, gpointer self) {
 	gboolean result;
-	result = slingshot_frontend_indicators_draw_background ((SlingshotFrontendIndicators*) self, _sender, event);
+	result = slingshot_frontend_indicators_draw_background ((SlingshotFrontendIndicators*) self, _sender, cr);
 	return result;
 }
 
@@ -212,7 +212,7 @@ void slingshot_frontend_indicators_append (SlingshotFrontendIndicators* self, co
 	_g_object_unref0 (_tmp7_);
 	_tmp8_ = _g_object_ref0 ((GtkWidget*) _data2_->indicator);
 	self->children = g_list_append (self->children, _tmp8_);
-	g_signal_connect_object ((GtkWidget*) self, "expose-event", (GCallback) _slingshot_frontend_indicators_draw_background_gtk_widget_expose_event, self, 0);
+	g_signal_connect_object ((GtkWidget*) self, "draw", (GCallback) _slingshot_frontend_indicators_draw_background_gtk_widget_draw, self, 0);
 	g_signal_connect_data ((GtkWidget*) _data2_->indicator, "button-release-event", (GCallback) ___lambda12__gtk_widget_button_release_event, block2_data_ref (_data2_), (GClosureNotify) block2_data_unref, 0);
 	gtk_box_pack_start ((GtkBox*) self, (GtkWidget*) _data2_->indicator, FALSE, FALSE, (guint) 0);
 	__vala_PangoFontDescription_free0 (font);
@@ -318,7 +318,7 @@ static void slingshot_frontend_indicators_end_animation (SlingshotFrontendIndica
 }
 
 
-gboolean slingshot_frontend_indicators_draw_background (SlingshotFrontendIndicators* self, GtkWidget* widget, GdkEventExpose* event) {
+gboolean slingshot_frontend_indicators_draw_background (SlingshotFrontendIndicators* self, GtkWidget* widget, cairo_t* ctx) {
 	gboolean result = FALSE;
 	GtkAllocation size = {0};
 	GtkWidget* _tmp0_ = NULL;
@@ -382,13 +382,13 @@ gboolean slingshot_frontend_indicators_draw_background (SlingshotFrontendIndicat
 	gint _tmp48_ = 0;
 	g_return_val_if_fail (self != NULL, FALSE);
 	g_return_val_if_fail (widget != NULL, FALSE);
-	g_return_val_if_fail (event != NULL, FALSE);
+	g_return_val_if_fail (ctx != NULL, FALSE);
 	_tmp0_ = widget;
 	gtk_widget_get_allocation (_tmp0_, &_tmp1_);
 	size = _tmp1_;
 	_tmp2_ = widget;
-	_tmp3_ = _tmp2_->window;
-	_tmp4_ = gdk_cairo_create ((GdkDrawable*) _tmp3_);
+	_tmp3_ = gtk_widget_get_window (_tmp2_);
+	_tmp4_ = gdk_cairo_create (_tmp3_);
 	context = _tmp4_;
 	_tmp5_ = self->priv->animation_frames;
 	d = (gdouble) _tmp5_;
@@ -490,7 +490,7 @@ GType slingshot_frontend_indicators_get_type (void) {
 	if (g_once_init_enter (&slingshot_frontend_indicators_type_id__volatile)) {
 		static const GTypeInfo g_define_type_info = { sizeof (SlingshotFrontendIndicatorsClass), (GBaseInitFunc) NULL, (GBaseFinalizeFunc) NULL, (GClassInitFunc) slingshot_frontend_indicators_class_init, (GClassFinalizeFunc) NULL, NULL, sizeof (SlingshotFrontendIndicators), 0, (GInstanceInitFunc) slingshot_frontend_indicators_instance_init, NULL };
 		GType slingshot_frontend_indicators_type_id;
-		slingshot_frontend_indicators_type_id = g_type_register_static (GTK_TYPE_HBOX, "SlingshotFrontendIndicators", &g_define_type_info, 0);
+		slingshot_frontend_indicators_type_id = g_type_register_static (gtk_hbox_get_type (), "SlingshotFrontendIndicators", &g_define_type_info, 0);
 		g_once_init_leave (&slingshot_frontend_indicators_type_id__volatile, slingshot_frontend_indicators_type_id);
 	}
 	return slingshot_frontend_indicators_type_id__volatile;

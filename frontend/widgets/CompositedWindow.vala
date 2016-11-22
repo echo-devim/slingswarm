@@ -5,27 +5,33 @@ namespace ElementaryWidgets {
         construct {
         
             //Window properties
-            this.skip_taskbar_hint = true;
-            this.decorated = false; // no window decoration
-            this.app_paintable = true;
+            this.set_skip_taskbar_hint (true);
+            this.set_decorated (false); // no window decoration
+            this.set_app_paintable (true);
+            this.set_name ("mainwindow");
             
-            this.set_default_colormap (this.get_screen ().get_rgba_colormap () ?? this.get_screen ().get_rgb_colormap ());
+            //this.set_default_colormap (this.get_screen ().get_rgba_colormap () ?? this.get_screen ().get_rgb_colormap ());
             
-            this.expose_event.connect (clear_background);
+            this.draw.connect (clear_background);
             this.realize.connect (() => {
-				this.get_window ().set_back_pixmap (null, false); // transparent background
-			});
+                // transparent background
+                //source: http://wolfvollprecht.de/blog/gtk-python-and-css-are-an-awesome-combo/
+                /*Gtk.CssProvider provider = new Gtk.CssProvider ();
+                provider.load_from_data ("window { background-color: #FF0000; }");
+                Gtk.StyleContext.add_provider_for_screen (Gdk.Screen.get_default(), provider, Gtk.STYLE_PROVIDER_PRIORITY_USER);
+                */
+            });
         
         }
         
-        public bool clear_background (Gtk.Widget widget, Gdk.EventExpose event) {
-			var context = Gdk.cairo_create (widget.window);
-			
-			context.set_operator (Cairo.Operator.CLEAR);
-			context.paint();
-			
-			return false;
-		}
+        public bool clear_background (Gtk.Widget widget, Cairo.Context ctx) {
+            var context = Gdk.cairo_create (widget.get_window ());
+            
+            context.set_operator (Cairo.Operator.CLEAR);
+            context.paint();
+            
+            return false;
+        }
     
     }
     

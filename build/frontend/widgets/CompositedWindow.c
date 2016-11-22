@@ -5,8 +5,8 @@
 #include <glib.h>
 #include <glib-object.h>
 #include <gtk/gtk.h>
-#include <gdk/gdk.h>
 #include <cairo.h>
+#include <gdk/gdk.h>
 
 
 #define ELEMENTARY_WIDGETS_TYPE_COMPOSITED_WINDOW (elementary_widgets_composited_window_get_type ())
@@ -37,16 +37,16 @@ GType elementary_widgets_composited_window_get_type (void) G_GNUC_CONST;
 enum  {
 	ELEMENTARY_WIDGETS_COMPOSITED_WINDOW_DUMMY_PROPERTY
 };
-gboolean elementary_widgets_composited_window_clear_background (ElementaryWidgetsCompositedWindow* self, GtkWidget* widget, GdkEventExpose* event);
+gboolean elementary_widgets_composited_window_clear_background (ElementaryWidgetsCompositedWindow* self, GtkWidget* widget, cairo_t* ctx);
 ElementaryWidgetsCompositedWindow* elementary_widgets_composited_window_new (void);
 ElementaryWidgetsCompositedWindow* elementary_widgets_composited_window_construct (GType object_type);
 static GObject * elementary_widgets_composited_window_constructor (GType type, guint n_construct_properties, GObjectConstructParam * construct_properties);
-static gboolean _elementary_widgets_composited_window_clear_background_gtk_widget_expose_event (GtkWidget* _sender, GdkEventExpose* event, gpointer self);
+static gboolean _elementary_widgets_composited_window_clear_background_gtk_widget_draw (GtkWidget* _sender, cairo_t* cr, gpointer self);
 static void _elementary_widgets_composited_window___lambda4_ (ElementaryWidgetsCompositedWindow* self);
 static void __elementary_widgets_composited_window___lambda4__gtk_widget_realize (GtkWidget* _sender, gpointer self);
 
 
-gboolean elementary_widgets_composited_window_clear_background (ElementaryWidgetsCompositedWindow* self, GtkWidget* widget, GdkEventExpose* event) {
+gboolean elementary_widgets_composited_window_clear_background (ElementaryWidgetsCompositedWindow* self, GtkWidget* widget, cairo_t* ctx) {
 	gboolean result = FALSE;
 	cairo_t* context = NULL;
 	GtkWidget* _tmp0_ = NULL;
@@ -54,10 +54,10 @@ gboolean elementary_widgets_composited_window_clear_background (ElementaryWidget
 	cairo_t* _tmp2_ = NULL;
 	g_return_val_if_fail (self != NULL, FALSE);
 	g_return_val_if_fail (widget != NULL, FALSE);
-	g_return_val_if_fail (event != NULL, FALSE);
+	g_return_val_if_fail (ctx != NULL, FALSE);
 	_tmp0_ = widget;
-	_tmp1_ = _tmp0_->window;
-	_tmp2_ = gdk_cairo_create ((GdkDrawable*) _tmp1_);
+	_tmp1_ = gtk_widget_get_window (_tmp0_);
+	_tmp2_ = gdk_cairo_create (_tmp1_);
 	context = _tmp2_;
 	cairo_set_operator (context, CAIRO_OPERATOR_CLEAR);
 	cairo_paint (context);
@@ -79,17 +79,14 @@ ElementaryWidgetsCompositedWindow* elementary_widgets_composited_window_new (voi
 }
 
 
-static gboolean _elementary_widgets_composited_window_clear_background_gtk_widget_expose_event (GtkWidget* _sender, GdkEventExpose* event, gpointer self) {
+static gboolean _elementary_widgets_composited_window_clear_background_gtk_widget_draw (GtkWidget* _sender, cairo_t* cr, gpointer self) {
 	gboolean result;
-	result = elementary_widgets_composited_window_clear_background ((ElementaryWidgetsCompositedWindow*) self, _sender, event);
+	result = elementary_widgets_composited_window_clear_background ((ElementaryWidgetsCompositedWindow*) self, _sender, cr);
 	return result;
 }
 
 
 static void _elementary_widgets_composited_window___lambda4_ (ElementaryWidgetsCompositedWindow* self) {
-	GdkWindow* _tmp0_ = NULL;
-	_tmp0_ = gtk_widget_get_window ((GtkWidget*) self);
-	gdk_window_set_back_pixmap (_tmp0_, NULL, FALSE);
 }
 
 
@@ -102,27 +99,14 @@ static GObject * elementary_widgets_composited_window_constructor (GType type, g
 	GObject * obj;
 	GObjectClass * parent_class;
 	ElementaryWidgetsCompositedWindow * self;
-	GdkColormap* _tmp0_ = NULL;
-	GdkScreen* _tmp1_ = NULL;
-	GdkColormap* _tmp2_ = NULL;
 	parent_class = G_OBJECT_CLASS (elementary_widgets_composited_window_parent_class);
 	obj = parent_class->constructor (type, n_construct_properties, construct_properties);
 	self = G_TYPE_CHECK_INSTANCE_CAST (obj, ELEMENTARY_WIDGETS_TYPE_COMPOSITED_WINDOW, ElementaryWidgetsCompositedWindow);
 	gtk_window_set_skip_taskbar_hint ((GtkWindow*) self, TRUE);
 	gtk_window_set_decorated ((GtkWindow*) self, FALSE);
 	gtk_widget_set_app_paintable ((GtkWidget*) self, TRUE);
-	_tmp1_ = gtk_window_get_screen ((GtkWindow*) self);
-	_tmp2_ = gdk_screen_get_rgba_colormap (_tmp1_);
-	_tmp0_ = _tmp2_;
-	if (_tmp0_ == NULL) {
-		GdkScreen* _tmp3_ = NULL;
-		GdkColormap* _tmp4_ = NULL;
-		_tmp3_ = gtk_window_get_screen ((GtkWindow*) self);
-		_tmp4_ = gdk_screen_get_rgb_colormap (_tmp3_);
-		_tmp0_ = _tmp4_;
-	}
-	gtk_widget_set_default_colormap (_tmp0_);
-	g_signal_connect_object ((GtkWidget*) self, "expose-event", (GCallback) _elementary_widgets_composited_window_clear_background_gtk_widget_expose_event, self, 0);
+	gtk_buildable_set_name ((GtkBuildable*) self, "mainwindow");
+	g_signal_connect_object ((GtkWidget*) self, "draw", (GCallback) _elementary_widgets_composited_window_clear_background_gtk_widget_draw, self, 0);
 	g_signal_connect_object ((GtkWidget*) self, "realize", (GCallback) __elementary_widgets_composited_window___lambda4__gtk_widget_realize, self, 0);
 	return obj;
 }
@@ -143,7 +127,7 @@ GType elementary_widgets_composited_window_get_type (void) {
 	if (g_once_init_enter (&elementary_widgets_composited_window_type_id__volatile)) {
 		static const GTypeInfo g_define_type_info = { sizeof (ElementaryWidgetsCompositedWindowClass), (GBaseInitFunc) NULL, (GBaseFinalizeFunc) NULL, (GClassInitFunc) elementary_widgets_composited_window_class_init, (GClassFinalizeFunc) NULL, NULL, sizeof (ElementaryWidgetsCompositedWindow), 0, (GInstanceInitFunc) elementary_widgets_composited_window_instance_init, NULL };
 		GType elementary_widgets_composited_window_type_id;
-		elementary_widgets_composited_window_type_id = g_type_register_static (GTK_TYPE_WINDOW, "ElementaryWidgetsCompositedWindow", &g_define_type_info, 0);
+		elementary_widgets_composited_window_type_id = g_type_register_static (gtk_window_get_type (), "ElementaryWidgetsCompositedWindow", &g_define_type_info, 0);
 		g_once_init_leave (&elementary_widgets_composited_window_type_id__volatile, elementary_widgets_composited_window_type_id);
 	}
 	return elementary_widgets_composited_window_type_id__volatile;

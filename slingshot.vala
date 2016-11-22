@@ -21,11 +21,11 @@ public class SlingshotWindow : ElementaryWidgets.CompositedWindow {
         Wnck.Screen.get_default().toggle_showing_desktop (false);
         
         // Window properties
-        this.title = "Slingscold";
-        this.skip_pager_hint = true;
-        this.skip_taskbar_hint = true;
+        this.set_title ("Slingscold");
+        this.set_skip_pager_hint (true);
+        this.set_skip_taskbar_hint (true);
         this.set_type_hint (Gdk.WindowTypeHint.NORMAL);
-        this.maximize ();
+        this.fullscreen (); //this.maximize ();
         this.stick ();
         this.set_keep_above (true);
         
@@ -118,7 +118,7 @@ public class SlingshotWindow : ElementaryWidgets.CompositedWindow {
         
         // Signals and callbacks
         this.button_release_event.connect ( () => { this.destroy(); return false; });
-        this.expose_event.connect (this.draw_background);
+        this.draw.connect (this.draw_background);
         this.focus_out_event.connect ( () => { this.destroy(); return true; } ); // close slingshot when the window loses focus
     }
     
@@ -253,10 +253,10 @@ public class SlingshotWindow : ElementaryWidgets.CompositedWindow {
         
     }
 
-    private bool draw_background (Gtk.Widget widget, Gdk.EventExpose event) {
+    private bool draw_background (Gtk.Widget widget, Cairo.Context ctx) {
         Gtk.Allocation size;
         widget.get_allocation (out size);
-        var context = Gdk.cairo_create (widget.window); // directly onto the gdk.window
+        var context = Gdk.cairo_create (widget.get_window ());
 
         // Semi-dark background
         var linear_gradient = new Cairo.Pattern.linear (size.x, size.y, size.x, size.y + size.height);
@@ -288,7 +288,7 @@ public class SlingshotWindow : ElementaryWidgets.CompositedWindow {
                 return true;
             case "Return":
                 if (this.filtered.size >= 1) {
-                    this.get_focus ().button_release_event (Gdk.EventButton ());
+                    this.get_focus ().button_release_event ((Gdk.EventButton) new Gdk.Event (Gdk.EventType.BUTTON_PRESS));
                 }
                 return true;
             case "BackSpace":
@@ -357,7 +357,7 @@ int main (string[] args) {
 
 	Unique.App app = new Unique.App ("org.elementary.slingshot", null);
 	
-	if (app.is_running) { //close if already running
+	if (app.is_running ()) { //close if already running
 		Unique.Command command = Unique.Command.NEW;
 		app.send_message (command, new Unique.MessageData());
 	} else {

@@ -24,12 +24,12 @@ namespace Slingshot.Frontend {
             
             // VBox properties
             this.wrapper = new Gtk.VBox (false, 0);
-            this.wrapper.expose_event.connect (this.draw_icon);
+            this.wrapper.draw.connect (this.draw_icon);
             this.add (this.wrapper);
 		    
 		    
 		    // Focused signals
-		    this.expose_event.connect (this.draw_background);
+		    this.draw.connect (this.draw_background);
 		    this.focus_in_event.connect ( () => { this.focus_in (); return true;} );
 		    this.focus_out_event.connect ( () => { this.focus_out (); return true;} );
 		    
@@ -80,10 +80,10 @@ namespace Slingshot.Frontend {
             
         }
         
-        private bool draw_icon (Gtk.Widget widget, Gdk.EventExpose event) {
+        private bool draw_icon (Gtk.Widget widget, Cairo.Context ctx) {
             Gtk.Allocation size;
             widget.get_allocation (out size);
-            var context = Gdk.cairo_create (widget.window);
+            var context = Gdk.cairo_create (widget.get_window ());
             
             // Draw icon
             Gdk.cairo_set_source_pixbuf (context, this.icon, size.x + ((this.icon.width - size.width) / -2.0), size.y);
@@ -108,10 +108,10 @@ namespace Slingshot.Frontend {
             return false;
         }
         
-        private bool draw_background (Gtk.Widget widget, Gdk.EventExpose event) {
+        private bool draw_background (Gtk.Widget widget, Cairo.Context ctx) {
             Gtk.Allocation size;
             widget.get_allocation (out size);
-            var context = Gdk.cairo_create (widget.window);
+            var context = Gdk.cairo_create (widget.get_window ());
             
             double progress;
             if (this.current_frame > 1) {

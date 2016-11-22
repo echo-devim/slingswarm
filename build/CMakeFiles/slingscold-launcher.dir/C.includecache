@@ -53,8 +53,6 @@ float.h
 -
 math.h
 -
-gdk/gdk.h
--
 stdlib.h
 -
 string.h
@@ -79,9 +77,9 @@ stdlib.h
 -
 string.h
 -
-gdk/gdk.h
--
 cairo.h
+-
+gdk/gdk.h
 -
 
 /home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/frontend/widgets/CompositedWindow.c
@@ -91,9 +89,9 @@ glib-object.h
 -
 gtk/gtk.h
 -
-gdk/gdk.h
--
 cairo.h
+-
+gdk/gdk.h
 -
 
 /home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/frontend/widgets/Grid.c
@@ -119,11 +117,11 @@ gdk/gdk.h
 -
 pango/pango.h
 -
+cairo.h
+-
 math.h
 -
 float.h
--
-cairo.h
 -
 
 /home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/frontend/widgets/Searchbar.c
@@ -173,14 +171,18 @@ float.h
 -
 math.h
 -
+cairo.h
+-
 gio/gdesktopappinfo.h
 -
 gio/gio.h
 -
 stdio.h
 -
-cairo.h
+unique/uniqueapp.h
 -
-unique/unique.h
+unique/uniqueenumtypes.h
+-
+unique/uniquemessage.h
 -
 

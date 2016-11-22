@@ -71,7 +71,7 @@ GType slingshot_frontend_grid_get_type (void) {
 	if (g_once_init_enter (&slingshot_frontend_grid_type_id__volatile)) {
 		static const GTypeInfo g_define_type_info = { sizeof (SlingshotFrontendGridClass), (GBaseInitFunc) NULL, (GBaseFinalizeFunc) NULL, (GClassInitFunc) slingshot_frontend_grid_class_init, (GClassFinalizeFunc) NULL, NULL, sizeof (SlingshotFrontendGrid), 0, (GInstanceInitFunc) slingshot_frontend_grid_instance_init, NULL };
 		GType slingshot_frontend_grid_type_id;
-		slingshot_frontend_grid_type_id = g_type_register_static (GTK_TYPE_TABLE, "SlingshotFrontendGrid", &g_define_type_info, 0);
+		slingshot_frontend_grid_type_id = g_type_register_static (gtk_table_get_type (), "SlingshotFrontendGrid", &g_define_type_info, 0);
 		g_once_init_leave (&slingshot_frontend_grid_type_id__volatile, slingshot_frontend_grid_type_id);
 	}
 	return slingshot_frontend_grid_type_id__volatile;
