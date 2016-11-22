@@ -1,0 +1,7 @@
+/home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/CMakeFiles/install.dir
+/home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/CMakeFiles/list_install_components.dir
+/home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/CMakeFiles/rebuild_cache.dir
+/home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/CMakeFiles/slingscold-launcher.dir
+/home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/CMakeFiles/install/strip.dir
+/home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/CMakeFiles/install/local.dir
+/home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/CMakeFiles/edit_cache.dir

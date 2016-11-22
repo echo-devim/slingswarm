@@ -1,0 +1,30 @@
+To install Slingscold from the source, you need to compile it.
+
+== Compilation ==
+
+- First, we need a build directory:
+    mkdir build
+    cd build
+- Then, configure CMake:
+    cmake ..
+    Here, you can get some errors if you don't have all the dependencies.
+- Compile it:
+    make
+    You can also use make -j3 if you have a dual core. (it will be much faster)
+
+== Launch Slingscold ==
+
+- Just run slingscold:
+    ./slingscold-launcher
+
+== Install Slingscold ==
+
+- With the administrator rights, use:
+    make install
+    Or:
+    sudo make install
+
+- You can now launch Slingscold using:
+    slingscold
+    Or:
+    /usr/local/bin/slingscold-launcher
