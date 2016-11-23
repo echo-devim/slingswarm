@@ -133,6 +133,7 @@ public class SlingshotWindow : ElementaryWidgets.CompositedWindow {
         this.pages.set_active (0);
         
         // Signals and callbacks
+        this.add_events (Gdk.EventMask.SCROLL_MASK);
         this.button_release_event.connect ( () => { this.destroy(); return false; });
         this.draw.connect (this.draw_background);
         this.focus_out_event.connect ( () => { this.destroy(); return true; } ); // close slingshot when the window loses focus

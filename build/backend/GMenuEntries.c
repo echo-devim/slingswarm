@@ -48,11 +48,15 @@ enum  {
 };
 GeeArrayList* slingshot_backend_gmenu_entries_get_categories (void);
 GeeHashSet* slingshot_backend_gmenu_entries_get_applications_for_category (GMenuTreeDirectory* category);
-GeeHashSet* slingshot_backend_gmenu_entries_get_all (void);
 static guint __lambda14_ (gconstpointer x);
 static guint ___lambda14__ghash_func (gconstpointer key);
 static gboolean __lambda15_ (gconstpointer x, gconstpointer y);
 static gboolean ___lambda15__gequal_func (gconstpointer a, gconstpointer b);
+GeeHashSet* slingshot_backend_gmenu_entries_get_all (void);
+static guint __lambda16_ (gconstpointer x);
+static guint ___lambda16__ghash_func (gconstpointer key);
+static gboolean __lambda17_ (gconstpointer x, gconstpointer y);
+static gboolean ___lambda17__gequal_func (gconstpointer a, gconstpointer b);
 void slingshot_backend_gmenu_entries_enumerate_apps (GeeHashSet* source, GeeHashMap* icons, gint icon_size, GeeArrayList** list);
 SlingshotBackendGMenuEntries* slingshot_backend_gmenu_entries_new (void);
 SlingshotBackendGMenuEntries* slingshot_backend_gmenu_entries_construct (GType object_type);
@@ -124,6 +128,52 @@ GeeArrayList* slingshot_backend_gmenu_entries_get_categories (void) {
 }
 
 
+static guint __lambda14_ (gconstpointer x) {
+	guint result = 0U;
+	gconstpointer _tmp0_ = NULL;
+	const gchar* _tmp1_ = NULL;
+	guint _tmp2_ = 0U;
+	_tmp0_ = x;
+	_tmp1_ = gmenu_tree_entry_get_desktop_file_path ((GMenuTreeEntry*) _tmp0_);
+	_tmp2_ = g_str_hash (_tmp1_);
+	result = _tmp2_;
+	return result;
+}
+
+
+static guint ___lambda14__ghash_func (gconstpointer key) {
+	guint result;
+	result = __lambda14_ (key);
+	return result;
+}
+
+
+static gboolean __lambda15_ (gconstpointer x, gconstpointer y) {
+	gboolean result = FALSE;
+	gconstpointer _tmp0_ = NULL;
+	const gchar* _tmp1_ = NULL;
+	guint _tmp2_ = 0U;
+	gconstpointer _tmp3_ = NULL;
+	const gchar* _tmp4_ = NULL;
+	guint _tmp5_ = 0U;
+	_tmp0_ = x;
+	_tmp1_ = gmenu_tree_entry_get_desktop_file_path ((GMenuTreeEntry*) _tmp0_);
+	_tmp2_ = g_str_hash (_tmp1_);
+	_tmp3_ = y;
+	_tmp4_ = gmenu_tree_entry_get_desktop_file_path ((GMenuTreeEntry*) _tmp3_);
+	_tmp5_ = g_str_hash (_tmp4_);
+	result = _tmp2_ == _tmp5_;
+	return result;
+}
+
+
+static gboolean ___lambda15__gequal_func (gconstpointer a, gconstpointer b) {
+	gboolean result;
+	result = __lambda15_ (a, b);
+	return result;
+}
+
+
 GeeHashSet* slingshot_backend_gmenu_entries_get_applications_for_category (GMenuTreeDirectory* category) {
 	GeeHashSet* result = NULL;
 	GeeHashSet* entries = NULL;
@@ -131,7 +181,7 @@ GeeHashSet* slingshot_backend_gmenu_entries_get_applications_for_category (GMenu
 	GMenuTreeDirectory* _tmp1_ = NULL;
 	GSList* _tmp2_ = NULL;
 	g_return_val_if_fail (category != NULL, NULL);
-	_tmp0_ = gee_hash_set_new (G_TYPE_POINTER, (GBoxedCopyFunc) gmenu_tree_item_ref, gmenu_tree_item_unref, NULL, NULL);
+	_tmp0_ = gee_hash_set_new (G_TYPE_POINTER, (GBoxedCopyFunc) gmenu_tree_item_ref, gmenu_tree_item_unref, ___lambda14__ghash_func, ___lambda15__gequal_func);
 	entries = _tmp0_;
 	_tmp1_ = category;
 	_tmp2_ = gmenu_tree_directory_get_contents (_tmp1_);
@@ -185,7 +235,7 @@ GeeHashSet* slingshot_backend_gmenu_entries_get_applications_for_category (GMenu
 }
 
 
-static guint __lambda14_ (gconstpointer x) {
+static guint __lambda16_ (gconstpointer x) {
 	guint result = 0U;
 	gconstpointer _tmp0_ = NULL;
 	const gchar* _tmp1_ = NULL;
@@ -198,14 +248,14 @@ static guint __lambda14_ (gconstpointer x) {
 }
 
 
-static guint ___lambda14__ghash_func (gconstpointer key) {
+static guint ___lambda16__ghash_func (gconstpointer key) {
 	guint result;
-	result = __lambda14_ (key);
+	result = __lambda16_ (key);
 	return result;
 }
 
 
-static gboolean __lambda15_ (gconstpointer x, gconstpointer y) {
+static gboolean __lambda17_ (gconstpointer x, gconstpointer y) {
 	gboolean result = FALSE;
 	gconstpointer _tmp0_ = NULL;
 	const gchar* _tmp1_ = NULL;
@@ -224,9 +274,9 @@ static gboolean __lambda15_ (gconstpointer x, gconstpointer y) {
 }
 
 
-static gboolean ___lambda15__gequal_func (gconstpointer a, gconstpointer b) {
+static gboolean ___lambda17__gequal_func (gconstpointer a, gconstpointer b) {
 	gboolean result;
-	result = __lambda15_ (a, b);
+	result = __lambda17_ (a, b);
 	return result;
 }
 
@@ -242,7 +292,7 @@ GeeHashSet* slingshot_backend_gmenu_entries_get_all (void) {
 	GeeHashSet* _tmp0_ = NULL;
 	GeeArrayList* all_categories = NULL;
 	GeeArrayList* _tmp1_ = NULL;
-	_tmp0_ = gee_hash_set_new (G_TYPE_POINTER, (GBoxedCopyFunc) gmenu_tree_item_ref, gmenu_tree_item_unref, ___lambda14__ghash_func, ___lambda15__gequal_func);
+	_tmp0_ = gee_hash_set_new (G_TYPE_POINTER, (GBoxedCopyFunc) gmenu_tree_item_ref, gmenu_tree_item_unref, ___lambda16__ghash_func, ___lambda17__gequal_func);
 	the_apps = _tmp0_;
 	_tmp1_ = slingshot_backend_gmenu_entries_get_categories ();
 	all_categories = _tmp1_;

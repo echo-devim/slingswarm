@@ -9,7 +9,6 @@ This project is a fork of Slingscold:
 ## KNOWN BUGS / TODOS
 
 * Missing background transparency
-* Can't scroll with the middle button
 
 ## Compilation
 
