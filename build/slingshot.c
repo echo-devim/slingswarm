@@ -1893,26 +1893,23 @@ static gboolean slingshot_window_real_key_press_event (GtkWidget* base, GdkEvent
 static gboolean slingshot_window_real_scroll_event (GtkWidget* base, GdkEventScroll* event) {
 	SlingshotWindow * self;
 	gboolean result = FALSE;
-	FILE* _tmp0_ = NULL;
-	GdkEventScroll* _tmp1_ = NULL;
-	GdkScrollDirection _tmp2_ = 0;
-	GEnumValue* _tmp3_;
-	const gchar* _tmp4_ = NULL;
-	GQuark _tmp6_ = 0U;
-	static GQuark _tmp5_label0 = 0;
-	static GQuark _tmp5_label1 = 0;
-	static GQuark _tmp5_label2 = 0;
-	static GQuark _tmp5_label3 = 0;
+	GdkEventScroll* _tmp0_ = NULL;
+	GdkScrollDirection _tmp1_ = 0;
+	GEnumValue* _tmp2_;
+	const gchar* _tmp3_ = NULL;
+	GQuark _tmp5_ = 0U;
+	static GQuark _tmp4_label0 = 0;
+	static GQuark _tmp4_label1 = 0;
+	static GQuark _tmp4_label2 = 0;
+	static GQuark _tmp4_label3 = 0;
 	self = (SlingshotWindow*) base;
 	g_return_val_if_fail (event != NULL, FALSE);
-	_tmp0_ = stdout;
-	fprintf (_tmp0_, "Scroll\n");
-	_tmp1_ = event;
-	_tmp2_ = _tmp1_->direction;
-	_tmp3_ = g_enum_get_value (g_type_class_ref (gdk_scroll_direction_get_type ()), _tmp2_);
-	_tmp4_ = (_tmp3_ != NULL) ? _tmp3_->value_name : NULL;
-	_tmp6_ = (NULL == _tmp4_) ? 0 : g_quark_from_string (_tmp4_);
-	if ((_tmp6_ == ((0 != _tmp5_label0) ? _tmp5_label0 : (_tmp5_label0 = g_quark_from_static_string ("GDK_SCROLL_UP")))) || (_tmp6_ == ((0 != _tmp5_label1) ? _tmp5_label1 : (_tmp5_label1 = g_quark_from_static_string ("GDK_SCROLL_LEFT"))))) {
+	_tmp0_ = event;
+	_tmp1_ = _tmp0_->direction;
+	_tmp2_ = g_enum_get_value (g_type_class_ref (gdk_scroll_direction_get_type ()), _tmp1_);
+	_tmp3_ = (_tmp2_ != NULL) ? _tmp2_->value_name : NULL;
+	_tmp5_ = (NULL == _tmp3_) ? 0 : g_quark_from_string (_tmp3_);
+	if ((_tmp5_ == ((0 != _tmp4_label0) ? _tmp4_label0 : (_tmp4_label0 = g_quark_from_static_string ("GDK_SCROLL_UP")))) || (_tmp5_ == ((0 != _tmp4_label1) ? _tmp4_label1 : (_tmp4_label1 = g_quark_from_static_string ("GDK_SCROLL_LEFT"))))) {
 		switch (0) {
 			default:
 			{
@@ -1920,7 +1917,7 @@ static gboolean slingshot_window_real_scroll_event (GtkWidget* base, GdkEventScr
 				break;
 			}
 		}
-	} else if ((_tmp6_ == ((0 != _tmp5_label2) ? _tmp5_label2 : (_tmp5_label2 = g_quark_from_static_string ("GDK_SCROLL_DOWN")))) || (_tmp6_ == ((0 != _tmp5_label3) ? _tmp5_label3 : (_tmp5_label3 = g_quark_from_static_string ("GDK_SCROLL_RIGHT"))))) {
+	} else if ((_tmp5_ == ((0 != _tmp4_label2) ? _tmp4_label2 : (_tmp4_label2 = g_quark_from_static_string ("GDK_SCROLL_DOWN")))) || (_tmp5_ == ((0 != _tmp4_label3) ? _tmp4_label3 : (_tmp4_label3 = g_quark_from_static_string ("GDK_SCROLL_RIGHT"))))) {
 		switch (0) {
 			default:
 			{

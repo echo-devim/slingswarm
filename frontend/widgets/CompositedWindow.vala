@@ -9,17 +9,17 @@ namespace ElementaryWidgets {
             this.set_decorated (false); // no window decoration
             this.set_app_paintable (true);
             this.set_name ("mainwindow");
+            this.set_visual (this.get_screen().get_rgba_visual ());
             
             //this.set_default_colormap (this.get_screen ().get_rgba_colormap () ?? this.get_screen ().get_rgb_colormap ());
+            //Gtk.Window window = this;
             
             this.draw.connect (clear_background);
             this.realize.connect (() => {
                 // transparent background
-                //source: http://wolfvollprecht.de/blog/gtk-python-and-css-are-an-awesome-combo/
-                /*Gtk.CssProvider provider = new Gtk.CssProvider ();
-                provider.load_from_data ("window { background-color: #FF0000; }");
-                Gtk.StyleContext.add_provider_for_screen (Gdk.Screen.get_default(), provider, Gtk.STYLE_PROVIDER_PRIORITY_USER);
-                */
+                //var color = Gdk.RGBA ();
+                //color.parse ("#a0a0a0");
+                //window.override_background_color(Gtk.StateFlags.NORMAL, color);
             });
         
         }

@@ -99,6 +99,8 @@ static GObject * elementary_widgets_composited_window_constructor (GType type, g
 	GObject * obj;
 	GObjectClass * parent_class;
 	ElementaryWidgetsCompositedWindow * self;
+	GdkScreen* _tmp0_ = NULL;
+	GdkVisual* _tmp1_ = NULL;
 	parent_class = G_OBJECT_CLASS (elementary_widgets_composited_window_parent_class);
 	obj = parent_class->constructor (type, n_construct_properties, construct_properties);
 	self = G_TYPE_CHECK_INSTANCE_CAST (obj, ELEMENTARY_WIDGETS_TYPE_COMPOSITED_WINDOW, ElementaryWidgetsCompositedWindow);
@@ -106,6 +108,9 @@ static GObject * elementary_widgets_composited_window_constructor (GType type, g
 	gtk_window_set_decorated ((GtkWindow*) self, FALSE);
 	gtk_widget_set_app_paintable ((GtkWidget*) self, TRUE);
 	gtk_buildable_set_name ((GtkBuildable*) self, "mainwindow");
+	_tmp0_ = gtk_window_get_screen ((GtkWindow*) self);
+	_tmp1_ = gdk_screen_get_rgba_visual (_tmp0_);
+	gtk_widget_set_visual ((GtkWidget*) self, _tmp1_);
 	g_signal_connect_object ((GtkWidget*) self, "draw", (GCallback) _elementary_widgets_composited_window_clear_background_gtk_widget_draw, self, 0);
 	g_signal_connect_object ((GtkWidget*) self, "realize", (GCallback) __elementary_widgets_composited_window___lambda4__gtk_widget_realize, self, 0);
 	return obj;

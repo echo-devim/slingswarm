@@ -6,10 +6,6 @@ This project is a fork of Slingscold:
 
   * http://sourceforge.net/projects/slingscold/
 
-## KNOWN BUGS / TODOS
-
-* Missing background transparency
-
 ## Compilation
 
 Enter inside the **build** folder and execute `cmake ..` and after `make`.
