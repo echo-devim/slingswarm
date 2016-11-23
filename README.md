@@ -11,7 +11,6 @@ This project is a fork of Slingscold:
 * Missing background transparency
 * Can't scroll with the middle button
 * Redundant items in the list of applications
-* Several warnings during the compilation process
 
 ## Compilation
 
