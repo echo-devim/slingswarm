@@ -398,8 +398,8 @@ void slingshot_backend_gmenu_entries_enumerate_apps (GeeArrayList* source, GeeHa
 				gchar* _tmp38_ = NULL;
 				gboolean _tmp39_ = FALSE;
 				gboolean _tmp40_ = FALSE;
-				GeeArrayList* _tmp107_ = NULL;
-				GeeHashMap* _tmp108_ = NULL;
+				GeeArrayList* _tmp85_ = NULL;
+				GeeHashMap* _tmp86_ = NULL;
 				_tmp22_ = gee_hash_map_new (G_TYPE_STRING, (GBoxedCopyFunc) g_strdup, g_free, G_TYPE_STRING, (GBoxedCopyFunc) g_strdup, g_free, NULL, NULL, NULL);
 				app_to_add = _tmp22_;
 				_tmp23_ = app_to_add;
@@ -430,18 +430,18 @@ void slingshot_backend_gmenu_entries_enumerate_apps (GeeArrayList* source, GeeHa
 					GMenuTreeEntry* _tmp41_ = NULL;
 					const gchar* _tmp42_ = NULL;
 					gchar* _tmp43_ = NULL;
-					GtkIconTheme* _tmp44_ = NULL;
-					const gchar* _tmp45_ = NULL;
-					gboolean _tmp46_ = FALSE;
 					_tmp41_ = app;
 					_tmp42_ = gmenu_tree_entry_get_icon (_tmp41_);
 					_tmp43_ = g_strdup (_tmp42_);
 					app_icon = _tmp43_;
-					_tmp44_ = icon_theme;
-					_tmp45_ = app_icon;
-					_tmp46_ = gtk_icon_theme_has_icon (_tmp44_, _tmp45_);
-					if (_tmp46_) {
-						{
+					{
+						GtkIconTheme* _tmp44_ = NULL;
+						const gchar* _tmp45_ = NULL;
+						gboolean _tmp46_ = FALSE;
+						_tmp44_ = icon_theme;
+						_tmp45_ = app_icon;
+						_tmp46_ = gtk_icon_theme_has_icon (_tmp44_, _tmp45_);
+						if (_tmp46_) {
 							GdkPixbuf* _tmp47_ = NULL;
 							GtkIconTheme* _tmp48_ = NULL;
 							const gchar* _tmp49_ = NULL;
@@ -473,185 +473,101 @@ void slingshot_backend_gmenu_entries_enumerate_apps (GeeArrayList* source, GeeHa
 							gee_abstract_map_set ((GeeAbstractMap*) _tmp55_, _tmp58_, _tmp47_);
 							_g_free0 (_tmp58_);
 							_g_object_unref0 (_tmp47_);
-						}
-						goto __finally1;
-						__catch1_g_error:
-						{
-							GdkPixbuf* _tmp59_ = NULL;
-							GtkIconTheme* _tmp60_ = NULL;
-							gint _tmp61_ = 0;
-							GtkIconInfo* _tmp62_ = NULL;
-							GtkIconInfo* _tmp63_ = NULL;
-							GdkPixbuf* _tmp64_ = NULL;
-							GdkPixbuf* _tmp65_ = NULL;
-							GeeHashMap* _tmp66_ = NULL;
-							GeeHashMap* _tmp67_ = NULL;
-							gpointer _tmp68_ = NULL;
-							gchar* _tmp69_ = NULL;
-							g_clear_error (&_inner_error_);
-							_inner_error_ = NULL;
-							_tmp60_ = icon_theme;
-							_tmp61_ = icon_size;
-							_tmp62_ = gtk_icon_theme_lookup_icon (_tmp60_, "application-default-icon", _tmp61_, 0);
+						} else {
+							const gchar* _tmp59_ = NULL;
+							GFile* _tmp60_ = NULL;
+							GFile* _tmp61_ = NULL;
+							gboolean _tmp62_ = FALSE;
+							gboolean _tmp63_ = FALSE;
+							_tmp59_ = app_icon;
+							_tmp60_ = g_file_new_for_path (_tmp59_);
+							_tmp61_ = _tmp60_;
+							_tmp62_ = g_file_query_exists (_tmp61_, NULL);
 							_tmp63_ = _tmp62_;
-							_tmp64_ = gtk_icon_info_load_icon (_tmp63_, &_inner_error_);
-							_tmp65_ = _tmp64_;
-							_gtk_icon_info_free0 (_tmp63_);
-							_tmp59_ = _tmp65_;
-							if (G_UNLIKELY (_inner_error_ != NULL)) {
-								goto __finally1;
-							}
-							_tmp66_ = icons;
-							_tmp67_ = app_to_add;
-							_tmp68_ = gee_abstract_map_get ((GeeAbstractMap*) _tmp67_, "command");
-							_tmp69_ = (gchar*) _tmp68_;
-							gee_abstract_map_set ((GeeAbstractMap*) _tmp66_, _tmp69_, _tmp59_);
-							_g_free0 (_tmp69_);
-							_g_object_unref0 (_tmp59_);
-						}
-						__finally1:
-						if (G_UNLIKELY (_inner_error_ != NULL)) {
-							_g_free0 (app_icon);
-							_g_object_unref0 (app_to_add);
-							_gmenu_tree_item_unref0 (app);
-							_g_object_unref0 (_app_list);
-							_g_object_unref0 (icon_theme);
-							g_critical ("file %s: line %d: uncaught error: %s (%s, %d)", __FILE__, __LINE__, _inner_error_->message, g_quark_to_string (_inner_error_->domain), _inner_error_->code);
-							g_clear_error (&_inner_error_);
-							return;
-						}
-					} else {
-						const gchar* _tmp70_ = NULL;
-						GFile* _tmp71_ = NULL;
-						GFile* _tmp72_ = NULL;
-						gboolean _tmp73_ = FALSE;
-						gboolean _tmp74_ = FALSE;
-						_tmp70_ = app_icon;
-						_tmp71_ = g_file_new_for_path (_tmp70_);
-						_tmp72_ = _tmp71_;
-						_tmp73_ = g_file_query_exists (_tmp72_, NULL);
-						_tmp74_ = _tmp73_;
-						_g_object_unref0 (_tmp72_);
-						if (_tmp74_) {
-							{
-								GdkPixbuf* _tmp75_ = NULL;
-								const gchar* _tmp76_ = NULL;
-								const gchar* _tmp77_ = NULL;
-								gint _tmp78_ = 0;
+							_g_object_unref0 (_tmp61_);
+							if (_tmp63_) {
+								GdkPixbuf* _tmp64_ = NULL;
+								const gchar* _tmp65_ = NULL;
+								const gchar* _tmp66_ = NULL;
+								gint _tmp67_ = 0;
+								GdkPixbuf* _tmp68_ = NULL;
+								GeeHashMap* _tmp69_ = NULL;
+								GeeHashMap* _tmp70_ = NULL;
+								gpointer _tmp71_ = NULL;
+								gchar* _tmp72_ = NULL;
+								_tmp65_ = app_icon;
+								_tmp66_ = string_to_string (_tmp65_);
+								_tmp67_ = icon_size;
+								_tmp68_ = gdk_pixbuf_new_from_file_at_scale (_tmp66_, -1, _tmp67_, TRUE, &_inner_error_);
+								_tmp64_ = _tmp68_;
+								if (G_UNLIKELY (_inner_error_ != NULL)) {
+									goto __catch1_g_error;
+								}
+								_tmp69_ = icons;
+								_tmp70_ = app_to_add;
+								_tmp71_ = gee_abstract_map_get ((GeeAbstractMap*) _tmp70_, "command");
+								_tmp72_ = (gchar*) _tmp71_;
+								gee_abstract_map_set ((GeeAbstractMap*) _tmp69_, _tmp72_, _tmp64_);
+								_g_free0 (_tmp72_);
+								_g_object_unref0 (_tmp64_);
+							} else {
+								GdkPixbuf* _tmp73_ = NULL;
+								GtkIconTheme* _tmp74_ = NULL;
+								gint _tmp75_ = 0;
+								GtkIconInfo* _tmp76_ = NULL;
+								GtkIconInfo* _tmp77_ = NULL;
+								GdkPixbuf* _tmp78_ = NULL;
 								GdkPixbuf* _tmp79_ = NULL;
 								GeeHashMap* _tmp80_ = NULL;
 								GeeHashMap* _tmp81_ = NULL;
 								gpointer _tmp82_ = NULL;
 								gchar* _tmp83_ = NULL;
-								_tmp76_ = app_icon;
-								_tmp77_ = string_to_string (_tmp76_);
-								_tmp78_ = icon_size;
-								_tmp79_ = gdk_pixbuf_new_from_file_at_scale (_tmp77_, -1, _tmp78_, TRUE, &_inner_error_);
-								_tmp75_ = _tmp79_;
+								_tmp74_ = icon_theme;
+								_tmp75_ = icon_size;
+								_tmp76_ = gtk_icon_theme_lookup_icon (_tmp74_, "application-default-icon", _tmp75_, 0);
+								_tmp77_ = _tmp76_;
+								_tmp78_ = gtk_icon_info_load_icon (_tmp77_, &_inner_error_);
+								_tmp79_ = _tmp78_;
+								_gtk_icon_info_free0 (_tmp77_);
+								_tmp73_ = _tmp79_;
 								if (G_UNLIKELY (_inner_error_ != NULL)) {
-									goto __catch2_g_error;
+									goto __catch1_g_error;
 								}
 								_tmp80_ = icons;
 								_tmp81_ = app_to_add;
 								_tmp82_ = gee_abstract_map_get ((GeeAbstractMap*) _tmp81_, "command");
 								_tmp83_ = (gchar*) _tmp82_;
-								gee_abstract_map_set ((GeeAbstractMap*) _tmp80_, _tmp83_, _tmp75_);
+								gee_abstract_map_set ((GeeAbstractMap*) _tmp80_, _tmp83_, _tmp73_);
 								_g_free0 (_tmp83_);
-								_g_object_unref0 (_tmp75_);
+								_g_object_unref0 (_tmp73_);
 							}
-							goto __finally2;
-							__catch2_g_error:
-							{
-								GdkPixbuf* _tmp84_ = NULL;
-								GtkIconTheme* _tmp85_ = NULL;
-								gint _tmp86_ = 0;
-								GtkIconInfo* _tmp87_ = NULL;
-								GtkIconInfo* _tmp88_ = NULL;
-								GdkPixbuf* _tmp89_ = NULL;
-								GdkPixbuf* _tmp90_ = NULL;
-								GeeHashMap* _tmp91_ = NULL;
-								GeeHashMap* _tmp92_ = NULL;
-								gpointer _tmp93_ = NULL;
-								gchar* _tmp94_ = NULL;
-								FILE* _tmp95_ = NULL;
-								g_clear_error (&_inner_error_);
-								_inner_error_ = NULL;
-								_tmp85_ = icon_theme;
-								_tmp86_ = icon_size;
-								_tmp87_ = gtk_icon_theme_lookup_icon (_tmp85_, "application-default-icon", _tmp86_, 0);
-								_tmp88_ = _tmp87_;
-								_tmp89_ = gtk_icon_info_load_icon (_tmp88_, &_inner_error_);
-								_tmp90_ = _tmp89_;
-								_gtk_icon_info_free0 (_tmp88_);
-								_tmp84_ = _tmp90_;
-								if (G_UNLIKELY (_inner_error_ != NULL)) {
-									goto __finally2;
-								}
-								_tmp91_ = icons;
-								_tmp92_ = app_to_add;
-								_tmp93_ = gee_abstract_map_get ((GeeAbstractMap*) _tmp92_, "command");
-								_tmp94_ = (gchar*) _tmp93_;
-								gee_abstract_map_set ((GeeAbstractMap*) _tmp91_, _tmp94_, _tmp84_);
-								_g_free0 (_tmp94_);
-								_tmp95_ = stdout;
-								fprintf (_tmp95_, "Failed to load icon from file.\n");
-								_g_object_unref0 (_tmp84_);
-							}
-							__finally2:
-							if (G_UNLIKELY (_inner_error_ != NULL)) {
-								_g_free0 (app_icon);
-								_g_object_unref0 (app_to_add);
-								_gmenu_tree_item_unref0 (app);
-								_g_object_unref0 (_app_list);
-								_g_object_unref0 (icon_theme);
-								g_critical ("file %s: line %d: uncaught error: %s (%s, %d)", __FILE__, __LINE__, _inner_error_->message, g_quark_to_string (_inner_error_->domain), _inner_error_->code);
-								g_clear_error (&_inner_error_);
-								return;
-							}
-						} else {
-							GdkPixbuf* _tmp96_ = NULL;
-							GtkIconTheme* _tmp97_ = NULL;
-							gint _tmp98_ = 0;
-							GtkIconInfo* _tmp99_ = NULL;
-							GtkIconInfo* _tmp100_ = NULL;
-							GdkPixbuf* _tmp101_ = NULL;
-							GdkPixbuf* _tmp102_ = NULL;
-							GeeHashMap* _tmp103_ = NULL;
-							GeeHashMap* _tmp104_ = NULL;
-							gpointer _tmp105_ = NULL;
-							gchar* _tmp106_ = NULL;
-							_tmp97_ = icon_theme;
-							_tmp98_ = icon_size;
-							_tmp99_ = gtk_icon_theme_lookup_icon (_tmp97_, "application-default-icon", _tmp98_, 0);
-							_tmp100_ = _tmp99_;
-							_tmp101_ = gtk_icon_info_load_icon (_tmp100_, &_inner_error_);
-							_tmp102_ = _tmp101_;
-							_gtk_icon_info_free0 (_tmp100_);
-							_tmp96_ = _tmp102_;
-							if (G_UNLIKELY (_inner_error_ != NULL)) {
-								_g_free0 (app_icon);
-								_g_object_unref0 (app_to_add);
-								_gmenu_tree_item_unref0 (app);
-								_g_object_unref0 (_app_list);
-								_g_object_unref0 (icon_theme);
-								g_critical ("file %s: line %d: uncaught error: %s (%s, %d)", __FILE__, __LINE__, _inner_error_->message, g_quark_to_string (_inner_error_->domain), _inner_error_->code);
-								g_clear_error (&_inner_error_);
-								return;
-							}
-							_tmp103_ = icons;
-							_tmp104_ = app_to_add;
-							_tmp105_ = gee_abstract_map_get ((GeeAbstractMap*) _tmp104_, "command");
-							_tmp106_ = (gchar*) _tmp105_;
-							gee_abstract_map_set ((GeeAbstractMap*) _tmp103_, _tmp106_, _tmp96_);
-							_g_free0 (_tmp106_);
-							_g_object_unref0 (_tmp96_);
 						}
+					}
+					goto __finally1;
+					__catch1_g_error:
+					{
+						FILE* _tmp84_ = NULL;
+						g_clear_error (&_inner_error_);
+						_inner_error_ = NULL;
+						_tmp84_ = stdout;
+						fprintf (_tmp84_, "No icon found.\n");
+					}
+					__finally1:
+					if (G_UNLIKELY (_inner_error_ != NULL)) {
+						_g_free0 (app_icon);
+						_g_object_unref0 (app_to_add);
+						_gmenu_tree_item_unref0 (app);
+						_g_object_unref0 (_app_list);
+						_g_object_unref0 (icon_theme);
+						g_critical ("file %s: line %d: uncaught error: %s (%s, %d)", __FILE__, __LINE__, _inner_error_->message, g_quark_to_string (_inner_error_->domain), _inner_error_->code);
+						g_clear_error (&_inner_error_);
+						return;
 					}
 					_g_free0 (app_icon);
 				}
-				_tmp107_ = _vala_list;
-				_tmp108_ = app_to_add;
-				gee_abstract_collection_add ((GeeAbstractCollection*) _tmp107_, _tmp108_);
+				_tmp85_ = _vala_list;
+				_tmp86_ = app_to_add;
+				gee_abstract_collection_add ((GeeAbstractCollection*) _tmp85_, _tmp86_);
 				_g_object_unref0 (app_to_add);
 			}
 			_gmenu_tree_item_unref0 (app);
