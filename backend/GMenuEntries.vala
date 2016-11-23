@@ -62,13 +62,14 @@ namespace Slingshot.Backend {
                         var app_icon = app.get_icon ();
                         try {
                             if (icon_theme.has_icon (app_icon)) {
-                                icons[app_to_add["command"]] = icon_theme.lookup_icon(app_icon, icon_size, 0).load_icon ();
+                                /* Attention: the icons inside the icon_theme can tell lies about their icon_size, so we need always to scale them */
+                                icons[app_to_add["command"]] = icon_theme.load_icon(app_icon, icon_size, 0).scale_simple(icon_size, icon_size, Gdk.InterpType.BILINEAR);
                             } else if (GLib.File.new_for_path(app_icon).query_exists()) {
                                 icons[app_to_add["command"]] = new Gdk.Pixbuf.from_file_at_scale (app_icon.to_string (), -1, icon_size, true);
                             } else {
-                                icons[app_to_add["command"]] = icon_theme.lookup_icon("application-default-icon", icon_size, 0).load_icon ();
+                                icons[app_to_add["command"]] = icon_theme.load_icon("application-default-icon", icon_size, 0);
                             }
-                        } catch {
+                        } catch  (GLib.Error e) {
                             stdout.printf("No icon found.\n");
                         }
                     }
