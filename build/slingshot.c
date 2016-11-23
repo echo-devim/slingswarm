@@ -120,7 +120,7 @@ struct _SlingshotWindow {
 	GeeArrayList* all_categories;
 	gint icon_size;
 	gint total_pages;
-	GtkHBox* top_spacer;
+	GtkBox* top_spacer;
 };
 
 struct _SlingshotWindowClass {
@@ -240,7 +240,7 @@ static void _slingshot_window_change_category_slingshot_frontend_indicators_chil
 
 
 static void __lambda14_ (SlingshotWindow* self) {
-	GtkHBox* _tmp0_ = NULL;
+	GtkBox* _tmp0_ = NULL;
 	_tmp0_ = self->top_spacer;
 	gtk_widget_set_visible ((GtkWidget*) _tmp0_, TRUE);
 }
@@ -332,50 +332,50 @@ SlingshotWindow* slingshot_window_construct (GType object_type) {
 	GtkEventBox* _tmp25_ = NULL;
 	GtkEventBox* _tmp26_ = NULL;
 	GtkEventBox* _tmp27_ = NULL;
-	GtkVBox* container = NULL;
-	GtkVBox* _tmp28_ = NULL;
+	GtkBox* container = NULL;
+	GtkBox* _tmp28_ = NULL;
 	GtkEventBox* _tmp29_ = NULL;
-	GtkVBox* _tmp30_ = NULL;
-	GtkHBox* top = NULL;
-	GtkHBox* _tmp31_ = NULL;
-	GtkHBox* bottom = NULL;
-	GtkHBox* _tmp32_ = NULL;
+	GtkBox* _tmp30_ = NULL;
+	GtkBox* top = NULL;
+	GtkBox* _tmp31_ = NULL;
+	GtkBox* bottom = NULL;
+	GtkBox* _tmp32_ = NULL;
 	SlingshotFrontendIndicators* _tmp33_ = NULL;
 	SlingshotFrontendIndicators* _tmp34_ = NULL;
 	SlingshotFrontendIndicators* _tmp35_ = NULL;
 	SlingshotFrontendIndicators* _tmp50_ = NULL;
-	GtkHBox* _tmp51_ = NULL;
+	GtkBox* _tmp51_ = NULL;
 	SlingshotFrontendIndicators* _tmp52_ = NULL;
-	GtkHBox* _tmp53_ = NULL;
-	GtkHBox* _tmp54_ = NULL;
-	GtkHBox* _tmp55_ = NULL;
-	GtkHBox* _tmp56_ = NULL;
-	GtkHBox* _tmp57_ = NULL;
+	GtkBox* _tmp53_ = NULL;
+	GtkBox* _tmp54_ = NULL;
+	GtkBox* _tmp55_ = NULL;
+	GtkBox* _tmp56_ = NULL;
+	GtkBox* _tmp57_ = NULL;
 	SlingshotFrontendSearchbar* _tmp58_ = NULL;
 	SlingshotFrontendSearchbar* _tmp59_ = NULL;
 	gint medio = 0;
 	GdkRectangle _tmp60_ = {0};
 	gint _tmp61_ = 0;
-	GtkHBox* _tmp62_ = NULL;
+	GtkBox* _tmp62_ = NULL;
 	SlingshotFrontendSearchbar* _tmp63_ = NULL;
 	gint _tmp64_ = 0;
-	GtkVBox* _tmp65_ = NULL;
-	GtkHBox* _tmp66_ = NULL;
-	GtkVBox* _tmp67_ = NULL;
-	GtkHBox* _tmp68_ = NULL;
+	GtkBox* _tmp65_ = NULL;
+	GtkBox* _tmp66_ = NULL;
+	GtkBox* _tmp67_ = NULL;
+	GtkBox* _tmp68_ = NULL;
 	GdkRectangle _tmp69_ = {0};
 	gint _tmp70_ = 0;
 	GdkRectangle _tmp71_ = {0};
 	gint _tmp72_ = 0;
-	GtkVBox* _tmp75_ = NULL;
+	GtkBox* _tmp75_ = NULL;
 	SlingshotFrontendGrid* _tmp76_ = NULL;
 	SlingshotFrontendIndicators* _tmp77_ = NULL;
 	SlingshotFrontendIndicators* _tmp78_ = NULL;
-	GtkHBox* pages_wrapper = NULL;
-	GtkHBox* _tmp79_ = NULL;
-	GtkHBox* _tmp80_ = NULL;
-	GtkVBox* _tmp81_ = NULL;
-	GtkHBox* _tmp82_ = NULL;
+	GtkBox* pages_wrapper = NULL;
+	GtkBox* _tmp79_ = NULL;
+	GtkBox* _tmp80_ = NULL;
+	GtkBox* _tmp81_ = NULL;
+	GtkBox* _tmp82_ = NULL;
 	GeeArrayList* _tmp83_ = NULL;
 	gint _tmp84_ = 0;
 	SlingshotFrontendIndicators* _tmp95_ = NULL;
@@ -456,16 +456,16 @@ SlingshotWindow* slingshot_window_construct (GType object_type) {
 	gtk_event_box_set_visible_window (_tmp26_, FALSE);
 	_tmp27_ = wrapper;
 	gtk_container_add ((GtkContainer*) self, (GtkWidget*) _tmp27_);
-	_tmp28_ = (GtkVBox*) gtk_vbox_new (FALSE, 5);
+	_tmp28_ = (GtkBox*) gtk_box_new (GTK_ORIENTATION_VERTICAL, 5);
 	g_object_ref_sink (_tmp28_);
 	container = _tmp28_;
 	_tmp29_ = wrapper;
 	_tmp30_ = container;
 	gtk_container_add ((GtkContainer*) _tmp29_, (GtkWidget*) _tmp30_);
-	_tmp31_ = (GtkHBox*) gtk_hbox_new (FALSE, 0);
+	_tmp31_ = (GtkBox*) gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
 	g_object_ref_sink (_tmp31_);
 	top = _tmp31_;
-	_tmp32_ = (GtkHBox*) gtk_hbox_new (FALSE, 0);
+	_tmp32_ = (GtkBox*) gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
 	g_object_ref_sink (_tmp32_);
 	bottom = _tmp32_;
 	_tmp33_ = slingshot_frontend_indicators_new ();
@@ -527,8 +527,8 @@ SlingshotWindow* slingshot_window_construct (GType object_type) {
 	slingshot_frontend_indicators_set_active (_tmp50_, 0);
 	_tmp51_ = top;
 	_tmp52_ = self->categories;
-	gtk_box_pack_start ((GtkBox*) _tmp51_, (GtkWidget*) _tmp52_, TRUE, TRUE, (guint) 20);
-	_tmp53_ = (GtkHBox*) gtk_hbox_new (FALSE, 20);
+	gtk_box_pack_start (_tmp51_, (GtkWidget*) _tmp52_, TRUE, TRUE, (guint) 20);
+	_tmp53_ = (GtkBox*) gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 20);
 	g_object_ref_sink (_tmp53_);
 	_g_object_unref0 (self->top_spacer);
 	self->top_spacer = _tmp53_;
@@ -538,7 +538,7 @@ SlingshotWindow* slingshot_window_construct (GType object_type) {
 	g_object_set ((GtkWidget*) _tmp55_, "can-focus", TRUE, NULL);
 	_tmp56_ = bottom;
 	_tmp57_ = self->top_spacer;
-	gtk_box_pack_start ((GtkBox*) _tmp56_, (GtkWidget*) _tmp57_, FALSE, FALSE, (guint) 0);
+	gtk_box_pack_start (_tmp56_, (GtkWidget*) _tmp57_, FALSE, FALSE, (guint) 0);
 	_tmp58_ = slingshot_frontend_searchbar_new ("Type to search...");
 	g_object_ref_sink (_tmp58_);
 	_g_object_unref0 (self->searchbar);
@@ -551,13 +551,13 @@ SlingshotWindow* slingshot_window_construct (GType object_type) {
 	_tmp62_ = bottom;
 	_tmp63_ = self->searchbar;
 	_tmp64_ = medio;
-	gtk_box_pack_start ((GtkBox*) _tmp62_, (GtkWidget*) _tmp63_, FALSE, TRUE, (guint) _tmp64_);
+	gtk_box_pack_start (_tmp62_, (GtkWidget*) _tmp63_, FALSE, TRUE, (guint) _tmp64_);
 	_tmp65_ = container;
 	_tmp66_ = bottom;
-	gtk_box_pack_start ((GtkBox*) _tmp65_, (GtkWidget*) _tmp66_, FALSE, TRUE, (guint) 20);
+	gtk_box_pack_start (_tmp65_, (GtkWidget*) _tmp66_, FALSE, TRUE, (guint) 20);
 	_tmp67_ = container;
 	_tmp68_ = top;
-	gtk_box_pack_start ((GtkBox*) _tmp67_, (GtkWidget*) _tmp68_, FALSE, TRUE, (guint) 0);
+	gtk_box_pack_start (_tmp67_, (GtkWidget*) _tmp68_, FALSE, TRUE, (guint) 0);
 	_tmp69_ = monitor_dimensions;
 	_tmp70_ = _tmp69_.width;
 	_tmp71_ = monitor_dimensions;
@@ -577,7 +577,7 @@ SlingshotWindow* slingshot_window_construct (GType object_type) {
 	}
 	_tmp75_ = container;
 	_tmp76_ = self->grid;
-	gtk_box_pack_start ((GtkBox*) _tmp75_, (GtkWidget*) _tmp76_, TRUE, TRUE, (guint) 0);
+	gtk_box_pack_start (_tmp75_, (GtkWidget*) _tmp76_, TRUE, TRUE, (guint) 0);
 	slingshot_window_populate_grid (self);
 	_tmp77_ = slingshot_frontend_indicators_new ();
 	g_object_ref_sink (_tmp77_);
@@ -585,23 +585,23 @@ SlingshotWindow* slingshot_window_construct (GType object_type) {
 	self->pages = _tmp77_;
 	_tmp78_ = self->pages;
 	g_signal_connect_object (_tmp78_, "child-activated", (GCallback) ___lambda19__slingshot_frontend_indicators_child_activated, self, 0);
-	_tmp79_ = (GtkHBox*) gtk_hbox_new (FALSE, 0);
+	_tmp79_ = (GtkBox*) gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
 	g_object_ref_sink (_tmp79_);
 	pages_wrapper = _tmp79_;
 	_tmp80_ = pages_wrapper;
 	gtk_widget_set_size_request ((GtkWidget*) _tmp80_, -1, 30);
 	_tmp81_ = container;
 	_tmp82_ = pages_wrapper;
-	gtk_box_pack_end ((GtkBox*) _tmp81_, (GtkWidget*) _tmp82_, FALSE, TRUE, (guint) 15);
+	gtk_box_pack_end (_tmp81_, (GtkWidget*) _tmp82_, FALSE, TRUE, (guint) 15);
 	_tmp83_ = self->apps;
 	slingshot_window_update_pages (self, _tmp83_);
 	_tmp84_ = self->total_pages;
 	if (_tmp84_ > 1) {
-		GtkHBox* _tmp85_ = NULL;
+		GtkBox* _tmp85_ = NULL;
 		SlingshotFrontendIndicators* _tmp86_ = NULL;
 		_tmp85_ = pages_wrapper;
 		_tmp86_ = self->pages;
-		gtk_box_pack_start ((GtkBox*) _tmp85_, (GtkWidget*) _tmp86_, TRUE, FALSE, (guint) 0);
+		gtk_box_pack_start (_tmp85_, (GtkWidget*) _tmp86_, TRUE, FALSE, (guint) 0);
 		{
 			gint p = 0;
 			p = 1;
@@ -715,7 +715,7 @@ static gboolean _________lambda16__gtk_widget_enter_notify_event (GtkWidget* _se
 
 static gboolean ________lambda17_ (SlingshotWindow* self) {
 	gboolean result = FALSE;
-	GtkHBox* _tmp0_ = NULL;
+	GtkBox* _tmp0_ = NULL;
 	_tmp0_ = self->top_spacer;
 	gtk_widget_grab_focus ((GtkWidget*) _tmp0_);
 	result = TRUE;

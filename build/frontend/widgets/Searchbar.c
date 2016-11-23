@@ -144,8 +144,8 @@ SlingshotFrontendSearchbar* slingshot_frontend_searchbar_construct (GType object
 	GtkTextBuffer* _tmp2_ = NULL;
 	GtkTextBuffer* _tmp3_ = NULL;
 	const gchar* _tmp4_ = NULL;
-	GtkHBox* wrapper = NULL;
-	GtkHBox* _tmp5_ = NULL;
+	GtkBox* wrapper = NULL;
+	GtkBox* _tmp5_ = NULL;
 	GtkEventBox* search_icon_wrapper = NULL;
 	GtkEventBox* _tmp6_ = NULL;
 	GtkImage* _tmp7_ = NULL;
@@ -192,7 +192,7 @@ SlingshotFrontendSearchbar* slingshot_frontend_searchbar_construct (GType object
 	gtk_box_set_homogeneous ((GtkBox*) self, FALSE);
 	g_object_set ((GtkWidget*) self, "can-focus", FALSE, NULL);
 	gtk_widget_set_size_request ((GtkWidget*) self, SLINGSHOT_FRONTEND_SEARCHBAR_WIDTH, SLINGSHOT_FRONTEND_SEARCHBAR_HEIGHT);
-	_tmp5_ = (GtkHBox*) gtk_hbox_new (FALSE, 3);
+	_tmp5_ = (GtkBox*) gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 3);
 	g_object_ref_sink (_tmp5_);
 	wrapper = _tmp5_;
 	gtk_container_add ((GtkContainer*) self, (GtkWidget*) wrapper);
@@ -208,7 +208,7 @@ SlingshotFrontendSearchbar* slingshot_frontend_searchbar_construct (GType object
 	gtk_container_add ((GtkContainer*) search_icon_wrapper, (GtkWidget*) _tmp8_);
 	gtk_container_set_border_width ((GtkContainer*) search_icon_wrapper, (guint) 4);
 	g_signal_connect_object ((GtkWidget*) search_icon_wrapper, "button-release-event", (GCallback) ___lambda9__gtk_widget_button_release_event, self, 0);
-	gtk_box_pack_start ((GtkBox*) wrapper, (GtkWidget*) search_icon_wrapper, FALSE, TRUE, (guint) 3);
+	gtk_box_pack_start (wrapper, (GtkWidget*) search_icon_wrapper, FALSE, TRUE, (guint) 3);
 	_tmp9_ = self->priv->buffer;
 	g_object_get (_tmp9_, "text", &_tmp10_, NULL);
 	_tmp11_ = _tmp10_;
@@ -229,7 +229,7 @@ SlingshotFrontendSearchbar* slingshot_frontend_searchbar_construct (GType object
 	_tmp18_ = self->label;
 	gtk_label_set_single_line_mode (_tmp18_, TRUE);
 	_tmp19_ = self->label;
-	gtk_box_pack_start ((GtkBox*) wrapper, (GtkWidget*) _tmp19_, TRUE, TRUE, (guint) 0);
+	gtk_box_pack_start (wrapper, (GtkWidget*) _tmp19_, TRUE, TRUE, (guint) 0);
 	_tmp20_ = (GtkEventBox*) gtk_event_box_new ();
 	g_object_ref_sink (_tmp20_);
 	clear_icon_wrapper = _tmp20_;
@@ -267,7 +267,7 @@ SlingshotFrontendSearchbar* slingshot_frontend_searchbar_construct (GType object
 	_tmp28_ = self->priv->clear_icon;
 	gtk_container_add ((GtkContainer*) clear_icon_wrapper, (GtkWidget*) _tmp28_);
 	g_signal_connect_object ((GtkWidget*) clear_icon_wrapper, "button-release-event", (GCallback) ___lambda10__gtk_widget_button_release_event, self, 0);
-	gtk_box_pack_end ((GtkBox*) wrapper, (GtkWidget*) clear_icon_wrapper, FALSE, TRUE, (guint) 3);
+	gtk_box_pack_end (wrapper, (GtkWidget*) clear_icon_wrapper, FALSE, TRUE, (guint) 3);
 	_tmp29_ = self->priv->buffer;
 	g_signal_connect_object (_tmp29_, "changed", (GCallback) _slingshot_frontend_searchbar_on_changed_gtk_text_buffer_changed, self, 0);
 	g_signal_connect_object ((GtkWidget*) self, "draw", (GCallback) _slingshot_frontend_searchbar_draw_background_gtk_widget_draw, self, 0);

@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/backend/GMenuEntries.c
+/home/greg/Scaricati/slingscold3/build/backend/GMenuEntries.c
 glib.h
 -
 glib-object.h
@@ -28,7 +28,7 @@ gio/gio.h
 stdio.h
 -
 
-/home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/frontend/Color.c
+/home/greg/Scaricati/slingscold3/build/frontend/Color.c
 glib.h
 -
 glib-object.h
@@ -40,7 +40,7 @@ math.h
 string.h
 -
 
-/home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/frontend/Utilities.c
+/home/greg/Scaricati/slingscold3/build/frontend/Utilities.c
 glib.h
 -
 glib-object.h
@@ -60,7 +60,7 @@ string.h
 gdk-pixbuf/gdk-pixbuf.h
 -
 
-/home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/frontend/widgets/AppItem.c
+/home/greg/Scaricati/slingscold3/build/frontend/widgets/AppItem.c
 glib.h
 -
 glib-object.h
@@ -82,7 +82,7 @@ cairo.h
 gdk/gdk.h
 -
 
-/home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/frontend/widgets/CompositedWindow.c
+/home/greg/Scaricati/slingscold3/build/frontend/widgets/CompositedWindow.c
 glib.h
 -
 glib-object.h
@@ -94,7 +94,7 @@ cairo.h
 gdk/gdk.h
 -
 
-/home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/frontend/widgets/Grid.c
+/home/greg/Scaricati/slingscold3/build/frontend/widgets/Grid.c
 glib.h
 -
 glib-object.h
@@ -102,7 +102,7 @@ glib-object.h
 gtk/gtk.h
 -
 
-/home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/frontend/widgets/Indicators.c
+/home/greg/Scaricati/slingscold3/build/frontend/widgets/Indicators.c
 glib.h
 -
 glib-object.h
@@ -124,7 +124,7 @@ math.h
 float.h
 -
 
-/home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/frontend/widgets/Searchbar.c
+/home/greg/Scaricati/slingscold3/build/frontend/widgets/Searchbar.c
 glib.h
 -
 glib-object.h
@@ -146,7 +146,7 @@ float.h
 math.h
 -
 
-/home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/slingshot.c
+/home/greg/Scaricati/slingscold3/build/slingshot.c
 glib.h
 -
 glib-object.h

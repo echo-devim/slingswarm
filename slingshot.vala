@@ -13,7 +13,7 @@ public class SlingshotWindow : ElementaryWidgets.CompositedWindow {
     public Gee.ArrayList<GMenu.TreeDirectory> all_categories = Slingshot.Backend.GMenuEntries.get_categories ();
     public int icon_size;
     public int total_pages;
-    public Gtk.HBox top_spacer;
+    public Gtk.Box top_spacer;
 
     public SlingshotWindow () {
     
@@ -54,12 +54,12 @@ public class SlingshotWindow : ElementaryWidgets.CompositedWindow {
         this.add (wrapper);
         
         // Add container
-        var container = new Gtk.VBox (false, 5);
+        var container = new Gtk.Box (Gtk.Orientation.VERTICAL, 5);
         wrapper.add (container);
          
         // Add top bar
-        var top = new Gtk.HBox (false, 0);
-        var bottom = new Gtk.HBox (false, 0);
+        var top = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 0);
+        var bottom = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 0);
         
         this.categories = new Slingshot.Frontend.Indicators ();
         this.categories.child_activated.connect (this.change_category);
@@ -72,7 +72,7 @@ public class SlingshotWindow : ElementaryWidgets.CompositedWindow {
         this.categories.set_active (0);
         top.pack_start (this.categories, true, true, 20);
        
-        this.top_spacer = new Gtk.HBox (false, 20);
+        this.top_spacer = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 20);
         this.top_spacer.realize.connect ( () => { this.top_spacer.visible = true; } );
         this.top_spacer.can_focus = true;
         bottom.pack_start (this.top_spacer, false, false, 0);
@@ -102,7 +102,7 @@ public class SlingshotWindow : ElementaryWidgets.CompositedWindow {
         this.pages = new Slingshot.Frontend.Indicators ();
         this.pages.child_activated.connect ( () => { this.update_grid (this.filtered); } );
         
-        var pages_wrapper = new Gtk.HBox (false, 0);
+        var pages_wrapper = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 0);
         pages_wrapper.set_size_request (-1, 30);        
         container.pack_end (pages_wrapper, false, true, 15);
         

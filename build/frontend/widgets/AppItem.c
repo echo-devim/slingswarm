@@ -52,7 +52,7 @@ struct _SlingshotFrontendAppItemPrivate {
 	GdkPixbuf* icon;
 	SlingshotFrontendColor prominent;
 	gchar* label;
-	GtkVBox* wrapper;
+	GtkBox* wrapper;
 	gint icon_size;
 	gint current_frame;
 };
@@ -143,9 +143,9 @@ SlingshotFrontendAppItem* slingshot_frontend_app_item_construct (GType object_ty
 	gint _tmp0_ = 0;
 	gint _tmp1_ = 0;
 	gint _tmp2_ = 0;
-	GtkVBox* _tmp3_ = NULL;
-	GtkVBox* _tmp4_ = NULL;
-	GtkVBox* _tmp5_ = NULL;
+	GtkBox* _tmp3_ = NULL;
+	GtkBox* _tmp4_ = NULL;
+	GtkBox* _tmp5_ = NULL;
 	self = (SlingshotFrontendAppItem*) g_object_new (object_type, NULL);
 	_tmp0_ = size;
 	self->priv->icon_size = _tmp0_;
@@ -154,7 +154,7 @@ SlingshotFrontendAppItem* slingshot_frontend_app_item_construct (GType object_ty
 	_tmp1_ = self->priv->icon_size;
 	_tmp2_ = self->priv->icon_size;
 	gtk_widget_set_size_request ((GtkWidget*) self, _tmp1_ * 3, _tmp2_ + 30);
-	_tmp3_ = (GtkVBox*) gtk_vbox_new (FALSE, 0);
+	_tmp3_ = (GtkBox*) gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
 	g_object_ref_sink (_tmp3_);
 	_g_object_unref0 (self->priv->wrapper);
 	self->priv->wrapper = _tmp3_;
@@ -187,7 +187,7 @@ void slingshot_frontend_app_item_change_app (SlingshotFrontendAppItem* self, Gdk
 	const gchar* _tmp4_ = NULL;
 	gchar* _tmp5_ = NULL;
 	const gchar* _tmp6_ = NULL;
-	GtkVBox* _tmp7_ = NULL;
+	GtkBox* _tmp7_ = NULL;
 	g_return_if_fail (self != NULL);
 	g_return_if_fail (new_icon != NULL);
 	g_return_if_fail (new_name != NULL);

@@ -6,5 +6,5 @@ C_FLAGS =   -pthread -I/usr/include/unique-3.0 -I/usr/include/gee-1.0 -I/usr/inc
 
 C_DEFINES = -DGMENU_I_KNOW_THIS_IS_UNSTABLE -DWNCK_I_KNOW_THIS_IS_UNSTABLE
 
-C_INCLUDES = -I/home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build 
+C_INCLUDES = -I/home/greg/Scaricati/slingscold3/build 
 

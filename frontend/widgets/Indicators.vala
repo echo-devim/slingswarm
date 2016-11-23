@@ -106,7 +106,7 @@ namespace Slingshot.Frontend {
             this.current_frame = 0;
             this.animation_active = true;
 
-            this.animation_loop_id = GLib.Timeout.add (((int)(1000 / this.FPS)), () => {
+            this.animation_loop_id = GLib.Timeout.add (((int)(1000 / FPS)), () => {
 				if (this.current_frame >= this.animation_frames) {
 				    end_animation();
 					return false; // stop animation

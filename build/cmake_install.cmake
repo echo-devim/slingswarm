@@ -1,4 +1,4 @@
-# Install script for directory: /home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da
+# Install script for directory: /home/greg/Scaricati/slingscold3
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -41,7 +41,7 @@ if("${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMP
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-file(INSTALL DESTINATION "/usr/share/applications" TYPE FILE FILES "/home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/usr/slingscold-launcher.desktop")
+file(INSTALL DESTINATION "/usr/share/applications" TYPE FILE FILES "/home/greg/Scaricati/slingscold3/usr/slingscold-launcher.desktop")
 endif()
 
 if("${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
@@ -53,7 +53,7 @@ if("${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMP
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-file(INSTALL DESTINATION "/usr/share/icons" TYPE FILE FILES "/home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/usr/slingscold-launcher.png")
+file(INSTALL DESTINATION "/usr/share/icons" TYPE FILE FILES "/home/greg/Scaricati/slingscold3/usr/slingscold-launcher.png")
 endif()
 
 if("${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
@@ -63,7 +63,7 @@ if("${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMP
          FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/slingscold-launcher"
          RPATH "")
   endif()
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE EXECUTABLE FILES "/home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/slingscold-launcher")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE EXECUTABLE FILES "/home/greg/Scaricati/slingscold3/build/slingscold-launcher")
   if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/slingscold-launcher" AND
      NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/slingscold-launcher")
     if(CMAKE_INSTALL_DO_STRIP)
@@ -80,5 +80,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/greg/Scaricati/slingscold3/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

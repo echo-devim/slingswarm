@@ -44,10 +44,10 @@ namespace Slingshot.Frontend {
             // HBox properties
             this.homogeneous = false;
             this.can_focus = false;
-            this.set_size_request (this.WIDTH, this.HEIGHT);
+            this.set_size_request (WIDTH, HEIGHT);
         
             // Wrapper 
-            var wrapper = new Gtk.HBox (false, 3); // space between the icon and the phrase search
+            var wrapper = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 3); // space between the icon and the phrase search
             this.add (wrapper);
             
             // Pack gtk-find icon

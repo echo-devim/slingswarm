@@ -10,7 +10,7 @@ The output was:
 
 Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
 
-The C compiler identification is GNU, found in "/home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/CMakeFiles/3.6.1/CompilerIdC/a.out"
+The C compiler identification is GNU, found in "/home/greg/Scaricati/slingscold3/build/CMakeFiles/3.6.1/CompilerIdC/a.out"
 
 Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
 Compiler: /usr/bin/c++ 
@@ -23,33 +23,33 @@ The output was:
 
 Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
 
-The CXX compiler identification is GNU, found in "/home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/CMakeFiles/3.6.1/CompilerIdCXX/a.out"
+The CXX compiler identification is GNU, found in "/home/greg/Scaricati/slingscold3/build/CMakeFiles/3.6.1/CompilerIdCXX/a.out"
 
 Determining if the C compiler works passed with the following output:
-Change Dir: /home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/CMakeFiles/CMakeTmp
+Change Dir: /home/greg/Scaricati/slingscold3/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_44322/fast"
-/usr/bin/make -f CMakeFiles/cmTC_44322.dir/build.make CMakeFiles/cmTC_44322.dir/build
-make[1]: ingresso nella directory "/home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/CMakeFiles/CMakeTmp"
-Building C object CMakeFiles/cmTC_44322.dir/testCCompiler.c.o
-/usr/bin/cc     -o CMakeFiles/cmTC_44322.dir/testCCompiler.c.o   -c /home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/CMakeFiles/CMakeTmp/testCCompiler.c
-Linking C executable cmTC_44322
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_44322.dir/link.txt --verbose=1
-/usr/bin/cc       CMakeFiles/cmTC_44322.dir/testCCompiler.c.o  -o cmTC_44322 -rdynamic 
-make[1]: uscita dalla directory "/home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/CMakeFiles/CMakeTmp"
+Run Build Command:"/usr/bin/make" "cmTC_04598/fast"
+/usr/bin/make -f CMakeFiles/cmTC_04598.dir/build.make CMakeFiles/cmTC_04598.dir/build
+make[1]: ingresso nella directory "/home/greg/Scaricati/slingscold3/build/CMakeFiles/CMakeTmp"
+Building C object CMakeFiles/cmTC_04598.dir/testCCompiler.c.o
+/usr/bin/cc     -o CMakeFiles/cmTC_04598.dir/testCCompiler.c.o   -c /home/greg/Scaricati/slingscold3/build/CMakeFiles/CMakeTmp/testCCompiler.c
+Linking C executable cmTC_04598
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_04598.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTC_04598.dir/testCCompiler.c.o  -o cmTC_04598 -rdynamic 
+make[1]: uscita dalla directory "/home/greg/Scaricati/slingscold3/build/CMakeFiles/CMakeTmp"
 
 
 Detecting C compiler ABI info compiled with the following output:
-Change Dir: /home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/CMakeFiles/CMakeTmp
+Change Dir: /home/greg/Scaricati/slingscold3/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_0ca9d/fast"
-/usr/bin/make -f CMakeFiles/cmTC_0ca9d.dir/build.make CMakeFiles/cmTC_0ca9d.dir/build
-make[1]: ingresso nella directory "/home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/CMakeFiles/CMakeTmp"
-Building C object CMakeFiles/cmTC_0ca9d.dir/CMakeCCompilerABI.c.o
-/usr/bin/cc     -o CMakeFiles/cmTC_0ca9d.dir/CMakeCCompilerABI.c.o   -c /usr/share/cmake-3.6/Modules/CMakeCCompilerABI.c
-Linking C executable cmTC_0ca9d
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_0ca9d.dir/link.txt --verbose=1
-/usr/bin/cc      -v CMakeFiles/cmTC_0ca9d.dir/CMakeCCompilerABI.c.o  -o cmTC_0ca9d -rdynamic  
+Run Build Command:"/usr/bin/make" "cmTC_4d905/fast"
+/usr/bin/make -f CMakeFiles/cmTC_4d905.dir/build.make CMakeFiles/cmTC_4d905.dir/build
+make[1]: ingresso nella directory "/home/greg/Scaricati/slingscold3/build/CMakeFiles/CMakeTmp"
+Building C object CMakeFiles/cmTC_4d905.dir/CMakeCCompilerABI.c.o
+/usr/bin/cc     -o CMakeFiles/cmTC_4d905.dir/CMakeCCompilerABI.c.o   -c /usr/share/cmake-3.6/Modules/CMakeCCompilerABI.c
+Linking C executable cmTC_4d905
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4d905.dir/link.txt --verbose=1
+/usr/bin/cc      -v CMakeFiles/cmTC_4d905.dir/CMakeCCompilerABI.c.o  -o cmTC_4d905 -rdynamic  
 Using built-in specs.
 COLLECT_GCC=/usr/bin/cc
 COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/lto-wrapper
@@ -59,24 +59,24 @@ Thread model: posix
 gcc version 6.1.1 20160802 (GCC) 
 COMPILER_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/:/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/
 LIBRARY_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/../../../../lib/:/lib/../lib/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/../../../:/lib/:/usr/lib/
-COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_0ca9d' '-rdynamic' '-mtune=generic' '-march=x86-64'
- /usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/collect2 -plugin /usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/lto-wrapper -plugin-opt=-fresolution=/tmp/cc8JKKZE.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_0ca9d /usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/../../../../lib/crt1.o /usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/../../../../lib/crti.o /usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/crtbegin.o -L/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1 -L/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/../../.. CMakeFiles/cmTC_0ca9d.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/crtend.o /usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/../../../../lib/crtn.o
-COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_0ca9d' '-rdynamic' '-mtune=generic' '-march=x86-64'
-make[1]: uscita dalla directory "/home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/CMakeFiles/CMakeTmp"
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_4d905' '-rdynamic' '-mtune=generic' '-march=x86-64'
+ /usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/collect2 -plugin /usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/lto-wrapper -plugin-opt=-fresolution=/tmp/ccpTa9IG.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_4d905 /usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/../../../../lib/crt1.o /usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/../../../../lib/crti.o /usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/crtbegin.o -L/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1 -L/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/../../.. CMakeFiles/cmTC_4d905.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/crtend.o /usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/../../../../lib/crtn.o
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_4d905' '-rdynamic' '-mtune=generic' '-march=x86-64'
+make[1]: uscita dalla directory "/home/greg/Scaricati/slingscold3/build/CMakeFiles/CMakeTmp"
 
 
 Parsed C implicit link information from above output:
   link line regex: [^( *|.*[/\])(ld|([^/\]+-)?ld|collect2)[^/\]*( |$)]
-  ignore line: [Change Dir: /home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/CMakeFiles/CMakeTmp]
+  ignore line: [Change Dir: /home/greg/Scaricati/slingscold3/build/CMakeFiles/CMakeTmp]
   ignore line: []
-  ignore line: [Run Build Command:"/usr/bin/make" "cmTC_0ca9d/fast"]
-  ignore line: [/usr/bin/make -f CMakeFiles/cmTC_0ca9d.dir/build.make CMakeFiles/cmTC_0ca9d.dir/build]
-  ignore line: [make[1]: ingresso nella directory "/home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/CMakeFiles/CMakeTmp"]
-  ignore line: [Building C object CMakeFiles/cmTC_0ca9d.dir/CMakeCCompilerABI.c.o]
-  ignore line: [/usr/bin/cc     -o CMakeFiles/cmTC_0ca9d.dir/CMakeCCompilerABI.c.o   -c /usr/share/cmake-3.6/Modules/CMakeCCompilerABI.c]
-  ignore line: [Linking C executable cmTC_0ca9d]
-  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_0ca9d.dir/link.txt --verbose=1]
-  ignore line: [/usr/bin/cc      -v CMakeFiles/cmTC_0ca9d.dir/CMakeCCompilerABI.c.o  -o cmTC_0ca9d -rdynamic  ]
+  ignore line: [Run Build Command:"/usr/bin/make" "cmTC_4d905/fast"]
+  ignore line: [/usr/bin/make -f CMakeFiles/cmTC_4d905.dir/build.make CMakeFiles/cmTC_4d905.dir/build]
+  ignore line: [make[1]: ingresso nella directory "/home/greg/Scaricati/slingscold3/build/CMakeFiles/CMakeTmp"]
+  ignore line: [Building C object CMakeFiles/cmTC_4d905.dir/CMakeCCompilerABI.c.o]
+  ignore line: [/usr/bin/cc     -o CMakeFiles/cmTC_4d905.dir/CMakeCCompilerABI.c.o   -c /usr/share/cmake-3.6/Modules/CMakeCCompilerABI.c]
+  ignore line: [Linking C executable cmTC_4d905]
+  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4d905.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/cc      -v CMakeFiles/cmTC_4d905.dir/CMakeCCompilerABI.c.o  -o cmTC_4d905 -rdynamic  ]
   ignore line: [Using built-in specs.]
   ignore line: [COLLECT_GCC=/usr/bin/cc]
   ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/lto-wrapper]
@@ -86,13 +86,13 @@ Parsed C implicit link information from above output:
   ignore line: [gcc version 6.1.1 20160802 (GCC) ]
   ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/:/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/]
   ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/../../../../lib/:/lib/../lib/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/../../../:/lib/:/usr/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_0ca9d' '-rdynamic' '-mtune=generic' '-march=x86-64']
-  link line: [ /usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/collect2 -plugin /usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/lto-wrapper -plugin-opt=-fresolution=/tmp/cc8JKKZE.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_0ca9d /usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/../../../../lib/crt1.o /usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/../../../../lib/crti.o /usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/crtbegin.o -L/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1 -L/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/../../.. CMakeFiles/cmTC_0ca9d.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/crtend.o /usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/../../../../lib/crtn.o]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_4d905' '-rdynamic' '-mtune=generic' '-march=x86-64']
+  link line: [ /usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/collect2 -plugin /usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/lto-wrapper -plugin-opt=-fresolution=/tmp/ccpTa9IG.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_4d905 /usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/../../../../lib/crt1.o /usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/../../../../lib/crti.o /usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/crtbegin.o -L/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1 -L/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/../../.. CMakeFiles/cmTC_4d905.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/crtend.o /usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/../../../../lib/crtn.o]
     arg [/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/collect2] ==> ignore
     arg [-plugin] ==> ignore
     arg [/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/liblto_plugin.so] ==> ignore
     arg [-plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/lto-wrapper] ==> ignore
-    arg [-plugin-opt=-fresolution=/tmp/cc8JKKZE.res] ==> ignore
+    arg [-plugin-opt=-fresolution=/tmp/ccpTa9IG.res] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
     arg [-plugin-opt=-pass-through=-lc] ==> ignore
@@ -107,7 +107,7 @@ Parsed C implicit link information from above output:
     arg [-dynamic-linker] ==> ignore
     arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
     arg [-o] ==> ignore
-    arg [cmTC_0ca9d] ==> ignore
+    arg [cmTC_4d905] ==> ignore
     arg [/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/../../../../lib/crt1.o] ==> ignore
     arg [/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/../../../../lib/crti.o] ==> ignore
     arg [/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/crtbegin.o] ==> ignore
@@ -116,7 +116,7 @@ Parsed C implicit link information from above output:
     arg [-L/lib/../lib] ==> dir [/lib/../lib]
     arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
     arg [-L/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/../../..] ==> dir [/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/../../..]
-    arg [CMakeFiles/cmTC_0ca9d.dir/CMakeCCompilerABI.c.o] ==> ignore
+    arg [CMakeFiles/cmTC_4d905.dir/CMakeCCompilerABI.c.o] ==> ignore
     arg [-lgcc] ==> lib [gcc]
     arg [--as-needed] ==> ignore
     arg [-lgcc_s] ==> lib [gcc_s]
@@ -145,17 +145,17 @@ Parsed C implicit link information from above output:
 
 
 Detecting C [-std=c11] compiler features compiled with the following output:
-Change Dir: /home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/CMakeFiles/CMakeTmp
+Change Dir: /home/greg/Scaricati/slingscold3/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_2920a/fast"
-/usr/bin/make -f CMakeFiles/cmTC_2920a.dir/build.make CMakeFiles/cmTC_2920a.dir/build
-make[1]: ingresso nella directory "/home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/CMakeFiles/CMakeTmp"
-Building C object CMakeFiles/cmTC_2920a.dir/feature_tests.c.o
-/usr/bin/cc    -std=c11 -o CMakeFiles/cmTC_2920a.dir/feature_tests.c.o   -c /home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/CMakeFiles/feature_tests.c
-Linking C executable cmTC_2920a
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_2920a.dir/link.txt --verbose=1
-/usr/bin/cc       CMakeFiles/cmTC_2920a.dir/feature_tests.c.o  -o cmTC_2920a -rdynamic 
-make[1]: uscita dalla directory "/home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/CMakeFiles/CMakeTmp"
+Run Build Command:"/usr/bin/make" "cmTC_56019/fast"
+/usr/bin/make -f CMakeFiles/cmTC_56019.dir/build.make CMakeFiles/cmTC_56019.dir/build
+make[1]: ingresso nella directory "/home/greg/Scaricati/slingscold3/build/CMakeFiles/CMakeTmp"
+Building C object CMakeFiles/cmTC_56019.dir/feature_tests.c.o
+/usr/bin/cc    -std=c11 -o CMakeFiles/cmTC_56019.dir/feature_tests.c.o   -c /home/greg/Scaricati/slingscold3/build/CMakeFiles/feature_tests.c
+Linking C executable cmTC_56019
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_56019.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTC_56019.dir/feature_tests.c.o  -o cmTC_56019 -rdynamic 
+make[1]: uscita dalla directory "/home/greg/Scaricati/slingscold3/build/CMakeFiles/CMakeTmp"
 
 
     Feature record: C_FEATURE:1c_function_prototypes
@@ -165,17 +165,17 @@ make[1]: uscita dalla directory "/home/greg/Scaricati/flexiondotorg-slingscold-l
 
 
 Detecting C [-std=c99] compiler features compiled with the following output:
-Change Dir: /home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/CMakeFiles/CMakeTmp
+Change Dir: /home/greg/Scaricati/slingscold3/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_f91ed/fast"
-/usr/bin/make -f CMakeFiles/cmTC_f91ed.dir/build.make CMakeFiles/cmTC_f91ed.dir/build
-make[1]: ingresso nella directory "/home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/CMakeFiles/CMakeTmp"
-Building C object CMakeFiles/cmTC_f91ed.dir/feature_tests.c.o
-/usr/bin/cc    -std=c99 -o CMakeFiles/cmTC_f91ed.dir/feature_tests.c.o   -c /home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/CMakeFiles/feature_tests.c
-Linking C executable cmTC_f91ed
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f91ed.dir/link.txt --verbose=1
-/usr/bin/cc       CMakeFiles/cmTC_f91ed.dir/feature_tests.c.o  -o cmTC_f91ed -rdynamic 
-make[1]: uscita dalla directory "/home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/CMakeFiles/CMakeTmp"
+Run Build Command:"/usr/bin/make" "cmTC_8638d/fast"
+/usr/bin/make -f CMakeFiles/cmTC_8638d.dir/build.make CMakeFiles/cmTC_8638d.dir/build
+make[1]: ingresso nella directory "/home/greg/Scaricati/slingscold3/build/CMakeFiles/CMakeTmp"
+Building C object CMakeFiles/cmTC_8638d.dir/feature_tests.c.o
+/usr/bin/cc    -std=c99 -o CMakeFiles/cmTC_8638d.dir/feature_tests.c.o   -c /home/greg/Scaricati/slingscold3/build/CMakeFiles/feature_tests.c
+Linking C executable cmTC_8638d
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_8638d.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTC_8638d.dir/feature_tests.c.o  -o cmTC_8638d -rdynamic 
+make[1]: uscita dalla directory "/home/greg/Scaricati/slingscold3/build/CMakeFiles/CMakeTmp"
 
 
     Feature record: C_FEATURE:1c_function_prototypes
@@ -185,17 +185,17 @@ make[1]: uscita dalla directory "/home/greg/Scaricati/flexiondotorg-slingscold-l
 
 
 Detecting C [-std=c90] compiler features compiled with the following output:
-Change Dir: /home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/CMakeFiles/CMakeTmp
+Change Dir: /home/greg/Scaricati/slingscold3/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_c60bc/fast"
-/usr/bin/make -f CMakeFiles/cmTC_c60bc.dir/build.make CMakeFiles/cmTC_c60bc.dir/build
-make[1]: ingresso nella directory "/home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/CMakeFiles/CMakeTmp"
-Building C object CMakeFiles/cmTC_c60bc.dir/feature_tests.c.o
-/usr/bin/cc    -std=c90 -o CMakeFiles/cmTC_c60bc.dir/feature_tests.c.o   -c /home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/CMakeFiles/feature_tests.c
-Linking C executable cmTC_c60bc
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c60bc.dir/link.txt --verbose=1
-/usr/bin/cc       CMakeFiles/cmTC_c60bc.dir/feature_tests.c.o  -o cmTC_c60bc -rdynamic 
-make[1]: uscita dalla directory "/home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/CMakeFiles/CMakeTmp"
+Run Build Command:"/usr/bin/make" "cmTC_514e8/fast"
+/usr/bin/make -f CMakeFiles/cmTC_514e8.dir/build.make CMakeFiles/cmTC_514e8.dir/build
+make[1]: ingresso nella directory "/home/greg/Scaricati/slingscold3/build/CMakeFiles/CMakeTmp"
+Building C object CMakeFiles/cmTC_514e8.dir/feature_tests.c.o
+/usr/bin/cc    -std=c90 -o CMakeFiles/cmTC_514e8.dir/feature_tests.c.o   -c /home/greg/Scaricati/slingscold3/build/CMakeFiles/feature_tests.c
+Linking C executable cmTC_514e8
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_514e8.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTC_514e8.dir/feature_tests.c.o  -o cmTC_514e8 -rdynamic 
+make[1]: uscita dalla directory "/home/greg/Scaricati/slingscold3/build/CMakeFiles/CMakeTmp"
 
 
     Feature record: C_FEATURE:1c_function_prototypes
@@ -203,30 +203,30 @@ make[1]: uscita dalla directory "/home/greg/Scaricati/flexiondotorg-slingscold-l
     Feature record: C_FEATURE:0c_static_assert
     Feature record: C_FEATURE:0c_variadic_macros
 Determining if the CXX compiler works passed with the following output:
-Change Dir: /home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/CMakeFiles/CMakeTmp
+Change Dir: /home/greg/Scaricati/slingscold3/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_1eefb/fast"
-/usr/bin/make -f CMakeFiles/cmTC_1eefb.dir/build.make CMakeFiles/cmTC_1eefb.dir/build
-make[1]: ingresso nella directory "/home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/CMakeFiles/CMakeTmp"
-Building CXX object CMakeFiles/cmTC_1eefb.dir/testCXXCompiler.cxx.o
-/usr/bin/c++      -o CMakeFiles/cmTC_1eefb.dir/testCXXCompiler.cxx.o -c /home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
-Linking CXX executable cmTC_1eefb
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_1eefb.dir/link.txt --verbose=1
-/usr/bin/c++        CMakeFiles/cmTC_1eefb.dir/testCXXCompiler.cxx.o  -o cmTC_1eefb -rdynamic 
-make[1]: uscita dalla directory "/home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/CMakeFiles/CMakeTmp"
+Run Build Command:"/usr/bin/make" "cmTC_b66f0/fast"
+/usr/bin/make -f CMakeFiles/cmTC_b66f0.dir/build.make CMakeFiles/cmTC_b66f0.dir/build
+make[1]: ingresso nella directory "/home/greg/Scaricati/slingscold3/build/CMakeFiles/CMakeTmp"
+Building CXX object CMakeFiles/cmTC_b66f0.dir/testCXXCompiler.cxx.o
+/usr/bin/c++      -o CMakeFiles/cmTC_b66f0.dir/testCXXCompiler.cxx.o -c /home/greg/Scaricati/slingscold3/build/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
+Linking CXX executable cmTC_b66f0
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b66f0.dir/link.txt --verbose=1
+/usr/bin/c++        CMakeFiles/cmTC_b66f0.dir/testCXXCompiler.cxx.o  -o cmTC_b66f0 -rdynamic 
+make[1]: uscita dalla directory "/home/greg/Scaricati/slingscold3/build/CMakeFiles/CMakeTmp"
 
 
 Detecting CXX compiler ABI info compiled with the following output:
-Change Dir: /home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/CMakeFiles/CMakeTmp
+Change Dir: /home/greg/Scaricati/slingscold3/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_4cf52/fast"
-/usr/bin/make -f CMakeFiles/cmTC_4cf52.dir/build.make CMakeFiles/cmTC_4cf52.dir/build
-make[1]: ingresso nella directory "/home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/CMakeFiles/CMakeTmp"
-Building CXX object CMakeFiles/cmTC_4cf52.dir/CMakeCXXCompilerABI.cpp.o
-/usr/bin/c++      -o CMakeFiles/cmTC_4cf52.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-3.6/Modules/CMakeCXXCompilerABI.cpp
-Linking CXX executable cmTC_4cf52
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4cf52.dir/link.txt --verbose=1
-/usr/bin/c++       -v CMakeFiles/cmTC_4cf52.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_4cf52 -rdynamic  
+Run Build Command:"/usr/bin/make" "cmTC_4b26e/fast"
+/usr/bin/make -f CMakeFiles/cmTC_4b26e.dir/build.make CMakeFiles/cmTC_4b26e.dir/build
+make[1]: ingresso nella directory "/home/greg/Scaricati/slingscold3/build/CMakeFiles/CMakeTmp"
+Building CXX object CMakeFiles/cmTC_4b26e.dir/CMakeCXXCompilerABI.cpp.o
+/usr/bin/c++      -o CMakeFiles/cmTC_4b26e.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-3.6/Modules/CMakeCXXCompilerABI.cpp
+Linking CXX executable cmTC_4b26e
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4b26e.dir/link.txt --verbose=1
+/usr/bin/c++       -v CMakeFiles/cmTC_4b26e.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_4b26e -rdynamic  
 Using built-in specs.
 COLLECT_GCC=/usr/bin/c++
 COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/lto-wrapper
@@ -236,24 +236,24 @@ Thread model: posix
 gcc version 6.1.1 20160802 (GCC) 
 COMPILER_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/:/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/
 LIBRARY_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/../../../../lib/:/lib/../lib/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/../../../:/lib/:/usr/lib/
-COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_4cf52' '-rdynamic' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
- /usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/collect2 -plugin /usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/lto-wrapper -plugin-opt=-fresolution=/tmp/ccroggu8.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_4cf52 /usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/../../../../lib/crt1.o /usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/../../../../lib/crti.o /usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/crtbegin.o -L/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1 -L/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/../../.. CMakeFiles/cmTC_4cf52.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/crtend.o /usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/../../../../lib/crtn.o
-COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_4cf52' '-rdynamic' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
-make[1]: uscita dalla directory "/home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/CMakeFiles/CMakeTmp"
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_4b26e' '-rdynamic' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/collect2 -plugin /usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/lto-wrapper -plugin-opt=-fresolution=/tmp/ccGk9zXa.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_4b26e /usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/../../../../lib/crt1.o /usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/../../../../lib/crti.o /usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/crtbegin.o -L/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1 -L/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/../../.. CMakeFiles/cmTC_4b26e.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/crtend.o /usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/../../../../lib/crtn.o
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_4b26e' '-rdynamic' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+make[1]: uscita dalla directory "/home/greg/Scaricati/slingscold3/build/CMakeFiles/CMakeTmp"
 
 
 Parsed CXX implicit link information from above output:
   link line regex: [^( *|.*[/\])(ld|([^/\]+-)?ld|collect2)[^/\]*( |$)]
-  ignore line: [Change Dir: /home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/CMakeFiles/CMakeTmp]
+  ignore line: [Change Dir: /home/greg/Scaricati/slingscold3/build/CMakeFiles/CMakeTmp]
   ignore line: []
-  ignore line: [Run Build Command:"/usr/bin/make" "cmTC_4cf52/fast"]
-  ignore line: [/usr/bin/make -f CMakeFiles/cmTC_4cf52.dir/build.make CMakeFiles/cmTC_4cf52.dir/build]
-  ignore line: [make[1]: ingresso nella directory "/home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/CMakeFiles/CMakeTmp"]
-  ignore line: [Building CXX object CMakeFiles/cmTC_4cf52.dir/CMakeCXXCompilerABI.cpp.o]
-  ignore line: [/usr/bin/c++      -o CMakeFiles/cmTC_4cf52.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-3.6/Modules/CMakeCXXCompilerABI.cpp]
-  ignore line: [Linking CXX executable cmTC_4cf52]
-  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4cf52.dir/link.txt --verbose=1]
-  ignore line: [/usr/bin/c++       -v CMakeFiles/cmTC_4cf52.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_4cf52 -rdynamic  ]
+  ignore line: [Run Build Command:"/usr/bin/make" "cmTC_4b26e/fast"]
+  ignore line: [/usr/bin/make -f CMakeFiles/cmTC_4b26e.dir/build.make CMakeFiles/cmTC_4b26e.dir/build]
+  ignore line: [make[1]: ingresso nella directory "/home/greg/Scaricati/slingscold3/build/CMakeFiles/CMakeTmp"]
+  ignore line: [Building CXX object CMakeFiles/cmTC_4b26e.dir/CMakeCXXCompilerABI.cpp.o]
+  ignore line: [/usr/bin/c++      -o CMakeFiles/cmTC_4b26e.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-3.6/Modules/CMakeCXXCompilerABI.cpp]
+  ignore line: [Linking CXX executable cmTC_4b26e]
+  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4b26e.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/c++       -v CMakeFiles/cmTC_4b26e.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_4b26e -rdynamic  ]
   ignore line: [Using built-in specs.]
   ignore line: [COLLECT_GCC=/usr/bin/c++]
   ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/lto-wrapper]
@@ -263,13 +263,13 @@ Parsed CXX implicit link information from above output:
   ignore line: [gcc version 6.1.1 20160802 (GCC) ]
   ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/:/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/]
   ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/../../../../lib/:/lib/../lib/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/../../../:/lib/:/usr/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_4cf52' '-rdynamic' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
-  link line: [ /usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/collect2 -plugin /usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/lto-wrapper -plugin-opt=-fresolution=/tmp/ccroggu8.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_4cf52 /usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/../../../../lib/crt1.o /usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/../../../../lib/crti.o /usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/crtbegin.o -L/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1 -L/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/../../.. CMakeFiles/cmTC_4cf52.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/crtend.o /usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/../../../../lib/crtn.o]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_4b26e' '-rdynamic' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
+  link line: [ /usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/collect2 -plugin /usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/lto-wrapper -plugin-opt=-fresolution=/tmp/ccGk9zXa.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_4b26e /usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/../../../../lib/crt1.o /usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/../../../../lib/crti.o /usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/crtbegin.o -L/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1 -L/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/../../.. CMakeFiles/cmTC_4b26e.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/crtend.o /usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/../../../../lib/crtn.o]
     arg [/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/collect2] ==> ignore
     arg [-plugin] ==> ignore
     arg [/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/liblto_plugin.so] ==> ignore
     arg [-plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/lto-wrapper] ==> ignore
-    arg [-plugin-opt=-fresolution=/tmp/ccroggu8.res] ==> ignore
+    arg [-plugin-opt=-fresolution=/tmp/ccGk9zXa.res] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
     arg [-plugin-opt=-pass-through=-lc] ==> ignore
@@ -284,7 +284,7 @@ Parsed CXX implicit link information from above output:
     arg [-dynamic-linker] ==> ignore
     arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
     arg [-o] ==> ignore
-    arg [cmTC_4cf52] ==> ignore
+    arg [cmTC_4b26e] ==> ignore
     arg [/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/../../../../lib/crt1.o] ==> ignore
     arg [/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/../../../../lib/crti.o] ==> ignore
     arg [/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/crtbegin.o] ==> ignore
@@ -293,7 +293,7 @@ Parsed CXX implicit link information from above output:
     arg [-L/lib/../lib] ==> dir [/lib/../lib]
     arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
     arg [-L/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/../../..] ==> dir [/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/../../..]
-    arg [CMakeFiles/cmTC_4cf52.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+    arg [CMakeFiles/cmTC_4b26e.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
     arg [-lstdc++] ==> lib [stdc++]
     arg [-lm] ==> lib [m]
     arg [-lgcc_s] ==> lib [gcc_s]
@@ -320,17 +320,17 @@ Parsed CXX implicit link information from above output:
 
 
 Detecting CXX [-std=c++14] compiler features compiled with the following output:
-Change Dir: /home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/CMakeFiles/CMakeTmp
+Change Dir: /home/greg/Scaricati/slingscold3/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_48f53/fast"
-/usr/bin/make -f CMakeFiles/cmTC_48f53.dir/build.make CMakeFiles/cmTC_48f53.dir/build
-make[1]: ingresso nella directory "/home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/CMakeFiles/CMakeTmp"
-Building CXX object CMakeFiles/cmTC_48f53.dir/feature_tests.cxx.o
-/usr/bin/c++     -std=c++14 -o CMakeFiles/cmTC_48f53.dir/feature_tests.cxx.o -c /home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/CMakeFiles/feature_tests.cxx
-Linking CXX executable cmTC_48f53
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_48f53.dir/link.txt --verbose=1
-/usr/bin/c++        CMakeFiles/cmTC_48f53.dir/feature_tests.cxx.o  -o cmTC_48f53 -rdynamic 
-make[1]: uscita dalla directory "/home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/CMakeFiles/CMakeTmp"
+Run Build Command:"/usr/bin/make" "cmTC_307ee/fast"
+/usr/bin/make -f CMakeFiles/cmTC_307ee.dir/build.make CMakeFiles/cmTC_307ee.dir/build
+make[1]: ingresso nella directory "/home/greg/Scaricati/slingscold3/build/CMakeFiles/CMakeTmp"
+Building CXX object CMakeFiles/cmTC_307ee.dir/feature_tests.cxx.o
+/usr/bin/c++     -std=c++14 -o CMakeFiles/cmTC_307ee.dir/feature_tests.cxx.o -c /home/greg/Scaricati/slingscold3/build/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_307ee
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_307ee.dir/link.txt --verbose=1
+/usr/bin/c++        CMakeFiles/cmTC_307ee.dir/feature_tests.cxx.o  -o cmTC_307ee -rdynamic 
+make[1]: uscita dalla directory "/home/greg/Scaricati/slingscold3/build/CMakeFiles/CMakeTmp"
 
 
     Feature record: CXX_FEATURE:1cxx_aggregate_default_initializers
@@ -393,17 +393,17 @@ make[1]: uscita dalla directory "/home/greg/Scaricati/flexiondotorg-slingscold-l
 
 
 Detecting CXX [-std=c++11] compiler features compiled with the following output:
-Change Dir: /home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/CMakeFiles/CMakeTmp
+Change Dir: /home/greg/Scaricati/slingscold3/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_55a75/fast"
-/usr/bin/make -f CMakeFiles/cmTC_55a75.dir/build.make CMakeFiles/cmTC_55a75.dir/build
-make[1]: ingresso nella directory "/home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/CMakeFiles/CMakeTmp"
-Building CXX object CMakeFiles/cmTC_55a75.dir/feature_tests.cxx.o
-/usr/bin/c++     -std=c++11 -o CMakeFiles/cmTC_55a75.dir/feature_tests.cxx.o -c /home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/CMakeFiles/feature_tests.cxx
-Linking CXX executable cmTC_55a75
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_55a75.dir/link.txt --verbose=1
-/usr/bin/c++        CMakeFiles/cmTC_55a75.dir/feature_tests.cxx.o  -o cmTC_55a75 -rdynamic 
-make[1]: uscita dalla directory "/home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/CMakeFiles/CMakeTmp"
+Run Build Command:"/usr/bin/make" "cmTC_d6458/fast"
+/usr/bin/make -f CMakeFiles/cmTC_d6458.dir/build.make CMakeFiles/cmTC_d6458.dir/build
+make[1]: ingresso nella directory "/home/greg/Scaricati/slingscold3/build/CMakeFiles/CMakeTmp"
+Building CXX object CMakeFiles/cmTC_d6458.dir/feature_tests.cxx.o
+/usr/bin/c++     -std=c++11 -o CMakeFiles/cmTC_d6458.dir/feature_tests.cxx.o -c /home/greg/Scaricati/slingscold3/build/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_d6458
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d6458.dir/link.txt --verbose=1
+/usr/bin/c++        CMakeFiles/cmTC_d6458.dir/feature_tests.cxx.o  -o cmTC_d6458 -rdynamic 
+make[1]: uscita dalla directory "/home/greg/Scaricati/slingscold3/build/CMakeFiles/CMakeTmp"
 
 
     Feature record: CXX_FEATURE:0cxx_aggregate_default_initializers
@@ -466,17 +466,17 @@ make[1]: uscita dalla directory "/home/greg/Scaricati/flexiondotorg-slingscold-l
 
 
 Detecting CXX [-std=c++98] compiler features compiled with the following output:
-Change Dir: /home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/CMakeFiles/CMakeTmp
+Change Dir: /home/greg/Scaricati/slingscold3/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_efd83/fast"
-/usr/bin/make -f CMakeFiles/cmTC_efd83.dir/build.make CMakeFiles/cmTC_efd83.dir/build
-make[1]: ingresso nella directory "/home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/CMakeFiles/CMakeTmp"
-Building CXX object CMakeFiles/cmTC_efd83.dir/feature_tests.cxx.o
-/usr/bin/c++     -std=c++98 -o CMakeFiles/cmTC_efd83.dir/feature_tests.cxx.o -c /home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/CMakeFiles/feature_tests.cxx
-Linking CXX executable cmTC_efd83
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_efd83.dir/link.txt --verbose=1
-/usr/bin/c++        CMakeFiles/cmTC_efd83.dir/feature_tests.cxx.o  -o cmTC_efd83 -rdynamic 
-make[1]: uscita dalla directory "/home/greg/Scaricati/flexiondotorg-slingscold-launcher-e849c2f000da/build/CMakeFiles/CMakeTmp"
+Run Build Command:"/usr/bin/make" "cmTC_d2083/fast"
+/usr/bin/make -f CMakeFiles/cmTC_d2083.dir/build.make CMakeFiles/cmTC_d2083.dir/build
+make[1]: ingresso nella directory "/home/greg/Scaricati/slingscold3/build/CMakeFiles/CMakeTmp"
+Building CXX object CMakeFiles/cmTC_d2083.dir/feature_tests.cxx.o
+/usr/bin/c++     -std=c++98 -o CMakeFiles/cmTC_d2083.dir/feature_tests.cxx.o -c /home/greg/Scaricati/slingscold3/build/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_d2083
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d2083.dir/link.txt --verbose=1
+/usr/bin/c++        CMakeFiles/cmTC_d2083.dir/feature_tests.cxx.o  -o cmTC_d2083 -rdynamic 
+make[1]: uscita dalla directory "/home/greg/Scaricati/slingscold3/build/CMakeFiles/CMakeTmp"
 
 
     Feature record: CXX_FEATURE:0cxx_aggregate_default_initializers

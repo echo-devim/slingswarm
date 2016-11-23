@@ -6,7 +6,7 @@ namespace Slingshot.Frontend {
         private Gdk.Pixbuf icon;
         private Slingshot.Frontend.Color prominent;
         private string label;
-        private Gtk.VBox wrapper;
+        private Gtk.Box wrapper;
         private int icon_size;
         
         const int FPS = 24;
@@ -23,7 +23,7 @@ namespace Slingshot.Frontend {
             this.set_size_request (icon_size * 3, icon_size + 30); // 30 is the padding between icon and label and label's height
             
             // VBox properties
-            this.wrapper = new Gtk.VBox (false, 0);
+            this.wrapper = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
             this.wrapper.draw.connect (this.draw_icon);
             this.add (this.wrapper);
 		    
@@ -54,8 +54,8 @@ namespace Slingshot.Frontend {
         
         public new void focus_in () {
             
-            GLib.Timeout.add (((int)(1000/this.FPS)), () => {
-				if (this.current_frame >= this.RUN_LENGTH || !this.has_focus) {
+            GLib.Timeout.add (((int)(1000/FPS)), () => {
+				if (this.current_frame >= RUN_LENGTH || !this.has_focus) {
 				    current_frame = 1;
 					return false; // stop animation
 				}
@@ -68,8 +68,8 @@ namespace Slingshot.Frontend {
         
         public new void focus_out () {
             
-            GLib.Timeout.add (((int)(1000/this.FPS)), () => {
-				if (this.current_frame >= this.RUN_LENGTH || this.has_focus) {
+            GLib.Timeout.add (((int)(1000/FPS)), () => {
+				if (this.current_frame >= RUN_LENGTH || this.has_focus) {
 				    current_frame = 1;
 					return false; // stop animation
 				}
@@ -115,7 +115,7 @@ namespace Slingshot.Frontend {
             
             double progress;
             if (this.current_frame > 1) {
-                progress = (double)this.RUN_LENGTH/(double)this.current_frame;
+                progress = (double)RUN_LENGTH/(double)this.current_frame;
             } else {
                 progress = 1;
             }
