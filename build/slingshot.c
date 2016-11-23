@@ -158,46 +158,46 @@ SlingshotWindow* slingshot_window_new (void);
 SlingshotWindow* slingshot_window_construct (GType object_type);
 ElementaryWidgetsCompositedWindow* elementary_widgets_composited_window_new (void);
 ElementaryWidgetsCompositedWindow* elementary_widgets_composited_window_construct (GType object_type);
-void slingshot_backend_gmenu_entries_enumerate_apps (GeeArrayList* source, GeeHashMap* icons, gint icon_size, GeeArrayList** list);
-GeeArrayList* slingshot_backend_gmenu_entries_get_all (void);
+void slingshot_backend_gmenu_entries_enumerate_apps (GeeHashSet* source, GeeHashMap* icons, gint icon_size, GeeArrayList** list);
+GeeHashSet* slingshot_backend_gmenu_entries_get_all (void);
 SlingshotFrontendIndicators* slingshot_frontend_indicators_new (void);
 SlingshotFrontendIndicators* slingshot_frontend_indicators_construct (GType object_type);
 static void slingshot_window_change_category (SlingshotWindow* self);
 static void _slingshot_window_change_category_slingshot_frontend_indicators_child_activated (SlingshotFrontendIndicators* _sender, gpointer self);
 void slingshot_frontend_indicators_append (SlingshotFrontendIndicators* self, const gchar* thelabel);
 void slingshot_frontend_indicators_set_active (SlingshotFrontendIndicators* self, gint index);
-static void __lambda14_ (SlingshotWindow* self);
-static void ___lambda14__gtk_widget_realize (GtkWidget* _sender, gpointer self);
+static void __lambda16_ (SlingshotWindow* self);
+static void ___lambda16__gtk_widget_realize (GtkWidget* _sender, gpointer self);
 SlingshotFrontendSearchbar* slingshot_frontend_searchbar_new (const gchar* hint);
 SlingshotFrontendSearchbar* slingshot_frontend_searchbar_construct (GType object_type, const gchar* hint);
 static void slingshot_window_search (SlingshotWindow* self);
 static void _slingshot_window_search_slingshot_frontend_searchbar_changed (SlingshotFrontendSearchbar* _sender, gpointer self);
 static void slingshot_window_populate_grid (SlingshotWindow* self);
-static void __lambda19_ (SlingshotWindow* self);
+static void __lambda21_ (SlingshotWindow* self);
 static void slingshot_window_update_grid (SlingshotWindow* self, GeeArrayList* apps);
-static void ___lambda19__slingshot_frontend_indicators_child_activated (SlingshotFrontendIndicators* _sender, gpointer self);
+static void ___lambda21__slingshot_frontend_indicators_child_activated (SlingshotFrontendIndicators* _sender, gpointer self);
 static void slingshot_window_update_pages (SlingshotWindow* self, GeeArrayList* apps);
-static gboolean __lambda20_ (SlingshotWindow* self);
+static gboolean __lambda22_ (SlingshotWindow* self);
 void slingshot_window_destroy (SlingshotWindow* self);
-static gboolean ___lambda20__gtk_widget_button_release_event (GtkWidget* _sender, GdkEventButton* event, gpointer self);
+static gboolean ___lambda22__gtk_widget_button_release_event (GtkWidget* _sender, GdkEventButton* event, gpointer self);
 static gboolean slingshot_window_draw_background (SlingshotWindow* self, GtkWidget* widget, cairo_t* ctx);
 static gboolean _slingshot_window_draw_background_gtk_widget_draw (GtkWidget* _sender, cairo_t* cr, gpointer self);
-static gboolean __lambda21_ (SlingshotWindow* self);
-static gboolean ___lambda21__gtk_widget_focus_out_event (GtkWidget* _sender, GdkEventFocus* event, gpointer self);
+static gboolean __lambda23_ (SlingshotWindow* self);
+static gboolean ___lambda23__gtk_widget_focus_out_event (GtkWidget* _sender, GdkEventFocus* event, gpointer self);
 static Block1Data* block1_data_ref (Block1Data* _data1_);
 static void block1_data_unref (void * _userdata_);
 SlingshotFrontendAppItem* slingshot_frontend_app_item_new (gint size);
 SlingshotFrontendAppItem* slingshot_frontend_app_item_construct (GType object_type, gint size);
-static gboolean ________lambda15_ (Block1Data* _data1_);
-static gboolean _________lambda15__gtk_widget_button_press_event (GtkWidget* _sender, GdkEventButton* event, gpointer self);
-static gboolean ________lambda16_ (Block1Data* _data1_);
-static gboolean _________lambda16__gtk_widget_enter_notify_event (GtkWidget* _sender, GdkEventCrossing* event, gpointer self);
-static gboolean ________lambda17_ (SlingshotWindow* self);
-static gboolean _________lambda17__gtk_widget_leave_notify_event (GtkWidget* _sender, GdkEventCrossing* event, gpointer self);
+static gboolean ________lambda17_ (Block1Data* _data1_);
+static gboolean _________lambda17__gtk_widget_button_press_event (GtkWidget* _sender, GdkEventButton* event, gpointer self);
 static gboolean ________lambda18_ (Block1Data* _data1_);
-static gboolean _________lambda18__gtk_widget_button_release_event (GtkWidget* _sender, GdkEventButton* event, gpointer self);
+static gboolean _________lambda18__gtk_widget_enter_notify_event (GtkWidget* _sender, GdkEventCrossing* event, gpointer self);
+static gboolean ________lambda19_ (SlingshotWindow* self);
+static gboolean _________lambda19__gtk_widget_leave_notify_event (GtkWidget* _sender, GdkEventCrossing* event, gpointer self);
+static gboolean ________lambda20_ (Block1Data* _data1_);
+static gboolean _________lambda20__gtk_widget_button_release_event (GtkWidget* _sender, GdkEventButton* event, gpointer self);
 void slingshot_frontend_app_item_change_app (SlingshotFrontendAppItem* self, GdkPixbuf* new_icon, const gchar* new_name, const gchar* new_tooltip);
-GeeArrayList* slingshot_backend_gmenu_entries_get_applications_for_category (GMenuTreeDirectory* category);
+GeeHashSet* slingshot_backend_gmenu_entries_get_applications_for_category (GMenuTreeDirectory* category);
 gchar* slingshot_frontend_searchbar_get_text (SlingshotFrontendSearchbar* self);
 void slingshot_frontend_indicators_set_active_no_signal (SlingshotFrontendIndicators* self, gint index);
 static void slingshot_window_page_left (SlingshotWindow* self);
@@ -232,15 +232,15 @@ static void _slingshot_window_change_category_slingshot_frontend_indicators_chil
 }
 
 
-static void __lambda14_ (SlingshotWindow* self) {
+static void __lambda16_ (SlingshotWindow* self) {
 	GtkBox* _tmp0_ = NULL;
 	_tmp0_ = self->top_spacer;
 	gtk_widget_set_visible ((GtkWidget*) _tmp0_, TRUE);
 }
 
 
-static void ___lambda14__gtk_widget_realize (GtkWidget* _sender, gpointer self) {
-	__lambda14_ ((SlingshotWindow*) self);
+static void ___lambda16__gtk_widget_realize (GtkWidget* _sender, gpointer self) {
+	__lambda16_ ((SlingshotWindow*) self);
 }
 
 
@@ -249,19 +249,19 @@ static void _slingshot_window_search_slingshot_frontend_searchbar_changed (Sling
 }
 
 
-static void __lambda19_ (SlingshotWindow* self) {
+static void __lambda21_ (SlingshotWindow* self) {
 	GeeArrayList* _tmp0_ = NULL;
 	_tmp0_ = self->filtered;
 	slingshot_window_update_grid (self, _tmp0_);
 }
 
 
-static void ___lambda19__slingshot_frontend_indicators_child_activated (SlingshotFrontendIndicators* _sender, gpointer self) {
-	__lambda19_ ((SlingshotWindow*) self);
+static void ___lambda21__slingshot_frontend_indicators_child_activated (SlingshotFrontendIndicators* _sender, gpointer self) {
+	__lambda21_ ((SlingshotWindow*) self);
 }
 
 
-static gboolean __lambda20_ (SlingshotWindow* self) {
+static gboolean __lambda22_ (SlingshotWindow* self) {
 	gboolean result = FALSE;
 	slingshot_window_destroy (self);
 	result = FALSE;
@@ -269,9 +269,9 @@ static gboolean __lambda20_ (SlingshotWindow* self) {
 }
 
 
-static gboolean ___lambda20__gtk_widget_button_release_event (GtkWidget* _sender, GdkEventButton* event, gpointer self) {
+static gboolean ___lambda22__gtk_widget_button_release_event (GtkWidget* _sender, GdkEventButton* event, gpointer self) {
 	gboolean result;
-	result = __lambda20_ ((SlingshotWindow*) self);
+	result = __lambda22_ ((SlingshotWindow*) self);
 	return result;
 }
 
@@ -283,7 +283,7 @@ static gboolean _slingshot_window_draw_background_gtk_widget_draw (GtkWidget* _s
 }
 
 
-static gboolean __lambda21_ (SlingshotWindow* self) {
+static gboolean __lambda23_ (SlingshotWindow* self) {
 	gboolean result = FALSE;
 	slingshot_window_destroy (self);
 	result = TRUE;
@@ -291,9 +291,9 @@ static gboolean __lambda21_ (SlingshotWindow* self) {
 }
 
 
-static gboolean ___lambda21__gtk_widget_focus_out_event (GtkWidget* _sender, GdkEventFocus* event, gpointer self) {
+static gboolean ___lambda23__gtk_widget_focus_out_event (GtkWidget* _sender, GdkEventFocus* event, gpointer self) {
 	gboolean result;
-	result = __lambda21_ ((SlingshotWindow*) self);
+	result = __lambda23_ ((SlingshotWindow*) self);
 	return result;
 }
 
@@ -316,8 +316,8 @@ SlingshotWindow* slingshot_window_construct (GType object_type) {
 	gint _tmp10_ = 0;
 	gdouble _tmp11_ = 0.0;
 	gdouble _tmp12_ = 0.0;
-	GeeArrayList* _tmp20_ = NULL;
-	GeeArrayList* _tmp21_ = NULL;
+	GeeHashSet* _tmp20_ = NULL;
+	GeeHashSet* _tmp21_ = NULL;
 	GeeHashMap* _tmp22_ = NULL;
 	gint _tmp23_ = 0;
 	GeeArrayList* _tmp24_ = NULL;
@@ -452,7 +452,7 @@ SlingshotWindow* slingshot_window_construct (GType object_type) {
 	gtk_event_box_set_visible_window (_tmp26_, FALSE);
 	_tmp27_ = wrapper;
 	gtk_container_add ((GtkContainer*) self, (GtkWidget*) _tmp27_);
-	_tmp28_ = (GtkBox*) gtk_box_new (GTK_ORIENTATION_VERTICAL, 5);
+	_tmp28_ = (GtkBox*) gtk_box_new (GTK_ORIENTATION_VERTICAL, 10);
 	g_object_ref_sink (_tmp28_);
 	container = _tmp28_;
 	_tmp29_ = wrapper;
@@ -529,7 +529,7 @@ SlingshotWindow* slingshot_window_construct (GType object_type) {
 	_g_object_unref0 (self->top_spacer);
 	self->top_spacer = _tmp53_;
 	_tmp54_ = self->top_spacer;
-	g_signal_connect_object ((GtkWidget*) _tmp54_, "realize", (GCallback) ___lambda14__gtk_widget_realize, self, 0);
+	g_signal_connect_object ((GtkWidget*) _tmp54_, "realize", (GCallback) ___lambda16__gtk_widget_realize, self, 0);
 	_tmp55_ = self->top_spacer;
 	g_object_set ((GtkWidget*) _tmp55_, "can-focus", TRUE, NULL);
 	_tmp56_ = bottom;
@@ -638,7 +638,7 @@ SlingshotWindow* slingshot_window_construct (GType object_type) {
 	_g_object_unref0 (self->pages);
 	self->pages = _tmp90_;
 	_tmp91_ = self->pages;
-	g_signal_connect_object (_tmp91_, "child-activated", (GCallback) ___lambda19__slingshot_frontend_indicators_child_activated, self, 0);
+	g_signal_connect_object (_tmp91_, "child-activated", (GCallback) ___lambda21__slingshot_frontend_indicators_child_activated, self, 0);
 	_tmp92_ = (GtkBox*) gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
 	g_object_ref_sink (_tmp92_);
 	pages_wrapper = _tmp92_;
@@ -692,9 +692,9 @@ SlingshotWindow* slingshot_window_construct (GType object_type) {
 	}
 	_tmp108_ = self->pages;
 	slingshot_frontend_indicators_set_active (_tmp108_, 0);
-	g_signal_connect_object ((GtkWidget*) self, "button-release-event", (GCallback) ___lambda20__gtk_widget_button_release_event, self, 0);
+	g_signal_connect_object ((GtkWidget*) self, "button-release-event", (GCallback) ___lambda22__gtk_widget_button_release_event, self, 0);
 	g_signal_connect_object ((GtkWidget*) self, "draw", (GCallback) _slingshot_window_draw_background_gtk_widget_draw, self, 0);
-	g_signal_connect_object ((GtkWidget*) self, "focus-out-event", (GCallback) ___lambda21__gtk_widget_focus_out_event, self, 0);
+	g_signal_connect_object ((GtkWidget*) self, "focus-out-event", (GCallback) ___lambda23__gtk_widget_focus_out_event, self, 0);
 	_g_object_unref0 (pages_wrapper);
 	_g_object_unref0 (bottom);
 	_g_object_unref0 (top);
@@ -729,7 +729,7 @@ static void block1_data_unref (void * _userdata_) {
 }
 
 
-static gboolean ________lambda15_ (Block1Data* _data1_) {
+static gboolean ________lambda17_ (Block1Data* _data1_) {
 	SlingshotWindow* self;
 	gboolean result = FALSE;
 	SlingshotFrontendAppItem* _tmp0_ = NULL;
@@ -741,14 +741,14 @@ static gboolean ________lambda15_ (Block1Data* _data1_) {
 }
 
 
-static gboolean _________lambda15__gtk_widget_button_press_event (GtkWidget* _sender, GdkEventButton* event, gpointer self) {
+static gboolean _________lambda17__gtk_widget_button_press_event (GtkWidget* _sender, GdkEventButton* event, gpointer self) {
 	gboolean result;
-	result = ________lambda15_ (self);
+	result = ________lambda17_ (self);
 	return result;
 }
 
 
-static gboolean ________lambda16_ (Block1Data* _data1_) {
+static gboolean ________lambda18_ (Block1Data* _data1_) {
 	SlingshotWindow* self;
 	gboolean result = FALSE;
 	SlingshotFrontendAppItem* _tmp0_ = NULL;
@@ -760,14 +760,14 @@ static gboolean ________lambda16_ (Block1Data* _data1_) {
 }
 
 
-static gboolean _________lambda16__gtk_widget_enter_notify_event (GtkWidget* _sender, GdkEventCrossing* event, gpointer self) {
+static gboolean _________lambda18__gtk_widget_enter_notify_event (GtkWidget* _sender, GdkEventCrossing* event, gpointer self) {
 	gboolean result;
-	result = ________lambda16_ (self);
+	result = ________lambda18_ (self);
 	return result;
 }
 
 
-static gboolean ________lambda17_ (SlingshotWindow* self) {
+static gboolean ________lambda19_ (SlingshotWindow* self) {
 	gboolean result = FALSE;
 	GtkBox* _tmp0_ = NULL;
 	_tmp0_ = self->top_spacer;
@@ -777,14 +777,14 @@ static gboolean ________lambda17_ (SlingshotWindow* self) {
 }
 
 
-static gboolean _________lambda17__gtk_widget_leave_notify_event (GtkWidget* _sender, GdkEventCrossing* event, gpointer self) {
+static gboolean _________lambda19__gtk_widget_leave_notify_event (GtkWidget* _sender, GdkEventCrossing* event, gpointer self) {
 	gboolean result;
-	result = ________lambda17_ ((SlingshotWindow*) self);
+	result = ________lambda19_ ((SlingshotWindow*) self);
 	return result;
 }
 
 
-static gboolean ________lambda18_ (Block1Data* _data1_) {
+static gboolean ________lambda20_ (Block1Data* _data1_) {
 	SlingshotWindow* self;
 	gboolean result = FALSE;
 	GError * _inner_error_ = NULL;
@@ -858,9 +858,9 @@ static gboolean ________lambda18_ (Block1Data* _data1_) {
 }
 
 
-static gboolean _________lambda18__gtk_widget_button_release_event (GtkWidget* _sender, GdkEventButton* event, gpointer self) {
+static gboolean _________lambda20__gtk_widget_button_release_event (GtkWidget* _sender, GdkEventButton* event, gpointer self) {
 	gboolean result;
-	result = ________lambda18_ (self);
+	result = ________lambda20_ (self);
 	return result;
 }
 
@@ -933,13 +933,13 @@ static void slingshot_window_populate_grid (SlingshotWindow* self) {
 							_tmp11_ = _g_object_ref0 (_tmp10_);
 							self->children = g_list_append (self->children, _tmp11_);
 							_tmp12_ = _data1_->item;
-							g_signal_connect_data ((GtkWidget*) _tmp12_, "button-press-event", (GCallback) _________lambda15__gtk_widget_button_press_event, block1_data_ref (_data1_), (GClosureNotify) block1_data_unref, 0);
+							g_signal_connect_data ((GtkWidget*) _tmp12_, "button-press-event", (GCallback) _________lambda17__gtk_widget_button_press_event, block1_data_ref (_data1_), (GClosureNotify) block1_data_unref, 0);
 							_tmp13_ = _data1_->item;
-							g_signal_connect_data ((GtkWidget*) _tmp13_, "enter-notify-event", (GCallback) _________lambda16__gtk_widget_enter_notify_event, block1_data_ref (_data1_), (GClosureNotify) block1_data_unref, 0);
+							g_signal_connect_data ((GtkWidget*) _tmp13_, "enter-notify-event", (GCallback) _________lambda18__gtk_widget_enter_notify_event, block1_data_ref (_data1_), (GClosureNotify) block1_data_unref, 0);
 							_tmp14_ = _data1_->item;
-							g_signal_connect_object ((GtkWidget*) _tmp14_, "leave-notify-event", (GCallback) _________lambda17__gtk_widget_leave_notify_event, self, 0);
+							g_signal_connect_object ((GtkWidget*) _tmp14_, "leave-notify-event", (GCallback) _________lambda19__gtk_widget_leave_notify_event, self, 0);
 							_tmp15_ = _data1_->item;
-							g_signal_connect_data ((GtkWidget*) _tmp15_, "button-release-event", (GCallback) _________lambda18__gtk_widget_button_release_event, block1_data_ref (_data1_), (GClosureNotify) block1_data_unref, 0);
+							g_signal_connect_data ((GtkWidget*) _tmp15_, "button-release-event", (GCallback) _________lambda20__gtk_widget_button_release_event, block1_data_ref (_data1_), (GClosureNotify) block1_data_unref, 0);
 							_tmp16_ = self->grid;
 							_tmp17_ = _data1_->item;
 							_tmp18_ = c;
@@ -1194,8 +1194,8 @@ static void slingshot_window_change_category (SlingshotWindow* self) {
 		gint _tmp5_ = 0;
 		gpointer _tmp6_ = NULL;
 		GMenuTreeDirectory* _tmp7_ = NULL;
-		GeeArrayList* _tmp8_ = NULL;
-		GeeArrayList* _tmp9_ = NULL;
+		GeeHashSet* _tmp8_ = NULL;
+		GeeHashSet* _tmp9_ = NULL;
 		GeeHashMap* _tmp10_ = NULL;
 		gint _tmp11_ = 0;
 		GeeArrayList* _tmp12_ = NULL;

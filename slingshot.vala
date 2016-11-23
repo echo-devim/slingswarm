@@ -57,7 +57,7 @@ public class SlingshotWindow : ElementaryWidgets.CompositedWindow {
         this.add (wrapper);
         
         // Add container
-        var container = new Gtk.Box (Gtk.Orientation.VERTICAL, 5);
+        var container = new Gtk.Box (Gtk.Orientation.VERTICAL, 10);
         wrapper.add (container);
          
         // Add top bar

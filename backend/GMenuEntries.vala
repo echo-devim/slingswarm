@@ -15,9 +15,9 @@ namespace Slingshot.Backend {
             return main_directory_entries;
         }
 
-        public static Gee.ArrayList<GMenu.TreeEntry> get_applications_for_category (GMenu.TreeDirectory category) {
+        public static Gee.HashSet<GMenu.TreeEntry> get_applications_for_category (GMenu.TreeDirectory category) {
 
-            var entries = new Gee.ArrayList<GMenu.TreeEntry> ();
+            var entries = new Gee.HashSet<GMenu.TreeEntry>  ( (x) => ((GMenu.TreeEntry)x).get_desktop_file_path ().hash (), (x,y) => ((GMenu.TreeEntry)x).get_desktop_file_path ().hash () == ((GMenu.TreeEntry)y).get_desktop_file_path ().hash ());
 
             foreach (GMenu.TreeItem item in category.get_contents ()) {
                 switch (item.get_type ()) {
@@ -32,9 +32,9 @@ namespace Slingshot.Backend {
             return entries;
         }
 
-        public static Gee.ArrayList<GMenu.TreeEntry> get_all () {
+        public static Gee.HashSet<GMenu.TreeEntry> get_all () {
 
-            var the_apps = new Gee.ArrayList<GMenu.TreeEntry> ();
+            var the_apps = new Gee.HashSet<GMenu.TreeEntry> ( (x) => ((GMenu.TreeEntry)x).get_desktop_file_path ().hash (), (x,y) => ((GMenu.TreeEntry)x).get_desktop_file_path ().hash () == ((GMenu.TreeEntry)y).get_desktop_file_path ().hash ());
             var all_categories = get_categories ();
 
             foreach (GMenu.TreeDirectory directory in all_categories) {
@@ -46,7 +46,7 @@ namespace Slingshot.Backend {
             return the_apps;
         }
 
-        public static void enumerate_apps (Gee.ArrayList<GMenu.TreeEntry> source, Gee.HashMap<string, Gdk.Pixbuf> icons, int icon_size, out Gee.ArrayList<Gee.HashMap<string, string>> list) {
+        public static void enumerate_apps (Gee.HashSet<GMenu.TreeEntry> source, Gee.HashMap<string, Gdk.Pixbuf> icons, int icon_size, out Gee.ArrayList<Gee.HashMap<string, string>> list) {
 
             var icon_theme = Gtk.IconTheme.get_default();
 
