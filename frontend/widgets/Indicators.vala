@@ -47,13 +47,13 @@ namespace Slingshot.Frontend {
             indicator.set_visible_window (false);
 
             var label = new Gtk.Label(thelabel);
-            Gdk.Color white;
-            Gdk.Color.parse("#FFFFFF", out white);
-            label.modify_fg (Gtk.StateType.NORMAL, white);
+            var white = Gdk.RGBA ();
+            white.parse("#FFFFFF");
+            label.override_color (Gtk.StateFlags.NORMAL, white);
             var font = new Pango.FontDescription ();
             font.set_size (9500);
             font.set_weight (Pango.Weight.HEAVY);
-            label.modify_font (font);
+            label.override_font (font);
 
             indicator.add(Slingshot.Frontend.Utilities.wrap_alignment(label, 5, 15, 5, 15)); // make sure the child widget is added with padding
             this.children.append(indicator);

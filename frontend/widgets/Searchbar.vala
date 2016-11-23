@@ -78,17 +78,7 @@ namespace Slingshot.Frontend {
             stock_item.label = null;
             stock_item.modifier = 0;
             stock_item.keyval = 0;
-            stock_item.translation_domain = Gtk.Stock.CLEAR;
-            var factory = new Gtk.IconFactory ();
-            var icon_set = new Gtk.IconSet ();
-            var icon_source = new Gtk.IconSource ();
-            icon_source.set_icon_name (Gtk.Stock.CLEAR);
-            icon_set.add_source (icon_source);
-            icon_source.set_icon_name ("edit-clear-symbolic");
-            icon_set.add_source (icon_source);
-            factory.add ("edit-clear-symbolic", icon_set);
-            Gtk.Stock.add ({stock_item});
-            factory.add_default ();
+            stock_item.translation_domain = "edit-clear";
             this.clear_icon = new Gtk.Image.from_stock("edit-clear-symbolic", Gtk.IconSize.MENU);
             
             clear_icon_wrapper.add (this.clear_icon);
@@ -99,8 +89,8 @@ namespace Slingshot.Frontend {
             this.buffer.changed.connect (on_changed);
             this.draw.connect (this.draw_background);
             this.realize.connect (() => {
-				this.hint (); // hint it
-			});
+                this.hint (); // hint it
+            });
         
         }
         
@@ -118,19 +108,19 @@ namespace Slingshot.Frontend {
         
         
         private void grey_out () {
-            var color = Gdk.Color ();
-            Gdk.Color.parse ("#a0a0a0", out color);
-            this.label.modify_fg (Gtk.StateType.NORMAL, color);
-            this.label.modify_font (Pango.FontDescription.from_string ("italic"));
+            var color = Gdk.RGBA ();
+            color.parse ("#a0a0a0");
+            this.label.override_color (Gtk.StateFlags.NORMAL, color);
+            this.label.override_font (Pango.FontDescription.from_string ("italic"));
             this.is_hinted = true;
         }
         
         private void reset_font () {
         
-            var color = Gdk.Color ();
-            Gdk.Color.parse ("#444", out color);
-            this.label.modify_fg (Gtk.StateType.NORMAL, color);
-            this.label.modify_font (Pango.FontDescription.from_string ("normal"));
+            var color = Gdk.RGBA ();
+            color.parse ("#444");
+            this.label.override_color (Gtk.StateFlags.NORMAL, color);
+            this.label.override_font (Pango.FontDescription.from_string ("normal"));
             this.is_hinted = false;
         
         }
