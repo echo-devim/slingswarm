@@ -9,7 +9,6 @@ set(CMAKE_DEPENDS_CHECK_C
   "/home/greg/Scaricati/slingscold3/build/frontend/Utilities.c" "/home/greg/Scaricati/slingscold3/build/CMakeFiles/slingscold-launcher.dir/frontend/Utilities.c.o"
   "/home/greg/Scaricati/slingscold3/build/frontend/widgets/AppItem.c" "/home/greg/Scaricati/slingscold3/build/CMakeFiles/slingscold-launcher.dir/frontend/widgets/AppItem.c.o"
   "/home/greg/Scaricati/slingscold3/build/frontend/widgets/CompositedWindow.c" "/home/greg/Scaricati/slingscold3/build/CMakeFiles/slingscold-launcher.dir/frontend/widgets/CompositedWindow.c.o"
-  "/home/greg/Scaricati/slingscold3/build/frontend/widgets/Grid.c" "/home/greg/Scaricati/slingscold3/build/CMakeFiles/slingscold-launcher.dir/frontend/widgets/Grid.c.o"
   "/home/greg/Scaricati/slingscold3/build/frontend/widgets/Indicators.c" "/home/greg/Scaricati/slingscold3/build/CMakeFiles/slingscold-launcher.dir/frontend/widgets/Indicators.c.o"
   "/home/greg/Scaricati/slingscold3/build/frontend/widgets/Searchbar.c" "/home/greg/Scaricati/slingscold3/build/CMakeFiles/slingscold-launcher.dir/frontend/widgets/Searchbar.c.o"
   "/home/greg/Scaricati/slingscold3/build/slingshot.c" "/home/greg/Scaricati/slingscold3/build/CMakeFiles/slingscold-launcher.dir/slingshot.c.o"
@@ -34,7 +33,6 @@ set(CMAKE_MULTIPLE_OUTPUT_PAIRS
   "/home/greg/Scaricati/slingscold3/build/frontend/Utilities.c" "/home/greg/Scaricati/slingscold3/build/slingshot.c"
   "/home/greg/Scaricati/slingscold3/build/frontend/widgets/AppItem.c" "/home/greg/Scaricati/slingscold3/build/slingshot.c"
   "/home/greg/Scaricati/slingscold3/build/frontend/widgets/CompositedWindow.c" "/home/greg/Scaricati/slingscold3/build/slingshot.c"
-  "/home/greg/Scaricati/slingscold3/build/frontend/widgets/Grid.c" "/home/greg/Scaricati/slingscold3/build/slingshot.c"
   "/home/greg/Scaricati/slingscold3/build/frontend/widgets/Indicators.c" "/home/greg/Scaricati/slingscold3/build/slingshot.c"
   "/home/greg/Scaricati/slingscold3/build/frontend/widgets/Searchbar.c" "/home/greg/Scaricati/slingscold3/build/slingshot.c"
   )

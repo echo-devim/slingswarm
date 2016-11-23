@@ -302,33 +302,6 @@ frontend/widgets/CompositedWindow.c.s:
 	$(MAKE) -f CMakeFiles/slingscold-launcher.dir/build.make CMakeFiles/slingscold-launcher.dir/frontend/widgets/CompositedWindow.c.s
 .PHONY : frontend/widgets/CompositedWindow.c.s
 
-frontend/widgets/Grid.o: frontend/widgets/Grid.c.o
-
-.PHONY : frontend/widgets/Grid.o
-
-# target to build an object file
-frontend/widgets/Grid.c.o:
-	$(MAKE) -f CMakeFiles/slingscold-launcher.dir/build.make CMakeFiles/slingscold-launcher.dir/frontend/widgets/Grid.c.o
-.PHONY : frontend/widgets/Grid.c.o
-
-frontend/widgets/Grid.i: frontend/widgets/Grid.c.i
-
-.PHONY : frontend/widgets/Grid.i
-
-# target to preprocess a source file
-frontend/widgets/Grid.c.i:
-	$(MAKE) -f CMakeFiles/slingscold-launcher.dir/build.make CMakeFiles/slingscold-launcher.dir/frontend/widgets/Grid.c.i
-.PHONY : frontend/widgets/Grid.c.i
-
-frontend/widgets/Grid.s: frontend/widgets/Grid.c.s
-
-.PHONY : frontend/widgets/Grid.s
-
-# target to generate assembly for a file
-frontend/widgets/Grid.c.s:
-	$(MAKE) -f CMakeFiles/slingscold-launcher.dir/build.make CMakeFiles/slingscold-launcher.dir/frontend/widgets/Grid.c.s
-.PHONY : frontend/widgets/Grid.c.s
-
 frontend/widgets/Indicators.o: frontend/widgets/Indicators.c.o
 
 .PHONY : frontend/widgets/Indicators.o
@@ -438,9 +411,6 @@ help:
 	@echo "... frontend/widgets/CompositedWindow.o"
 	@echo "... frontend/widgets/CompositedWindow.i"
 	@echo "... frontend/widgets/CompositedWindow.s"
-	@echo "... frontend/widgets/Grid.o"
-	@echo "... frontend/widgets/Grid.i"
-	@echo "... frontend/widgets/Grid.s"
 	@echo "... frontend/widgets/Indicators.o"
 	@echo "... frontend/widgets/Indicators.i"
 	@echo "... frontend/widgets/Indicators.s"

@@ -60,23 +60,19 @@ include CMakeFiles/slingscold-launcher.dir/flags.make
 slingshot.c: ../slingshot.vala
 slingshot.c: ../frontend/widgets/AppItem.vala
 slingshot.c: ../frontend/widgets/CompositedWindow.vala
-slingshot.c: ../frontend/widgets/Grid.vala
 slingshot.c: ../frontend/widgets/Indicators.vala
 slingshot.c: ../frontend/widgets/Searchbar.vala
 slingshot.c: ../frontend/Utilities.vala
 slingshot.c: ../frontend/Color.vala
 slingshot.c: ../backend/GMenuEntries.vala
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/greg/Scaricati/slingscold3/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating slingshot.c, frontend/widgets/AppItem.c, frontend/widgets/CompositedWindow.c, frontend/widgets/Grid.c, frontend/widgets/Indicators.c, frontend/widgets/Searchbar.c, frontend/Utilities.c, frontend/Color.c, backend/GMenuEntries.c"
-	/usr/bin/valac -C -b /home/greg/Scaricati/slingscold3 -d /home/greg/Scaricati/slingscold3/build --pkg=gtk+-3.0 --pkg=gee-1.0 --pkg=gio-unix-2.0 --pkg=libgnome-menu --pkg=libwnck-3.0 --pkg=unique-3.0 --thread /home/greg/Scaricati/slingscold3/slingshot.vala /home/greg/Scaricati/slingscold3/frontend/widgets/AppItem.vala /home/greg/Scaricati/slingscold3/frontend/widgets/CompositedWindow.vala /home/greg/Scaricati/slingscold3/frontend/widgets/Grid.vala /home/greg/Scaricati/slingscold3/frontend/widgets/Indicators.vala /home/greg/Scaricati/slingscold3/frontend/widgets/Searchbar.vala /home/greg/Scaricati/slingscold3/frontend/Utilities.vala /home/greg/Scaricati/slingscold3/frontend/Color.vala /home/greg/Scaricati/slingscold3/backend/GMenuEntries.vala
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/greg/Scaricati/slingscold3/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating slingshot.c, frontend/widgets/AppItem.c, frontend/widgets/CompositedWindow.c, frontend/widgets/Indicators.c, frontend/widgets/Searchbar.c, frontend/Utilities.c, frontend/Color.c, backend/GMenuEntries.c"
+	/usr/bin/valac -C -b /home/greg/Scaricati/slingscold3 -d /home/greg/Scaricati/slingscold3/build --pkg=gtk+-3.0 --pkg=gee-1.0 --pkg=gio-unix-2.0 --pkg=libgnome-menu --pkg=libwnck-3.0 --pkg=unique-3.0 --thread /home/greg/Scaricati/slingscold3/slingshot.vala /home/greg/Scaricati/slingscold3/frontend/widgets/AppItem.vala /home/greg/Scaricati/slingscold3/frontend/widgets/CompositedWindow.vala /home/greg/Scaricati/slingscold3/frontend/widgets/Indicators.vala /home/greg/Scaricati/slingscold3/frontend/widgets/Searchbar.vala /home/greg/Scaricati/slingscold3/frontend/Utilities.vala /home/greg/Scaricati/slingscold3/frontend/Color.vala /home/greg/Scaricati/slingscold3/backend/GMenuEntries.vala
 
 frontend/widgets/AppItem.c: slingshot.c
 	@$(CMAKE_COMMAND) -E touch_nocreate frontend/widgets/AppItem.c
 
 frontend/widgets/CompositedWindow.c: slingshot.c
 	@$(CMAKE_COMMAND) -E touch_nocreate frontend/widgets/CompositedWindow.c
-
-frontend/widgets/Grid.c: slingshot.c
-	@$(CMAKE_COMMAND) -E touch_nocreate frontend/widgets/Grid.c
 
 frontend/widgets/Indicators.c: slingshot.c
 	@$(CMAKE_COMMAND) -E touch_nocreate frontend/widgets/Indicators.c
@@ -165,33 +161,9 @@ CMakeFiles/slingscold-launcher.dir/frontend/widgets/CompositedWindow.c.o.provide
 CMakeFiles/slingscold-launcher.dir/frontend/widgets/CompositedWindow.c.o.provides.build: CMakeFiles/slingscold-launcher.dir/frontend/widgets/CompositedWindow.c.o
 
 
-CMakeFiles/slingscold-launcher.dir/frontend/widgets/Grid.c.o: CMakeFiles/slingscold-launcher.dir/flags.make
-CMakeFiles/slingscold-launcher.dir/frontend/widgets/Grid.c.o: frontend/widgets/Grid.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/greg/Scaricati/slingscold3/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/slingscold-launcher.dir/frontend/widgets/Grid.c.o"
-	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/slingscold-launcher.dir/frontend/widgets/Grid.c.o   -c /home/greg/Scaricati/slingscold3/build/frontend/widgets/Grid.c
-
-CMakeFiles/slingscold-launcher.dir/frontend/widgets/Grid.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/slingscold-launcher.dir/frontend/widgets/Grid.c.i"
-	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/greg/Scaricati/slingscold3/build/frontend/widgets/Grid.c > CMakeFiles/slingscold-launcher.dir/frontend/widgets/Grid.c.i
-
-CMakeFiles/slingscold-launcher.dir/frontend/widgets/Grid.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/slingscold-launcher.dir/frontend/widgets/Grid.c.s"
-	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/greg/Scaricati/slingscold3/build/frontend/widgets/Grid.c -o CMakeFiles/slingscold-launcher.dir/frontend/widgets/Grid.c.s
-
-CMakeFiles/slingscold-launcher.dir/frontend/widgets/Grid.c.o.requires:
-
-.PHONY : CMakeFiles/slingscold-launcher.dir/frontend/widgets/Grid.c.o.requires
-
-CMakeFiles/slingscold-launcher.dir/frontend/widgets/Grid.c.o.provides: CMakeFiles/slingscold-launcher.dir/frontend/widgets/Grid.c.o.requires
-	$(MAKE) -f CMakeFiles/slingscold-launcher.dir/build.make CMakeFiles/slingscold-launcher.dir/frontend/widgets/Grid.c.o.provides.build
-.PHONY : CMakeFiles/slingscold-launcher.dir/frontend/widgets/Grid.c.o.provides
-
-CMakeFiles/slingscold-launcher.dir/frontend/widgets/Grid.c.o.provides.build: CMakeFiles/slingscold-launcher.dir/frontend/widgets/Grid.c.o
-
-
 CMakeFiles/slingscold-launcher.dir/frontend/widgets/Indicators.c.o: CMakeFiles/slingscold-launcher.dir/flags.make
 CMakeFiles/slingscold-launcher.dir/frontend/widgets/Indicators.c.o: frontend/widgets/Indicators.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/greg/Scaricati/slingscold3/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/slingscold-launcher.dir/frontend/widgets/Indicators.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/greg/Scaricati/slingscold3/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/slingscold-launcher.dir/frontend/widgets/Indicators.c.o"
 	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/slingscold-launcher.dir/frontend/widgets/Indicators.c.o   -c /home/greg/Scaricati/slingscold3/build/frontend/widgets/Indicators.c
 
 CMakeFiles/slingscold-launcher.dir/frontend/widgets/Indicators.c.i: cmake_force
@@ -215,7 +187,7 @@ CMakeFiles/slingscold-launcher.dir/frontend/widgets/Indicators.c.o.provides.buil
 
 CMakeFiles/slingscold-launcher.dir/frontend/widgets/Searchbar.c.o: CMakeFiles/slingscold-launcher.dir/flags.make
 CMakeFiles/slingscold-launcher.dir/frontend/widgets/Searchbar.c.o: frontend/widgets/Searchbar.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/greg/Scaricati/slingscold3/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/slingscold-launcher.dir/frontend/widgets/Searchbar.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/greg/Scaricati/slingscold3/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/slingscold-launcher.dir/frontend/widgets/Searchbar.c.o"
 	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/slingscold-launcher.dir/frontend/widgets/Searchbar.c.o   -c /home/greg/Scaricati/slingscold3/build/frontend/widgets/Searchbar.c
 
 CMakeFiles/slingscold-launcher.dir/frontend/widgets/Searchbar.c.i: cmake_force
@@ -239,7 +211,7 @@ CMakeFiles/slingscold-launcher.dir/frontend/widgets/Searchbar.c.o.provides.build
 
 CMakeFiles/slingscold-launcher.dir/frontend/Utilities.c.o: CMakeFiles/slingscold-launcher.dir/flags.make
 CMakeFiles/slingscold-launcher.dir/frontend/Utilities.c.o: frontend/Utilities.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/greg/Scaricati/slingscold3/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object CMakeFiles/slingscold-launcher.dir/frontend/Utilities.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/greg/Scaricati/slingscold3/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/slingscold-launcher.dir/frontend/Utilities.c.o"
 	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/slingscold-launcher.dir/frontend/Utilities.c.o   -c /home/greg/Scaricati/slingscold3/build/frontend/Utilities.c
 
 CMakeFiles/slingscold-launcher.dir/frontend/Utilities.c.i: cmake_force
@@ -263,7 +235,7 @@ CMakeFiles/slingscold-launcher.dir/frontend/Utilities.c.o.provides.build: CMakeF
 
 CMakeFiles/slingscold-launcher.dir/frontend/Color.c.o: CMakeFiles/slingscold-launcher.dir/flags.make
 CMakeFiles/slingscold-launcher.dir/frontend/Color.c.o: frontend/Color.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/greg/Scaricati/slingscold3/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object CMakeFiles/slingscold-launcher.dir/frontend/Color.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/greg/Scaricati/slingscold3/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object CMakeFiles/slingscold-launcher.dir/frontend/Color.c.o"
 	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/slingscold-launcher.dir/frontend/Color.c.o   -c /home/greg/Scaricati/slingscold3/build/frontend/Color.c
 
 CMakeFiles/slingscold-launcher.dir/frontend/Color.c.i: cmake_force
@@ -287,7 +259,7 @@ CMakeFiles/slingscold-launcher.dir/frontend/Color.c.o.provides.build: CMakeFiles
 
 CMakeFiles/slingscold-launcher.dir/backend/GMenuEntries.c.o: CMakeFiles/slingscold-launcher.dir/flags.make
 CMakeFiles/slingscold-launcher.dir/backend/GMenuEntries.c.o: backend/GMenuEntries.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/greg/Scaricati/slingscold3/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object CMakeFiles/slingscold-launcher.dir/backend/GMenuEntries.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/greg/Scaricati/slingscold3/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object CMakeFiles/slingscold-launcher.dir/backend/GMenuEntries.c.o"
 	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/slingscold-launcher.dir/backend/GMenuEntries.c.o   -c /home/greg/Scaricati/slingscold3/build/backend/GMenuEntries.c
 
 CMakeFiles/slingscold-launcher.dir/backend/GMenuEntries.c.i: cmake_force
@@ -314,7 +286,6 @@ slingscold__launcher_OBJECTS = \
 "CMakeFiles/slingscold-launcher.dir/slingshot.c.o" \
 "CMakeFiles/slingscold-launcher.dir/frontend/widgets/AppItem.c.o" \
 "CMakeFiles/slingscold-launcher.dir/frontend/widgets/CompositedWindow.c.o" \
-"CMakeFiles/slingscold-launcher.dir/frontend/widgets/Grid.c.o" \
 "CMakeFiles/slingscold-launcher.dir/frontend/widgets/Indicators.c.o" \
 "CMakeFiles/slingscold-launcher.dir/frontend/widgets/Searchbar.c.o" \
 "CMakeFiles/slingscold-launcher.dir/frontend/Utilities.c.o" \
@@ -327,7 +298,6 @@ slingscold__launcher_EXTERNAL_OBJECTS =
 slingscold-launcher: CMakeFiles/slingscold-launcher.dir/slingshot.c.o
 slingscold-launcher: CMakeFiles/slingscold-launcher.dir/frontend/widgets/AppItem.c.o
 slingscold-launcher: CMakeFiles/slingscold-launcher.dir/frontend/widgets/CompositedWindow.c.o
-slingscold-launcher: CMakeFiles/slingscold-launcher.dir/frontend/widgets/Grid.c.o
 slingscold-launcher: CMakeFiles/slingscold-launcher.dir/frontend/widgets/Indicators.c.o
 slingscold-launcher: CMakeFiles/slingscold-launcher.dir/frontend/widgets/Searchbar.c.o
 slingscold-launcher: CMakeFiles/slingscold-launcher.dir/frontend/Utilities.c.o
@@ -335,7 +305,7 @@ slingscold-launcher: CMakeFiles/slingscold-launcher.dir/frontend/Color.c.o
 slingscold-launcher: CMakeFiles/slingscold-launcher.dir/backend/GMenuEntries.c.o
 slingscold-launcher: CMakeFiles/slingscold-launcher.dir/build.make
 slingscold-launcher: CMakeFiles/slingscold-launcher.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/greg/Scaricati/slingscold3/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Linking C executable slingscold-launcher"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/greg/Scaricati/slingscold3/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking C executable slingscold-launcher"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/slingscold-launcher.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -346,7 +316,6 @@ CMakeFiles/slingscold-launcher.dir/build: slingscold-launcher
 CMakeFiles/slingscold-launcher.dir/requires: CMakeFiles/slingscold-launcher.dir/slingshot.c.o.requires
 CMakeFiles/slingscold-launcher.dir/requires: CMakeFiles/slingscold-launcher.dir/frontend/widgets/AppItem.c.o.requires
 CMakeFiles/slingscold-launcher.dir/requires: CMakeFiles/slingscold-launcher.dir/frontend/widgets/CompositedWindow.c.o.requires
-CMakeFiles/slingscold-launcher.dir/requires: CMakeFiles/slingscold-launcher.dir/frontend/widgets/Grid.c.o.requires
 CMakeFiles/slingscold-launcher.dir/requires: CMakeFiles/slingscold-launcher.dir/frontend/widgets/Indicators.c.o.requires
 CMakeFiles/slingscold-launcher.dir/requires: CMakeFiles/slingscold-launcher.dir/frontend/widgets/Searchbar.c.o.requires
 CMakeFiles/slingscold-launcher.dir/requires: CMakeFiles/slingscold-launcher.dir/frontend/Utilities.c.o.requires
@@ -362,7 +331,6 @@ CMakeFiles/slingscold-launcher.dir/clean:
 CMakeFiles/slingscold-launcher.dir/depend: slingshot.c
 CMakeFiles/slingscold-launcher.dir/depend: frontend/widgets/AppItem.c
 CMakeFiles/slingscold-launcher.dir/depend: frontend/widgets/CompositedWindow.c
-CMakeFiles/slingscold-launcher.dir/depend: frontend/widgets/Grid.c
 CMakeFiles/slingscold-launcher.dir/depend: frontend/widgets/Indicators.c
 CMakeFiles/slingscold-launcher.dir/depend: frontend/widgets/Searchbar.c
 CMakeFiles/slingscold-launcher.dir/depend: frontend/Utilities.c

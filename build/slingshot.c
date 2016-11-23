@@ -65,16 +65,6 @@ typedef struct _SlingshotFrontendAppItemClass SlingshotFrontendAppItemClass;
 typedef struct _SlingshotFrontendSearchbar SlingshotFrontendSearchbar;
 typedef struct _SlingshotFrontendSearchbarClass SlingshotFrontendSearchbarClass;
 
-#define SLINGSHOT_FRONTEND_TYPE_GRID (slingshot_frontend_grid_get_type ())
-#define SLINGSHOT_FRONTEND_GRID(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj), SLINGSHOT_FRONTEND_TYPE_GRID, SlingshotFrontendGrid))
-#define SLINGSHOT_FRONTEND_GRID_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST ((klass), SLINGSHOT_FRONTEND_TYPE_GRID, SlingshotFrontendGridClass))
-#define SLINGSHOT_FRONTEND_IS_GRID(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), SLINGSHOT_FRONTEND_TYPE_GRID))
-#define SLINGSHOT_FRONTEND_IS_GRID_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), SLINGSHOT_FRONTEND_TYPE_GRID))
-#define SLINGSHOT_FRONTEND_GRID_GET_CLASS(obj) (G_TYPE_INSTANCE_GET_CLASS ((obj), SLINGSHOT_FRONTEND_TYPE_GRID, SlingshotFrontendGridClass))
-
-typedef struct _SlingshotFrontendGrid SlingshotFrontendGrid;
-typedef struct _SlingshotFrontendGridClass SlingshotFrontendGridClass;
-
 #define SLINGSHOT_FRONTEND_TYPE_INDICATORS (slingshot_frontend_indicators_get_type ())
 #define SLINGSHOT_FRONTEND_INDICATORS(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj), SLINGSHOT_FRONTEND_TYPE_INDICATORS, SlingshotFrontendIndicators))
 #define SLINGSHOT_FRONTEND_INDICATORS_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST ((klass), SLINGSHOT_FRONTEND_TYPE_INDICATORS, SlingshotFrontendIndicatorsClass))
@@ -111,7 +101,7 @@ struct _SlingshotWindow {
 	SlingshotWindowPrivate * priv;
 	GList* children;
 	SlingshotFrontendSearchbar* searchbar;
-	SlingshotFrontendGrid* grid;
+	GtkGrid* grid;
 	GeeArrayList* apps;
 	GeeHashMap* icons;
 	GeeArrayList* filtered;
@@ -125,6 +115,11 @@ struct _SlingshotWindow {
 
 struct _SlingshotWindowClass {
 	ElementaryWidgetsCompositedWindowClass parent_class;
+};
+
+struct _SlingshotWindowPrivate {
+	gint grid_x;
+	gint grid_y;
 };
 
 struct _Block1Data {
@@ -151,8 +146,8 @@ GType elementary_widgets_composited_window_get_type (void) G_GNUC_CONST;
 GType slingshot_window_get_type (void) G_GNUC_CONST;
 GType slingshot_frontend_app_item_get_type (void) G_GNUC_CONST;
 GType slingshot_frontend_searchbar_get_type (void) G_GNUC_CONST;
-GType slingshot_frontend_grid_get_type (void) G_GNUC_CONST;
 GType slingshot_frontend_indicators_get_type (void) G_GNUC_CONST;
+#define SLINGSHOT_WINDOW_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), TYPE_SLINGSHOT_WINDOW, SlingshotWindowPrivate))
 enum  {
 	SLINGSHOT_WINDOW_DUMMY_PROPERTY
 };
@@ -177,8 +172,6 @@ SlingshotFrontendSearchbar* slingshot_frontend_searchbar_new (const gchar* hint)
 SlingshotFrontendSearchbar* slingshot_frontend_searchbar_construct (GType object_type, const gchar* hint);
 static void slingshot_window_search (SlingshotWindow* self);
 static void _slingshot_window_search_slingshot_frontend_searchbar_changed (SlingshotFrontendSearchbar* _sender, gpointer self);
-SlingshotFrontendGrid* slingshot_frontend_grid_new (gint rows, gint columns);
-SlingshotFrontendGrid* slingshot_frontend_grid_construct (GType object_type, gint rows, gint columns);
 static void slingshot_window_populate_grid (SlingshotWindow* self);
 static void __lambda19_ (SlingshotWindow* self);
 static void slingshot_window_update_grid (SlingshotWindow* self, GeeArrayList* apps);
@@ -363,22 +356,25 @@ SlingshotWindow* slingshot_window_construct (GType object_type) {
 	GtkBox* _tmp66_ = NULL;
 	GtkBox* _tmp67_ = NULL;
 	GtkBox* _tmp68_ = NULL;
-	GdkRectangle _tmp69_ = {0};
-	gint _tmp70_ = 0;
-	GdkRectangle _tmp71_ = {0};
-	gint _tmp72_ = 0;
-	GtkBox* _tmp75_ = NULL;
-	SlingshotFrontendGrid* _tmp76_ = NULL;
-	SlingshotFrontendIndicators* _tmp77_ = NULL;
-	SlingshotFrontendIndicators* _tmp78_ = NULL;
+	GtkGrid* _tmp69_ = NULL;
+	GtkGrid* _tmp70_ = NULL;
+	GtkGrid* _tmp71_ = NULL;
+	GdkRectangle _tmp72_ = {0};
+	gint _tmp73_ = 0;
+	GdkRectangle _tmp74_ = {0};
+	gint _tmp75_ = 0;
+	GtkBox* _tmp88_ = NULL;
+	GtkGrid* _tmp89_ = NULL;
+	SlingshotFrontendIndicators* _tmp90_ = NULL;
+	SlingshotFrontendIndicators* _tmp91_ = NULL;
 	GtkBox* pages_wrapper = NULL;
-	GtkBox* _tmp79_ = NULL;
-	GtkBox* _tmp80_ = NULL;
-	GtkBox* _tmp81_ = NULL;
-	GtkBox* _tmp82_ = NULL;
-	GeeArrayList* _tmp83_ = NULL;
-	gint _tmp84_ = 0;
-	SlingshotFrontendIndicators* _tmp95_ = NULL;
+	GtkBox* _tmp92_ = NULL;
+	GtkBox* _tmp93_ = NULL;
+	GtkBox* _tmp94_ = NULL;
+	GtkBox* _tmp95_ = NULL;
+	GeeArrayList* _tmp96_ = NULL;
+	gint _tmp97_ = 0;
+	SlingshotFrontendIndicators* _tmp108_ = NULL;
 	self = (SlingshotWindow*) elementary_widgets_composited_window_construct (object_type);
 	_tmp0_ = wnck_screen_get_default ();
 	wnck_screen_toggle_showing_desktop (_tmp0_, FALSE);
@@ -558,86 +554,144 @@ SlingshotWindow* slingshot_window_construct (GType object_type) {
 	_tmp67_ = container;
 	_tmp68_ = top;
 	gtk_box_pack_start (_tmp67_, (GtkWidget*) _tmp68_, FALSE, TRUE, (guint) 0);
-	_tmp69_ = monitor_dimensions;
-	_tmp70_ = _tmp69_.width;
-	_tmp71_ = monitor_dimensions;
-	_tmp72_ = _tmp71_.height;
-	if (_tmp70_ > _tmp72_) {
-		SlingshotFrontendGrid* _tmp73_ = NULL;
-		_tmp73_ = slingshot_frontend_grid_new (4, 6);
-		g_object_ref_sink (_tmp73_);
-		_g_object_unref0 (self->grid);
-		self->grid = _tmp73_;
+	_tmp69_ = (GtkGrid*) gtk_grid_new ();
+	g_object_ref_sink (_tmp69_);
+	_g_object_unref0 (self->grid);
+	self->grid = _tmp69_;
+	_tmp70_ = self->grid;
+	gtk_grid_set_row_spacing (_tmp70_, (guint) 70);
+	_tmp71_ = self->grid;
+	gtk_grid_set_column_spacing (_tmp71_, (guint) 30);
+	_tmp72_ = monitor_dimensions;
+	_tmp73_ = _tmp72_.width;
+	_tmp74_ = monitor_dimensions;
+	_tmp75_ = _tmp74_.height;
+	if (_tmp73_ > _tmp75_) {
+		self->priv->grid_x = 4;
+		self->priv->grid_y = 6;
 	} else {
-		SlingshotFrontendGrid* _tmp74_ = NULL;
-		_tmp74_ = slingshot_frontend_grid_new (6, 4);
-		g_object_ref_sink (_tmp74_);
-		_g_object_unref0 (self->grid);
-		self->grid = _tmp74_;
+		self->priv->grid_x = 6;
+		self->priv->grid_y = 4;
 	}
-	_tmp75_ = container;
-	_tmp76_ = self->grid;
-	gtk_box_pack_start (_tmp75_, (GtkWidget*) _tmp76_, TRUE, TRUE, (guint) 0);
+	{
+		gint r = 0;
+		r = 0;
+		{
+			gboolean _tmp76_ = FALSE;
+			_tmp76_ = TRUE;
+			while (TRUE) {
+				gint _tmp78_ = 0;
+				gint _tmp79_ = 0;
+				GtkGrid* _tmp80_ = NULL;
+				gint _tmp81_ = 0;
+				if (!_tmp76_) {
+					gint _tmp77_ = 0;
+					_tmp77_ = r;
+					r = _tmp77_ + 1;
+				}
+				_tmp76_ = FALSE;
+				_tmp78_ = r;
+				_tmp79_ = self->priv->grid_x;
+				if (!(_tmp78_ < _tmp79_)) {
+					break;
+				}
+				_tmp80_ = self->grid;
+				_tmp81_ = r;
+				gtk_grid_insert_row (_tmp80_, _tmp81_);
+			}
+		}
+	}
+	{
+		gint c = 0;
+		c = 0;
+		{
+			gboolean _tmp82_ = FALSE;
+			_tmp82_ = TRUE;
+			while (TRUE) {
+				gint _tmp84_ = 0;
+				gint _tmp85_ = 0;
+				GtkGrid* _tmp86_ = NULL;
+				gint _tmp87_ = 0;
+				if (!_tmp82_) {
+					gint _tmp83_ = 0;
+					_tmp83_ = c;
+					c = _tmp83_ + 1;
+				}
+				_tmp82_ = FALSE;
+				_tmp84_ = c;
+				_tmp85_ = self->priv->grid_y;
+				if (!(_tmp84_ < _tmp85_)) {
+					break;
+				}
+				_tmp86_ = self->grid;
+				_tmp87_ = c;
+				gtk_grid_insert_column (_tmp86_, _tmp87_);
+			}
+		}
+	}
+	_tmp88_ = container;
+	_tmp89_ = self->grid;
+	gtk_box_pack_start (_tmp88_, (GtkWidget*) _tmp89_, TRUE, TRUE, (guint) 0);
 	slingshot_window_populate_grid (self);
-	_tmp77_ = slingshot_frontend_indicators_new ();
-	g_object_ref_sink (_tmp77_);
+	_tmp90_ = slingshot_frontend_indicators_new ();
+	g_object_ref_sink (_tmp90_);
 	_g_object_unref0 (self->pages);
-	self->pages = _tmp77_;
-	_tmp78_ = self->pages;
-	g_signal_connect_object (_tmp78_, "child-activated", (GCallback) ___lambda19__slingshot_frontend_indicators_child_activated, self, 0);
-	_tmp79_ = (GtkBox*) gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-	g_object_ref_sink (_tmp79_);
-	pages_wrapper = _tmp79_;
-	_tmp80_ = pages_wrapper;
-	gtk_widget_set_size_request ((GtkWidget*) _tmp80_, -1, 30);
-	_tmp81_ = container;
-	_tmp82_ = pages_wrapper;
-	gtk_box_pack_end (_tmp81_, (GtkWidget*) _tmp82_, FALSE, TRUE, (guint) 15);
-	_tmp83_ = self->apps;
-	slingshot_window_update_pages (self, _tmp83_);
-	_tmp84_ = self->total_pages;
-	if (_tmp84_ > 1) {
-		GtkBox* _tmp85_ = NULL;
-		SlingshotFrontendIndicators* _tmp86_ = NULL;
-		_tmp85_ = pages_wrapper;
-		_tmp86_ = self->pages;
-		gtk_box_pack_start (_tmp85_, (GtkWidget*) _tmp86_, TRUE, FALSE, (guint) 0);
+	self->pages = _tmp90_;
+	_tmp91_ = self->pages;
+	g_signal_connect_object (_tmp91_, "child-activated", (GCallback) ___lambda19__slingshot_frontend_indicators_child_activated, self, 0);
+	_tmp92_ = (GtkBox*) gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+	g_object_ref_sink (_tmp92_);
+	pages_wrapper = _tmp92_;
+	_tmp93_ = pages_wrapper;
+	gtk_widget_set_size_request ((GtkWidget*) _tmp93_, -1, 30);
+	_tmp94_ = container;
+	_tmp95_ = pages_wrapper;
+	gtk_box_pack_end (_tmp94_, (GtkWidget*) _tmp95_, FALSE, TRUE, (guint) 15);
+	_tmp96_ = self->apps;
+	slingshot_window_update_pages (self, _tmp96_);
+	_tmp97_ = self->total_pages;
+	if (_tmp97_ > 1) {
+		GtkBox* _tmp98_ = NULL;
+		SlingshotFrontendIndicators* _tmp99_ = NULL;
+		_tmp98_ = pages_wrapper;
+		_tmp99_ = self->pages;
+		gtk_box_pack_start (_tmp98_, (GtkWidget*) _tmp99_, TRUE, FALSE, (guint) 0);
 		{
 			gint p = 0;
 			p = 1;
 			{
-				gboolean _tmp87_ = FALSE;
-				_tmp87_ = TRUE;
+				gboolean _tmp100_ = FALSE;
+				_tmp100_ = TRUE;
 				while (TRUE) {
-					gint _tmp89_ = 0;
-					gint _tmp90_ = 0;
-					SlingshotFrontendIndicators* _tmp91_ = NULL;
-					gint _tmp92_ = 0;
-					gchar* _tmp93_ = NULL;
-					gchar* _tmp94_ = NULL;
-					if (!_tmp87_) {
-						gint _tmp88_ = 0;
-						_tmp88_ = p;
-						p = _tmp88_ + 1;
+					gint _tmp102_ = 0;
+					gint _tmp103_ = 0;
+					SlingshotFrontendIndicators* _tmp104_ = NULL;
+					gint _tmp105_ = 0;
+					gchar* _tmp106_ = NULL;
+					gchar* _tmp107_ = NULL;
+					if (!_tmp100_) {
+						gint _tmp101_ = 0;
+						_tmp101_ = p;
+						p = _tmp101_ + 1;
 					}
-					_tmp87_ = FALSE;
-					_tmp89_ = p;
-					_tmp90_ = self->total_pages;
-					if (!(_tmp89_ <= _tmp90_)) {
+					_tmp100_ = FALSE;
+					_tmp102_ = p;
+					_tmp103_ = self->total_pages;
+					if (!(_tmp102_ <= _tmp103_)) {
 						break;
 					}
-					_tmp91_ = self->pages;
-					_tmp92_ = p;
-					_tmp93_ = g_strdup_printf ("%i", _tmp92_);
-					_tmp94_ = _tmp93_;
-					slingshot_frontend_indicators_append (_tmp91_, _tmp94_);
-					_g_free0 (_tmp94_);
+					_tmp104_ = self->pages;
+					_tmp105_ = p;
+					_tmp106_ = g_strdup_printf ("%i", _tmp105_);
+					_tmp107_ = _tmp106_;
+					slingshot_frontend_indicators_append (_tmp104_, _tmp107_);
+					_g_free0 (_tmp107_);
 				}
 			}
 		}
 	}
-	_tmp95_ = self->pages;
-	slingshot_frontend_indicators_set_active (_tmp95_, 0);
+	_tmp108_ = self->pages;
+	slingshot_frontend_indicators_set_active (_tmp108_, 0);
 	g_signal_connect_object ((GtkWidget*) self, "button-release-event", (GCallback) ___lambda20__gtk_widget_button_release_event, self, 0);
 	g_signal_connect_object ((GtkWidget*) self, "draw", (GCallback) _slingshot_window_draw_background_gtk_widget_draw, self, 0);
 	g_signal_connect_object ((GtkWidget*) self, "focus-out-event", (GCallback) ___lambda21__gtk_widget_focus_out_event, self, 0);
@@ -742,40 +796,32 @@ static gboolean ________lambda18_ (Block1Data* _data1_) {
 		gint _tmp3_ = 0;
 		SlingshotFrontendIndicators* _tmp4_ = NULL;
 		gint _tmp5_ = 0;
-		SlingshotFrontendGrid* _tmp6_ = NULL;
-		guint _tmp7_ = 0U;
-		guint _tmp8_ = 0U;
-		SlingshotFrontendGrid* _tmp9_ = NULL;
-		guint _tmp10_ = 0U;
-		guint _tmp11_ = 0U;
-		gpointer _tmp12_ = NULL;
-		GeeHashMap* _tmp13_ = NULL;
-		gpointer _tmp14_ = NULL;
-		gchar* _tmp15_ = NULL;
-		GDesktopAppInfo* _tmp16_ = NULL;
-		GDesktopAppInfo* _tmp17_ = NULL;
+		gint _tmp6_ = 0;
+		gint _tmp7_ = 0;
+		gpointer _tmp8_ = NULL;
+		GeeHashMap* _tmp9_ = NULL;
+		gpointer _tmp10_ = NULL;
+		gchar* _tmp11_ = NULL;
+		GDesktopAppInfo* _tmp12_ = NULL;
+		GDesktopAppInfo* _tmp13_ = NULL;
 		_tmp0_ = self->filtered;
 		_tmp1_ = self->children;
 		_tmp2_ = _data1_->item;
 		_tmp3_ = g_list_index (_tmp1_, _tmp2_);
 		_tmp4_ = self->pages;
 		_tmp5_ = _tmp4_->active;
-		_tmp6_ = self->grid;
-		g_object_get ((GtkTable*) _tmp6_, "n-columns", &_tmp7_, NULL);
-		_tmp8_ = _tmp7_;
-		_tmp9_ = self->grid;
-		g_object_get ((GtkTable*) _tmp9_, "n-rows", &_tmp10_, NULL);
-		_tmp11_ = _tmp10_;
-		_tmp12_ = gee_abstract_list_get ((GeeAbstractList*) _tmp0_, (gint) (_tmp3_ + ((_tmp5_ * _tmp8_) * _tmp11_)));
-		_tmp13_ = (GeeHashMap*) _tmp12_;
-		_tmp14_ = gee_abstract_map_get ((GeeAbstractMap*) _tmp13_, "desktop_file");
-		_tmp15_ = (gchar*) _tmp14_;
-		_tmp16_ = g_desktop_app_info_new_from_filename (_tmp15_);
-		_tmp17_ = _tmp16_;
-		g_app_info_launch ((GAppInfo*) _tmp17_, NULL, NULL, &_inner_error_);
-		_g_object_unref0 (_tmp17_);
-		_g_free0 (_tmp15_);
+		_tmp6_ = self->priv->grid_y;
+		_tmp7_ = self->priv->grid_x;
+		_tmp8_ = gee_abstract_list_get ((GeeAbstractList*) _tmp0_, (gint) (_tmp3_ + ((_tmp5_ * _tmp6_) * _tmp7_)));
+		_tmp9_ = (GeeHashMap*) _tmp8_;
+		_tmp10_ = gee_abstract_map_get ((GeeAbstractMap*) _tmp9_, "desktop_file");
+		_tmp11_ = (gchar*) _tmp10_;
+		_tmp12_ = g_desktop_app_info_new_from_filename (_tmp11_);
+		_tmp13_ = _tmp12_;
+		g_app_info_launch ((GAppInfo*) _tmp13_, NULL, NULL, &_inner_error_);
 		_g_object_unref0 (_tmp13_);
+		_g_free0 (_tmp11_);
+		_g_object_unref0 (_tmp9_);
 		if (G_UNLIKELY (_inner_error_ != NULL)) {
 			goto __catch0_g_error;
 		}
@@ -785,20 +831,20 @@ static gboolean ________lambda18_ (Block1Data* _data1_) {
 	__catch0_g_error:
 	{
 		GError* e = NULL;
-		FILE* _tmp18_ = NULL;
-		GError* _tmp19_ = NULL;
-		const gchar* _tmp20_ = NULL;
-		gchar* _tmp21_ = NULL;
-		gchar* _tmp22_ = NULL;
+		FILE* _tmp14_ = NULL;
+		GError* _tmp15_ = NULL;
+		const gchar* _tmp16_ = NULL;
+		gchar* _tmp17_ = NULL;
+		gchar* _tmp18_ = NULL;
 		e = _inner_error_;
 		_inner_error_ = NULL;
-		_tmp18_ = stdout;
-		_tmp19_ = e;
-		_tmp20_ = _tmp19_->message;
-		_tmp21_ = g_strconcat ("Error! Load application: ", _tmp20_, NULL);
-		_tmp22_ = _tmp21_;
-		fprintf (_tmp18_, "%s", _tmp22_);
-		_g_free0 (_tmp22_);
+		_tmp14_ = stdout;
+		_tmp15_ = e;
+		_tmp16_ = _tmp15_->message;
+		_tmp17_ = g_strconcat ("Error! Load application: ", _tmp16_, NULL);
+		_tmp18_ = _tmp17_;
+		fprintf (_tmp14_, "%s", _tmp18_);
+		_g_free0 (_tmp18_);
 		_g_error_free0 (e);
 	}
 	__finally0:
@@ -829,9 +875,7 @@ static void slingshot_window_populate_grid (SlingshotWindow* self) {
 			_tmp0_ = TRUE;
 			while (TRUE) {
 				gint _tmp2_ = 0;
-				SlingshotFrontendGrid* _tmp3_ = NULL;
-				guint _tmp4_ = 0U;
-				guint _tmp5_ = 0U;
+				gint _tmp3_ = 0;
 				if (!_tmp0_) {
 					gint _tmp1_ = 0;
 					_tmp1_ = r;
@@ -839,78 +883,68 @@ static void slingshot_window_populate_grid (SlingshotWindow* self) {
 				}
 				_tmp0_ = FALSE;
 				_tmp2_ = r;
-				_tmp3_ = self->grid;
-				g_object_get ((GtkTable*) _tmp3_, "n-rows", &_tmp4_, NULL);
-				_tmp5_ = _tmp4_;
-				if (!(((guint) _tmp2_) < _tmp5_)) {
+				_tmp3_ = self->priv->grid_x;
+				if (!(_tmp2_ < _tmp3_)) {
 					break;
 				}
 				{
 					gint c = 0;
 					c = 0;
 					{
-						gboolean _tmp6_ = FALSE;
-						_tmp6_ = TRUE;
+						gboolean _tmp4_ = FALSE;
+						_tmp4_ = TRUE;
 						while (TRUE) {
 							Block1Data* _data1_;
+							gint _tmp6_ = 0;
+							gint _tmp7_ = 0;
 							gint _tmp8_ = 0;
-							SlingshotFrontendGrid* _tmp9_ = NULL;
-							guint _tmp10_ = 0U;
-							guint _tmp11_ = 0U;
-							gint _tmp12_ = 0;
+							SlingshotFrontendAppItem* _tmp9_ = NULL;
+							SlingshotFrontendAppItem* _tmp10_ = NULL;
+							SlingshotFrontendAppItem* _tmp11_ = NULL;
+							SlingshotFrontendAppItem* _tmp12_ = NULL;
 							SlingshotFrontendAppItem* _tmp13_ = NULL;
 							SlingshotFrontendAppItem* _tmp14_ = NULL;
 							SlingshotFrontendAppItem* _tmp15_ = NULL;
-							SlingshotFrontendAppItem* _tmp16_ = NULL;
+							GtkGrid* _tmp16_ = NULL;
 							SlingshotFrontendAppItem* _tmp17_ = NULL;
-							SlingshotFrontendAppItem* _tmp18_ = NULL;
-							SlingshotFrontendAppItem* _tmp19_ = NULL;
-							SlingshotFrontendGrid* _tmp20_ = NULL;
-							SlingshotFrontendAppItem* _tmp21_ = NULL;
-							gint _tmp22_ = 0;
-							gint _tmp23_ = 0;
-							gint _tmp24_ = 0;
-							gint _tmp25_ = 0;
+							gint _tmp18_ = 0;
+							gint _tmp19_ = 0;
 							_data1_ = g_slice_new0 (Block1Data);
 							_data1_->_ref_count_ = 1;
 							_data1_->self = g_object_ref (self);
-							if (!_tmp6_) {
-								gint _tmp7_ = 0;
-								_tmp7_ = c;
-								c = _tmp7_ + 1;
+							if (!_tmp4_) {
+								gint _tmp5_ = 0;
+								_tmp5_ = c;
+								c = _tmp5_ + 1;
 							}
-							_tmp6_ = FALSE;
-							_tmp8_ = c;
-							_tmp9_ = self->grid;
-							g_object_get ((GtkTable*) _tmp9_, "n-columns", &_tmp10_, NULL);
-							_tmp11_ = _tmp10_;
-							if (!(((guint) _tmp8_) < _tmp11_)) {
+							_tmp4_ = FALSE;
+							_tmp6_ = c;
+							_tmp7_ = self->priv->grid_y;
+							if (!(_tmp6_ < _tmp7_)) {
 								block1_data_unref (_data1_);
 								_data1_ = NULL;
 								break;
 							}
-							_tmp12_ = self->icon_size;
-							_tmp13_ = slingshot_frontend_app_item_new (_tmp12_);
-							g_object_ref_sink (_tmp13_);
-							_data1_->item = _tmp13_;
+							_tmp8_ = self->icon_size;
+							_tmp9_ = slingshot_frontend_app_item_new (_tmp8_);
+							g_object_ref_sink (_tmp9_);
+							_data1_->item = _tmp9_;
+							_tmp10_ = _data1_->item;
+							_tmp11_ = _g_object_ref0 (_tmp10_);
+							self->children = g_list_append (self->children, _tmp11_);
+							_tmp12_ = _data1_->item;
+							g_signal_connect_data ((GtkWidget*) _tmp12_, "button-press-event", (GCallback) _________lambda15__gtk_widget_button_press_event, block1_data_ref (_data1_), (GClosureNotify) block1_data_unref, 0);
+							_tmp13_ = _data1_->item;
+							g_signal_connect_data ((GtkWidget*) _tmp13_, "enter-notify-event", (GCallback) _________lambda16__gtk_widget_enter_notify_event, block1_data_ref (_data1_), (GClosureNotify) block1_data_unref, 0);
 							_tmp14_ = _data1_->item;
-							_tmp15_ = _g_object_ref0 (_tmp14_);
-							self->children = g_list_append (self->children, _tmp15_);
-							_tmp16_ = _data1_->item;
-							g_signal_connect_data ((GtkWidget*) _tmp16_, "button-press-event", (GCallback) _________lambda15__gtk_widget_button_press_event, block1_data_ref (_data1_), (GClosureNotify) block1_data_unref, 0);
+							g_signal_connect_object ((GtkWidget*) _tmp14_, "leave-notify-event", (GCallback) _________lambda17__gtk_widget_leave_notify_event, self, 0);
+							_tmp15_ = _data1_->item;
+							g_signal_connect_data ((GtkWidget*) _tmp15_, "button-release-event", (GCallback) _________lambda18__gtk_widget_button_release_event, block1_data_ref (_data1_), (GClosureNotify) block1_data_unref, 0);
+							_tmp16_ = self->grid;
 							_tmp17_ = _data1_->item;
-							g_signal_connect_data ((GtkWidget*) _tmp17_, "enter-notify-event", (GCallback) _________lambda16__gtk_widget_enter_notify_event, block1_data_ref (_data1_), (GClosureNotify) block1_data_unref, 0);
-							_tmp18_ = _data1_->item;
-							g_signal_connect_object ((GtkWidget*) _tmp18_, "leave-notify-event", (GCallback) _________lambda17__gtk_widget_leave_notify_event, self, 0);
-							_tmp19_ = _data1_->item;
-							g_signal_connect_data ((GtkWidget*) _tmp19_, "button-release-event", (GCallback) _________lambda18__gtk_widget_button_release_event, block1_data_ref (_data1_), (GClosureNotify) block1_data_unref, 0);
-							_tmp20_ = self->grid;
-							_tmp21_ = _data1_->item;
-							_tmp22_ = c;
-							_tmp23_ = c;
-							_tmp24_ = r;
-							_tmp25_ = r;
-							gtk_table_attach ((GtkTable*) _tmp20_, (GtkWidget*) _tmp21_, (guint) _tmp22_, (guint) (_tmp23_ + 1), (guint) _tmp24_, (guint) (_tmp25_ + 1), GTK_EXPAND, GTK_EXPAND, (guint) 0, (guint) 0);
+							_tmp18_ = c;
+							_tmp19_ = r;
+							gtk_grid_attach (_tmp16_, (GtkWidget*) _tmp17_, _tmp18_, _tmp19_, 1, 1);
 							block1_data_unref (_data1_);
 							_data1_ = NULL;
 						}
@@ -926,229 +960,209 @@ static void slingshot_window_update_grid (SlingshotWindow* self, GeeArrayList* a
 	gint item_iter = 0;
 	SlingshotFrontendIndicators* _tmp0_ = NULL;
 	gint _tmp1_ = 0;
-	SlingshotFrontendGrid* _tmp2_ = NULL;
-	guint _tmp3_ = 0U;
-	guint _tmp4_ = 0U;
-	SlingshotFrontendGrid* _tmp5_ = NULL;
-	guint _tmp6_ = 0U;
-	guint _tmp7_ = 0U;
-	GeeArrayList* _tmp80_ = NULL;
-	GList* _tmp81_ = NULL;
-	gconstpointer _tmp82_ = NULL;
+	gint _tmp2_ = 0;
+	gint _tmp3_ = 0;
+	GeeArrayList* _tmp70_ = NULL;
+	GList* _tmp71_ = NULL;
+	gconstpointer _tmp72_ = NULL;
 	g_return_if_fail (self != NULL);
 	g_return_if_fail (apps != NULL);
 	_tmp0_ = self->pages;
 	_tmp1_ = _tmp0_->active;
-	_tmp2_ = self->grid;
-	g_object_get ((GtkTable*) _tmp2_, "n-columns", &_tmp3_, NULL);
-	_tmp4_ = _tmp3_;
-	_tmp5_ = self->grid;
-	g_object_get ((GtkTable*) _tmp5_, "n-rows", &_tmp6_, NULL);
-	_tmp7_ = _tmp6_;
-	item_iter = (gint) ((_tmp1_ * _tmp4_) * _tmp7_);
+	_tmp2_ = self->priv->grid_y;
+	_tmp3_ = self->priv->grid_x;
+	item_iter = (gint) ((_tmp1_ * _tmp2_) * _tmp3_);
 	{
 		gint r = 0;
 		r = 0;
 		{
-			gboolean _tmp8_ = FALSE;
-			_tmp8_ = TRUE;
+			gboolean _tmp4_ = FALSE;
+			_tmp4_ = TRUE;
 			while (TRUE) {
-				gint _tmp10_ = 0;
-				SlingshotFrontendGrid* _tmp11_ = NULL;
-				guint _tmp12_ = 0U;
-				guint _tmp13_ = 0U;
-				if (!_tmp8_) {
-					gint _tmp9_ = 0;
-					_tmp9_ = r;
-					r = _tmp9_ + 1;
+				gint _tmp6_ = 0;
+				gint _tmp7_ = 0;
+				if (!_tmp4_) {
+					gint _tmp5_ = 0;
+					_tmp5_ = r;
+					r = _tmp5_ + 1;
 				}
-				_tmp8_ = FALSE;
-				_tmp10_ = r;
-				_tmp11_ = self->grid;
-				g_object_get ((GtkTable*) _tmp11_, "n-rows", &_tmp12_, NULL);
-				_tmp13_ = _tmp12_;
-				if (!(((guint) _tmp10_) < _tmp13_)) {
+				_tmp4_ = FALSE;
+				_tmp6_ = r;
+				_tmp7_ = self->priv->grid_x;
+				if (!(_tmp6_ < _tmp7_)) {
 					break;
 				}
 				{
 					gint c = 0;
 					c = 0;
 					{
-						gboolean _tmp14_ = FALSE;
-						_tmp14_ = TRUE;
+						gboolean _tmp8_ = FALSE;
+						_tmp8_ = TRUE;
 						while (TRUE) {
-							gint _tmp16_ = 0;
-							SlingshotFrontendGrid* _tmp17_ = NULL;
-							guint _tmp18_ = 0U;
-							guint _tmp19_ = 0U;
+							gint _tmp10_ = 0;
+							gint _tmp11_ = 0;
 							gint table_pos = 0;
-							gint _tmp20_ = 0;
-							gint _tmp21_ = 0;
-							SlingshotFrontendGrid* _tmp22_ = NULL;
-							guint _tmp23_ = 0U;
-							guint _tmp24_ = 0U;
+							gint _tmp12_ = 0;
+							gint _tmp13_ = 0;
+							gint _tmp14_ = 0;
 							SlingshotFrontendAppItem* item = NULL;
-							GList* _tmp25_ = NULL;
-							gint _tmp26_ = 0;
-							gconstpointer _tmp27_ = NULL;
-							SlingshotFrontendAppItem* _tmp28_ = NULL;
-							gint _tmp29_ = 0;
-							GeeArrayList* _tmp30_ = NULL;
-							gint _tmp31_ = 0;
-							gint _tmp32_ = 0;
-							gint _tmp79_ = 0;
-							if (!_tmp14_) {
-								gint _tmp15_ = 0;
-								_tmp15_ = c;
-								c = _tmp15_ + 1;
+							GList* _tmp15_ = NULL;
+							gint _tmp16_ = 0;
+							gconstpointer _tmp17_ = NULL;
+							SlingshotFrontendAppItem* _tmp18_ = NULL;
+							gint _tmp19_ = 0;
+							GeeArrayList* _tmp20_ = NULL;
+							gint _tmp21_ = 0;
+							gint _tmp22_ = 0;
+							gint _tmp69_ = 0;
+							if (!_tmp8_) {
+								gint _tmp9_ = 0;
+								_tmp9_ = c;
+								c = _tmp9_ + 1;
 							}
-							_tmp14_ = FALSE;
-							_tmp16_ = c;
-							_tmp17_ = self->grid;
-							g_object_get ((GtkTable*) _tmp17_, "n-columns", &_tmp18_, NULL);
-							_tmp19_ = _tmp18_;
-							if (!(((guint) _tmp16_) < _tmp19_)) {
+							_tmp8_ = FALSE;
+							_tmp10_ = c;
+							_tmp11_ = self->priv->grid_y;
+							if (!(_tmp10_ < _tmp11_)) {
 								break;
 							}
-							_tmp20_ = c;
-							_tmp21_ = r;
-							_tmp22_ = self->grid;
-							g_object_get ((GtkTable*) _tmp22_, "n-columns", &_tmp23_, NULL);
-							_tmp24_ = _tmp23_;
-							table_pos = _tmp20_ + (_tmp21_ * ((gint) _tmp24_));
-							_tmp25_ = self->children;
-							_tmp26_ = table_pos;
-							_tmp27_ = g_list_nth_data (_tmp25_, (guint) _tmp26_);
-							_tmp28_ = _g_object_ref0 ((SlingshotFrontendAppItem*) _tmp27_);
-							item = _tmp28_;
-							_tmp29_ = item_iter;
-							_tmp30_ = apps;
-							_tmp31_ = gee_abstract_collection_get_size ((GeeCollection*) _tmp30_);
-							_tmp32_ = _tmp31_;
-							if (_tmp29_ < _tmp32_) {
+							_tmp12_ = c;
+							_tmp13_ = r;
+							_tmp14_ = self->priv->grid_y;
+							table_pos = _tmp12_ + (_tmp13_ * ((gint) _tmp14_));
+							_tmp15_ = self->children;
+							_tmp16_ = table_pos;
+							_tmp17_ = g_list_nth_data (_tmp15_, (guint) _tmp16_);
+							_tmp18_ = _g_object_ref0 ((SlingshotFrontendAppItem*) _tmp17_);
+							item = _tmp18_;
+							_tmp19_ = item_iter;
+							_tmp20_ = apps;
+							_tmp21_ = gee_abstract_collection_get_size ((GeeCollection*) _tmp20_);
+							_tmp22_ = _tmp21_;
+							if (_tmp19_ < _tmp22_) {
 								GeeHashMap* current_item = NULL;
-								GeeArrayList* _tmp33_ = NULL;
-								gint _tmp34_ = 0;
-								gpointer _tmp35_ = NULL;
-								gboolean _tmp36_ = FALSE;
-								GeeHashMap* _tmp37_ = NULL;
-								gpointer _tmp38_ = NULL;
-								gchar* _tmp39_ = NULL;
-								gboolean _tmp40_ = FALSE;
-								SlingshotFrontendAppItem* _tmp77_ = NULL;
-								_tmp33_ = apps;
-								_tmp34_ = item_iter;
-								_tmp35_ = gee_abstract_list_get ((GeeAbstractList*) _tmp33_, _tmp34_);
-								current_item = (GeeHashMap*) _tmp35_;
-								_tmp37_ = current_item;
-								_tmp38_ = gee_abstract_map_get ((GeeAbstractMap*) _tmp37_, "description");
-								_tmp39_ = (gchar*) _tmp38_;
-								_tmp40_ = _tmp39_ == NULL;
-								_g_free0 (_tmp39_);
-								if (_tmp40_) {
-									_tmp36_ = TRUE;
+								GeeArrayList* _tmp23_ = NULL;
+								gint _tmp24_ = 0;
+								gpointer _tmp25_ = NULL;
+								gboolean _tmp26_ = FALSE;
+								GeeHashMap* _tmp27_ = NULL;
+								gpointer _tmp28_ = NULL;
+								gchar* _tmp29_ = NULL;
+								gboolean _tmp30_ = FALSE;
+								SlingshotFrontendAppItem* _tmp67_ = NULL;
+								_tmp23_ = apps;
+								_tmp24_ = item_iter;
+								_tmp25_ = gee_abstract_list_get ((GeeAbstractList*) _tmp23_, _tmp24_);
+								current_item = (GeeHashMap*) _tmp25_;
+								_tmp27_ = current_item;
+								_tmp28_ = gee_abstract_map_get ((GeeAbstractMap*) _tmp27_, "description");
+								_tmp29_ = (gchar*) _tmp28_;
+								_tmp30_ = _tmp29_ == NULL;
+								_g_free0 (_tmp29_);
+								if (_tmp30_) {
+									_tmp26_ = TRUE;
 								} else {
+									GeeHashMap* _tmp31_ = NULL;
+									gpointer _tmp32_ = NULL;
+									gchar* _tmp33_ = NULL;
+									_tmp31_ = current_item;
+									_tmp32_ = gee_abstract_map_get ((GeeAbstractMap*) _tmp31_, "description");
+									_tmp33_ = (gchar*) _tmp32_;
+									_tmp26_ = g_strcmp0 (_tmp33_, "") == 0;
+									_g_free0 (_tmp33_);
+								}
+								if (_tmp26_) {
+									SlingshotFrontendAppItem* _tmp34_ = NULL;
+									GeeHashMap* _tmp35_ = NULL;
+									GeeHashMap* _tmp36_ = NULL;
+									gpointer _tmp37_ = NULL;
+									gchar* _tmp38_ = NULL;
+									gpointer _tmp39_ = NULL;
+									GdkPixbuf* _tmp40_ = NULL;
 									GeeHashMap* _tmp41_ = NULL;
 									gpointer _tmp42_ = NULL;
 									gchar* _tmp43_ = NULL;
+									GeeHashMap* _tmp44_ = NULL;
+									gpointer _tmp45_ = NULL;
+									gchar* _tmp46_ = NULL;
+									_tmp34_ = item;
+									_tmp35_ = self->icons;
+									_tmp36_ = current_item;
+									_tmp37_ = gee_abstract_map_get ((GeeAbstractMap*) _tmp36_, "command");
+									_tmp38_ = (gchar*) _tmp37_;
+									_tmp39_ = gee_abstract_map_get ((GeeAbstractMap*) _tmp35_, _tmp38_);
+									_tmp40_ = (GdkPixbuf*) _tmp39_;
 									_tmp41_ = current_item;
-									_tmp42_ = gee_abstract_map_get ((GeeAbstractMap*) _tmp41_, "description");
+									_tmp42_ = gee_abstract_map_get ((GeeAbstractMap*) _tmp41_, "name");
 									_tmp43_ = (gchar*) _tmp42_;
-									_tmp36_ = g_strcmp0 (_tmp43_, "") == 0;
+									_tmp44_ = current_item;
+									_tmp45_ = gee_abstract_map_get ((GeeAbstractMap*) _tmp44_, "name");
+									_tmp46_ = (gchar*) _tmp45_;
+									slingshot_frontend_app_item_change_app (_tmp34_, _tmp40_, _tmp43_, _tmp46_);
+									_g_free0 (_tmp46_);
 									_g_free0 (_tmp43_);
-								}
-								if (_tmp36_) {
-									SlingshotFrontendAppItem* _tmp44_ = NULL;
-									GeeHashMap* _tmp45_ = NULL;
-									GeeHashMap* _tmp46_ = NULL;
-									gpointer _tmp47_ = NULL;
-									gchar* _tmp48_ = NULL;
-									gpointer _tmp49_ = NULL;
-									GdkPixbuf* _tmp50_ = NULL;
-									GeeHashMap* _tmp51_ = NULL;
+									_g_object_unref0 (_tmp40_);
+									_g_free0 (_tmp38_);
+								} else {
+									SlingshotFrontendAppItem* _tmp47_ = NULL;
+									GeeHashMap* _tmp48_ = NULL;
+									GeeHashMap* _tmp49_ = NULL;
+									gpointer _tmp50_ = NULL;
+									gchar* _tmp51_ = NULL;
 									gpointer _tmp52_ = NULL;
-									gchar* _tmp53_ = NULL;
+									GdkPixbuf* _tmp53_ = NULL;
 									GeeHashMap* _tmp54_ = NULL;
 									gpointer _tmp55_ = NULL;
 									gchar* _tmp56_ = NULL;
-									_tmp44_ = item;
-									_tmp45_ = self->icons;
-									_tmp46_ = current_item;
-									_tmp47_ = gee_abstract_map_get ((GeeAbstractMap*) _tmp46_, "command");
-									_tmp48_ = (gchar*) _tmp47_;
-									_tmp49_ = gee_abstract_map_get ((GeeAbstractMap*) _tmp45_, _tmp48_);
-									_tmp50_ = (GdkPixbuf*) _tmp49_;
-									_tmp51_ = current_item;
-									_tmp52_ = gee_abstract_map_get ((GeeAbstractMap*) _tmp51_, "name");
-									_tmp53_ = (gchar*) _tmp52_;
+									GeeHashMap* _tmp57_ = NULL;
+									gpointer _tmp58_ = NULL;
+									gchar* _tmp59_ = NULL;
+									gchar* _tmp60_ = NULL;
+									gchar* _tmp61_ = NULL;
+									GeeHashMap* _tmp62_ = NULL;
+									gpointer _tmp63_ = NULL;
+									gchar* _tmp64_ = NULL;
+									gchar* _tmp65_ = NULL;
+									gchar* _tmp66_ = NULL;
+									_tmp47_ = item;
+									_tmp48_ = self->icons;
+									_tmp49_ = current_item;
+									_tmp50_ = gee_abstract_map_get ((GeeAbstractMap*) _tmp49_, "command");
+									_tmp51_ = (gchar*) _tmp50_;
+									_tmp52_ = gee_abstract_map_get ((GeeAbstractMap*) _tmp48_, _tmp51_);
+									_tmp53_ = (GdkPixbuf*) _tmp52_;
 									_tmp54_ = current_item;
 									_tmp55_ = gee_abstract_map_get ((GeeAbstractMap*) _tmp54_, "name");
 									_tmp56_ = (gchar*) _tmp55_;
-									slingshot_frontend_app_item_change_app (_tmp44_, _tmp50_, _tmp53_, _tmp56_);
-									_g_free0 (_tmp56_);
-									_g_free0 (_tmp53_);
-									_g_object_unref0 (_tmp50_);
-									_g_free0 (_tmp48_);
-								} else {
-									SlingshotFrontendAppItem* _tmp57_ = NULL;
-									GeeHashMap* _tmp58_ = NULL;
-									GeeHashMap* _tmp59_ = NULL;
-									gpointer _tmp60_ = NULL;
-									gchar* _tmp61_ = NULL;
-									gpointer _tmp62_ = NULL;
-									GdkPixbuf* _tmp63_ = NULL;
-									GeeHashMap* _tmp64_ = NULL;
-									gpointer _tmp65_ = NULL;
-									gchar* _tmp66_ = NULL;
-									GeeHashMap* _tmp67_ = NULL;
-									gpointer _tmp68_ = NULL;
-									gchar* _tmp69_ = NULL;
-									gchar* _tmp70_ = NULL;
-									gchar* _tmp71_ = NULL;
-									GeeHashMap* _tmp72_ = NULL;
-									gpointer _tmp73_ = NULL;
-									gchar* _tmp74_ = NULL;
-									gchar* _tmp75_ = NULL;
-									gchar* _tmp76_ = NULL;
-									_tmp57_ = item;
-									_tmp58_ = self->icons;
-									_tmp59_ = current_item;
-									_tmp60_ = gee_abstract_map_get ((GeeAbstractMap*) _tmp59_, "command");
-									_tmp61_ = (gchar*) _tmp60_;
-									_tmp62_ = gee_abstract_map_get ((GeeAbstractMap*) _tmp58_, _tmp61_);
-									_tmp63_ = (GdkPixbuf*) _tmp62_;
-									_tmp64_ = current_item;
-									_tmp65_ = gee_abstract_map_get ((GeeAbstractMap*) _tmp64_, "name");
-									_tmp66_ = (gchar*) _tmp65_;
-									_tmp67_ = current_item;
-									_tmp68_ = gee_abstract_map_get ((GeeAbstractMap*) _tmp67_, "name");
-									_tmp69_ = (gchar*) _tmp68_;
-									_tmp70_ = g_strconcat (_tmp69_, ":\n", NULL);
-									_tmp71_ = _tmp70_;
-									_tmp72_ = current_item;
-									_tmp73_ = gee_abstract_map_get ((GeeAbstractMap*) _tmp72_, "description");
-									_tmp74_ = (gchar*) _tmp73_;
-									_tmp75_ = g_strconcat (_tmp71_, _tmp74_, NULL);
-									_tmp76_ = _tmp75_;
-									slingshot_frontend_app_item_change_app (_tmp57_, _tmp63_, _tmp66_, _tmp76_);
-									_g_free0 (_tmp76_);
-									_g_free0 (_tmp74_);
-									_g_free0 (_tmp71_);
-									_g_free0 (_tmp69_);
+									_tmp57_ = current_item;
+									_tmp58_ = gee_abstract_map_get ((GeeAbstractMap*) _tmp57_, "name");
+									_tmp59_ = (gchar*) _tmp58_;
+									_tmp60_ = g_strconcat (_tmp59_, ":\n", NULL);
+									_tmp61_ = _tmp60_;
+									_tmp62_ = current_item;
+									_tmp63_ = gee_abstract_map_get ((GeeAbstractMap*) _tmp62_, "description");
+									_tmp64_ = (gchar*) _tmp63_;
+									_tmp65_ = g_strconcat (_tmp61_, _tmp64_, NULL);
+									_tmp66_ = _tmp65_;
+									slingshot_frontend_app_item_change_app (_tmp47_, _tmp53_, _tmp56_, _tmp66_);
 									_g_free0 (_tmp66_);
-									_g_object_unref0 (_tmp63_);
+									_g_free0 (_tmp64_);
 									_g_free0 (_tmp61_);
+									_g_free0 (_tmp59_);
+									_g_free0 (_tmp56_);
+									_g_object_unref0 (_tmp53_);
+									_g_free0 (_tmp51_);
 								}
-								_tmp77_ = item;
-								gtk_widget_set_visible ((GtkWidget*) _tmp77_, TRUE);
+								_tmp67_ = item;
+								gtk_widget_set_visible ((GtkWidget*) _tmp67_, TRUE);
 								_g_object_unref0 (current_item);
 							} else {
-								SlingshotFrontendAppItem* _tmp78_ = NULL;
-								_tmp78_ = item;
-								gtk_widget_set_visible ((GtkWidget*) _tmp78_, FALSE);
+								SlingshotFrontendAppItem* _tmp68_ = NULL;
+								_tmp68_ = item;
+								gtk_widget_set_visible ((GtkWidget*) _tmp68_, FALSE);
 							}
-							_tmp79_ = item_iter;
-							item_iter = _tmp79_ + 1;
+							_tmp69_ = item_iter;
+							item_iter = _tmp69_ + 1;
 							_g_object_unref0 (item);
 						}
 					}
@@ -1156,11 +1170,11 @@ static void slingshot_window_update_grid (SlingshotWindow* self, GeeArrayList* a
 			}
 		}
 	}
-	_tmp80_ = apps;
-	slingshot_window_update_pages (self, _tmp80_);
-	_tmp81_ = self->children;
-	_tmp82_ = g_list_nth_data (_tmp81_, (guint) 0);
-	gtk_widget_grab_focus ((GtkWidget*) ((SlingshotFrontendAppItem*) _tmp82_));
+	_tmp70_ = apps;
+	slingshot_window_update_pages (self, _tmp70_);
+	_tmp71_ = self->children;
+	_tmp72_ = g_list_nth_data (_tmp71_, (guint) 0);
+	gtk_widget_grab_focus ((GtkWidget*) ((SlingshotFrontendAppItem*) _tmp72_));
 }
 
 
@@ -1216,123 +1230,107 @@ static void slingshot_window_update_pages (SlingshotWindow* self, GeeArrayList* 
 	GeeArrayList* _tmp0_ = NULL;
 	gint _tmp1_ = 0;
 	gint _tmp2_ = 0;
-	SlingshotFrontendGrid* _tmp3_ = NULL;
-	guint _tmp4_ = 0U;
-	guint _tmp5_ = 0U;
-	SlingshotFrontendGrid* _tmp6_ = NULL;
-	guint _tmp7_ = 0U;
-	guint _tmp8_ = 0U;
+	gint _tmp3_ = 0;
+	gint _tmp4_ = 0;
+	gint _tmp5_ = 0;
+	GeeArrayList* _tmp6_ = NULL;
+	gint _tmp7_ = 0;
+	gint _tmp8_ = 0;
 	gint _tmp9_ = 0;
-	GeeArrayList* _tmp10_ = NULL;
-	gint _tmp11_ = 0;
-	gint _tmp12_ = 0;
-	SlingshotFrontendGrid* _tmp13_ = NULL;
-	guint _tmp14_ = 0U;
-	guint _tmp15_ = 0U;
-	SlingshotFrontendGrid* _tmp16_ = NULL;
-	guint _tmp17_ = 0U;
-	guint _tmp18_ = 0U;
-	gint _tmp23_ = 0;
+	gint _tmp10_ = 0;
+	gint _tmp15_ = 0;
 	g_return_if_fail (self != NULL);
 	g_return_if_fail (apps != NULL);
 	_tmp0_ = apps;
 	_tmp1_ = gee_abstract_collection_get_size ((GeeCollection*) _tmp0_);
 	_tmp2_ = _tmp1_;
-	_tmp3_ = self->grid;
-	g_object_get ((GtkTable*) _tmp3_, "n-columns", &_tmp4_, NULL);
-	_tmp5_ = _tmp4_;
-	_tmp6_ = self->grid;
-	g_object_get ((GtkTable*) _tmp6_, "n-rows", &_tmp7_, NULL);
+	_tmp3_ = self->priv->grid_y;
+	_tmp4_ = self->priv->grid_x;
+	num_pages = (gint) (_tmp2_ / (_tmp3_ * _tmp4_));
+	_tmp6_ = apps;
+	_tmp7_ = gee_abstract_collection_get_size ((GeeCollection*) _tmp6_);
 	_tmp8_ = _tmp7_;
-	num_pages = (gint) (_tmp2_ / (_tmp5_ * _tmp8_));
-	_tmp10_ = apps;
-	_tmp11_ = gee_abstract_collection_get_size ((GeeCollection*) _tmp10_);
-	_tmp12_ = _tmp11_;
-	_tmp13_ = self->grid;
-	g_object_get ((GtkTable*) _tmp13_, "n-columns", &_tmp14_, NULL);
-	_tmp15_ = _tmp14_;
-	_tmp16_ = self->grid;
-	g_object_get ((GtkTable*) _tmp16_, "n-rows", &_tmp17_, NULL);
-	_tmp18_ = _tmp17_;
-	if (fmod ((gdouble) _tmp12_, (gdouble) (_tmp15_ * _tmp18_)) > ((gdouble) 0)) {
-		gint _tmp19_ = 0;
-		gint _tmp20_ = 0;
-		_tmp19_ = num_pages;
-		self->total_pages = _tmp19_ + 1;
-		_tmp20_ = self->total_pages;
-		_tmp9_ = _tmp20_;
+	_tmp9_ = self->priv->grid_y;
+	_tmp10_ = self->priv->grid_x;
+	if (fmod ((gdouble) _tmp8_, (gdouble) (_tmp9_ * _tmp10_)) > ((gdouble) 0)) {
+		gint _tmp11_ = 0;
+		gint _tmp12_ = 0;
+		_tmp11_ = num_pages;
+		self->total_pages = _tmp11_ + 1;
+		_tmp12_ = self->total_pages;
+		_tmp5_ = _tmp12_;
 	} else {
-		gint _tmp21_ = 0;
-		gint _tmp22_ = 0;
-		_tmp21_ = num_pages;
-		self->total_pages = _tmp21_;
-		_tmp22_ = self->total_pages;
-		_tmp9_ = _tmp22_;
+		gint _tmp13_ = 0;
+		gint _tmp14_ = 0;
+		_tmp13_ = num_pages;
+		self->total_pages = _tmp13_;
+		_tmp14_ = self->total_pages;
+		_tmp5_ = _tmp14_;
 	}
-	_tmp23_ = self->total_pages;
-	if (_tmp23_ > 1) {
-		SlingshotFrontendIndicators* _tmp24_ = NULL;
-		_tmp24_ = self->pages;
-		gtk_widget_set_visible ((GtkWidget*) _tmp24_, TRUE);
+	_tmp15_ = self->total_pages;
+	if (_tmp15_ > 1) {
+		SlingshotFrontendIndicators* _tmp16_ = NULL;
+		_tmp16_ = self->pages;
+		gtk_widget_set_visible ((GtkWidget*) _tmp16_, TRUE);
 		{
 			gint p = 0;
 			p = 1;
 			{
-				gboolean _tmp25_ = FALSE;
-				_tmp25_ = TRUE;
+				gboolean _tmp17_ = FALSE;
+				_tmp17_ = TRUE;
 				while (TRUE) {
-					gint _tmp27_ = 0;
-					SlingshotFrontendIndicators* _tmp28_ = NULL;
-					GList* _tmp29_ = NULL;
-					guint _tmp30_ = 0U;
-					gboolean _tmp31_ = FALSE;
-					gint _tmp32_ = 0;
-					gint _tmp33_ = 0;
-					if (!_tmp25_) {
-						gint _tmp26_ = 0;
-						_tmp26_ = p;
-						p = _tmp26_ + 1;
+					gint _tmp19_ = 0;
+					SlingshotFrontendIndicators* _tmp20_ = NULL;
+					GList* _tmp21_ = NULL;
+					guint _tmp22_ = 0U;
+					gboolean _tmp23_ = FALSE;
+					gint _tmp24_ = 0;
+					gint _tmp25_ = 0;
+					if (!_tmp17_) {
+						gint _tmp18_ = 0;
+						_tmp18_ = p;
+						p = _tmp18_ + 1;
 					}
-					_tmp25_ = FALSE;
-					_tmp27_ = p;
-					_tmp28_ = self->pages;
-					_tmp29_ = _tmp28_->children;
-					_tmp30_ = g_list_length (_tmp29_);
-					if (!(((guint) _tmp27_) <= _tmp30_)) {
+					_tmp17_ = FALSE;
+					_tmp19_ = p;
+					_tmp20_ = self->pages;
+					_tmp21_ = _tmp20_->children;
+					_tmp22_ = g_list_length (_tmp21_);
+					if (!(((guint) _tmp19_) <= _tmp22_)) {
 						break;
 					}
-					_tmp32_ = p;
-					_tmp33_ = self->total_pages;
-					if (_tmp32_ > _tmp33_) {
-						SlingshotFrontendIndicators* _tmp34_ = NULL;
-						GList* _tmp35_ = NULL;
-						gint _tmp36_ = 0;
-						gconstpointer _tmp37_ = NULL;
-						_tmp34_ = self->pages;
-						_tmp35_ = _tmp34_->children;
-						_tmp36_ = p;
-						_tmp37_ = g_list_nth_data (_tmp35_, (guint) (_tmp36_ - 1));
-						gtk_widget_set_visible ((GtkWidget*) _tmp37_, FALSE);
-						_tmp31_ = FALSE;
+					_tmp24_ = p;
+					_tmp25_ = self->total_pages;
+					if (_tmp24_ > _tmp25_) {
+						SlingshotFrontendIndicators* _tmp26_ = NULL;
+						GList* _tmp27_ = NULL;
+						gint _tmp28_ = 0;
+						gconstpointer _tmp29_ = NULL;
+						_tmp26_ = self->pages;
+						_tmp27_ = _tmp26_->children;
+						_tmp28_ = p;
+						_tmp29_ = g_list_nth_data (_tmp27_, (guint) (_tmp28_ - 1));
+						gtk_widget_set_visible ((GtkWidget*) _tmp29_, FALSE);
+						_tmp23_ = FALSE;
 					} else {
-						SlingshotFrontendIndicators* _tmp38_ = NULL;
-						GList* _tmp39_ = NULL;
-						gint _tmp40_ = 0;
-						gconstpointer _tmp41_ = NULL;
-						_tmp38_ = self->pages;
-						_tmp39_ = _tmp38_->children;
-						_tmp40_ = p;
-						_tmp41_ = g_list_nth_data (_tmp39_, (guint) (_tmp40_ - 1));
-						gtk_widget_set_visible ((GtkWidget*) _tmp41_, TRUE);
-						_tmp31_ = TRUE;
+						SlingshotFrontendIndicators* _tmp30_ = NULL;
+						GList* _tmp31_ = NULL;
+						gint _tmp32_ = 0;
+						gconstpointer _tmp33_ = NULL;
+						_tmp30_ = self->pages;
+						_tmp31_ = _tmp30_->children;
+						_tmp32_ = p;
+						_tmp33_ = g_list_nth_data (_tmp31_, (guint) (_tmp32_ - 1));
+						gtk_widget_set_visible ((GtkWidget*) _tmp33_, TRUE);
+						_tmp23_ = TRUE;
 					}
 				}
 			}
 		}
 	} else {
-		SlingshotFrontendIndicators* _tmp42_ = NULL;
-		_tmp42_ = self->pages;
-		gtk_widget_set_visible ((GtkWidget*) _tmp42_, FALSE);
+		SlingshotFrontendIndicators* _tmp34_ = NULL;
+		_tmp34_ = self->pages;
+		gtk_widget_set_visible ((GtkWidget*) _tmp34_, FALSE);
 	}
 }
 
@@ -1678,7 +1676,7 @@ static gboolean slingshot_window_real_key_press_event (GtkWidget* base, GdkEvent
 	static GQuark _tmp4_label8 = 0;
 	static GQuark _tmp4_label9 = 0;
 	static GQuark _tmp4_label10 = 0;
-	GdkEventKey* _tmp58_ = NULL;
+	GdkEventKey* _tmp52_ = NULL;
 	self = (SlingshotWindow*) base;
 	g_return_val_if_fail (event != NULL, FALSE);
 	_tmp0_ = event;
@@ -1789,19 +1787,15 @@ static gboolean slingshot_window_real_key_press_event (GtkWidget* base, GdkEvent
 			default:
 			{
 				gint current_item = 0;
-				SlingshotFrontendGrid* _tmp26_ = NULL;
+				GtkGrid* _tmp26_ = NULL;
 				GList* _tmp27_ = NULL;
 				GList* _tmp28_ = NULL;
 				GtkWidget* _tmp29_ = NULL;
 				gint _tmp30_ = 0;
 				gint _tmp31_ = 0;
 				gint _tmp32_ = 0;
-				SlingshotFrontendGrid* _tmp33_ = NULL;
-				guint _tmp34_ = 0U;
-				guint _tmp35_ = 0U;
-				SlingshotFrontendGrid* _tmp36_ = NULL;
-				guint _tmp37_ = 0U;
-				guint _tmp38_ = 0U;
+				gint _tmp33_ = 0;
+				gint _tmp34_ = 0;
 				_tmp26_ = self->grid;
 				_tmp27_ = gtk_container_get_children ((GtkContainer*) _tmp26_);
 				_tmp28_ = _tmp27_;
@@ -1811,13 +1805,9 @@ static gboolean slingshot_window_real_key_press_event (GtkWidget* base, GdkEvent
 				_g_list_free0 (_tmp28_);
 				current_item = _tmp31_;
 				_tmp32_ = current_item;
-				_tmp33_ = self->grid;
-				g_object_get ((GtkTable*) _tmp33_, "n-columns", &_tmp34_, NULL);
-				_tmp35_ = _tmp34_;
-				_tmp36_ = self->grid;
-				g_object_get ((GtkTable*) _tmp36_, "n-columns", &_tmp37_, NULL);
-				_tmp38_ = _tmp37_;
-				if ((_tmp32_ % _tmp35_) == (_tmp38_ - 1)) {
+				_tmp33_ = self->priv->grid_y;
+				_tmp34_ = self->priv->grid_y;
+				if ((_tmp32_ % _tmp33_) == (_tmp34_ - 1)) {
 					slingshot_window_page_left (self);
 					result = TRUE;
 					return result;
@@ -1830,29 +1820,25 @@ static gboolean slingshot_window_real_key_press_event (GtkWidget* base, GdkEvent
 			default:
 			{
 				gint current_item = 0;
-				SlingshotFrontendGrid* _tmp39_ = NULL;
-				GList* _tmp40_ = NULL;
-				GList* _tmp41_ = NULL;
-				GtkWidget* _tmp42_ = NULL;
-				gint _tmp43_ = 0;
-				gint _tmp44_ = 0;
-				gint _tmp45_ = 0;
-				SlingshotFrontendGrid* _tmp46_ = NULL;
-				guint _tmp47_ = 0U;
-				guint _tmp48_ = 0U;
-				_tmp39_ = self->grid;
-				_tmp40_ = gtk_container_get_children ((GtkContainer*) _tmp39_);
-				_tmp41_ = _tmp40_;
-				_tmp42_ = gtk_window_get_focus ((GtkWindow*) self);
-				_tmp43_ = g_list_index (_tmp41_, _tmp42_);
-				_tmp44_ = _tmp43_;
-				_g_list_free0 (_tmp41_);
-				current_item = _tmp44_;
-				_tmp45_ = current_item;
-				_tmp46_ = self->grid;
-				g_object_get ((GtkTable*) _tmp46_, "n-columns", &_tmp47_, NULL);
-				_tmp48_ = _tmp47_;
-				if ((_tmp45_ % _tmp48_) == ((guint) 0)) {
+				GtkGrid* _tmp35_ = NULL;
+				GList* _tmp36_ = NULL;
+				GList* _tmp37_ = NULL;
+				GtkWidget* _tmp38_ = NULL;
+				gint _tmp39_ = 0;
+				gint _tmp40_ = 0;
+				gint _tmp41_ = 0;
+				gint _tmp42_ = 0;
+				_tmp35_ = self->grid;
+				_tmp36_ = gtk_container_get_children ((GtkContainer*) _tmp35_);
+				_tmp37_ = _tmp36_;
+				_tmp38_ = gtk_window_get_focus ((GtkWindow*) self);
+				_tmp39_ = g_list_index (_tmp37_, _tmp38_);
+				_tmp40_ = _tmp39_;
+				_g_list_free0 (_tmp37_);
+				current_item = _tmp40_;
+				_tmp41_ = current_item;
+				_tmp42_ = self->priv->grid_y;
+				if ((_tmp41_ % _tmp42_) == 0) {
 					slingshot_window_page_right (self);
 					result = TRUE;
 					return result;
@@ -1871,33 +1857,33 @@ static gboolean slingshot_window_real_key_press_event (GtkWidget* base, GdkEvent
 		switch (0) {
 			default:
 			{
-				SlingshotFrontendSearchbar* _tmp49_ = NULL;
-				SlingshotFrontendSearchbar* _tmp50_ = NULL;
+				SlingshotFrontendSearchbar* _tmp43_ = NULL;
+				SlingshotFrontendSearchbar* _tmp44_ = NULL;
+				gchar* _tmp45_ = NULL;
+				gchar* _tmp46_ = NULL;
+				gchar* _tmp47_ = NULL;
+				GdkEventKey* _tmp48_ = NULL;
+				const gchar* _tmp49_ = NULL;
+				gchar* _tmp50_ = NULL;
 				gchar* _tmp51_ = NULL;
-				gchar* _tmp52_ = NULL;
-				gchar* _tmp53_ = NULL;
-				GdkEventKey* _tmp54_ = NULL;
-				const gchar* _tmp55_ = NULL;
-				gchar* _tmp56_ = NULL;
-				gchar* _tmp57_ = NULL;
-				_tmp49_ = self->searchbar;
-				_tmp50_ = self->searchbar;
-				_tmp51_ = slingshot_frontend_searchbar_get_text (_tmp50_);
-				_tmp52_ = _tmp51_;
-				_tmp53_ = _tmp52_;
-				_tmp54_ = event;
-				_tmp55_ = _tmp54_->string;
-				_tmp56_ = g_strconcat (_tmp53_, _tmp55_, NULL);
-				_tmp57_ = _tmp56_;
-				slingshot_frontend_searchbar_set_text (_tmp49_, _tmp57_);
-				_g_free0 (_tmp57_);
-				_g_free0 (_tmp53_);
+				_tmp43_ = self->searchbar;
+				_tmp44_ = self->searchbar;
+				_tmp45_ = slingshot_frontend_searchbar_get_text (_tmp44_);
+				_tmp46_ = _tmp45_;
+				_tmp47_ = _tmp46_;
+				_tmp48_ = event;
+				_tmp49_ = _tmp48_->string;
+				_tmp50_ = g_strconcat (_tmp47_, _tmp49_, NULL);
+				_tmp51_ = _tmp50_;
+				slingshot_frontend_searchbar_set_text (_tmp43_, _tmp51_);
+				_g_free0 (_tmp51_);
+				_g_free0 (_tmp47_);
 				break;
 			}
 		}
 	}
-	_tmp58_ = event;
-	GTK_WIDGET_CLASS (slingshot_window_parent_class)->key_press_event ((GtkWidget*) G_TYPE_CHECK_INSTANCE_CAST (self, ELEMENTARY_WIDGETS_TYPE_COMPOSITED_WINDOW, ElementaryWidgetsCompositedWindow), _tmp58_);
+	_tmp52_ = event;
+	GTK_WIDGET_CLASS (slingshot_window_parent_class)->key_press_event ((GtkWidget*) G_TYPE_CHECK_INSTANCE_CAST (self, ELEMENTARY_WIDGETS_TYPE_COMPOSITED_WINDOW, ElementaryWidgetsCompositedWindow), _tmp52_);
 	result = FALSE;
 	return result;
 }
@@ -1956,6 +1942,7 @@ void slingshot_window_destroy (SlingshotWindow* self) {
 
 static void slingshot_window_class_init (SlingshotWindowClass * klass) {
 	slingshot_window_parent_class = g_type_class_peek_parent (klass);
+	g_type_class_add_private (klass, sizeof (SlingshotWindowPrivate));
 	((GtkWidgetClass *) klass)->key_press_event = slingshot_window_real_key_press_event;
 	((GtkWidgetClass *) klass)->scroll_event = slingshot_window_real_scroll_event;
 	G_OBJECT_CLASS (klass)->finalize = slingshot_window_finalize;
@@ -1967,6 +1954,7 @@ static void slingshot_window_instance_init (SlingshotWindow * self) {
 	GeeHashMap* _tmp1_ = NULL;
 	GeeArrayList* _tmp2_ = NULL;
 	GeeArrayList* _tmp3_ = NULL;
+	self->priv = SLINGSHOT_WINDOW_GET_PRIVATE (self);
 	self->children = NULL;
 	_tmp0_ = gee_array_list_new (GEE_TYPE_HASH_MAP, (GBoxedCopyFunc) g_object_ref, g_object_unref, NULL);
 	self->apps = _tmp0_;

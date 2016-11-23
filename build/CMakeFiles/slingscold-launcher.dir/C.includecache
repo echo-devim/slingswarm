@@ -94,14 +94,6 @@ cairo.h
 gdk/gdk.h
 -
 
-/home/greg/Scaricati/slingscold3/build/frontend/widgets/Grid.c
-glib.h
--
-glib-object.h
--
-gtk/gtk.h
--
-
 /home/greg/Scaricati/slingscold3/build/frontend/widgets/Indicators.c
 glib.h
 -

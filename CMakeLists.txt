@@ -31,7 +31,6 @@ vala_precompile(VALA_C
     slingshot.vala
     frontend/widgets/AppItem.vala
     frontend/widgets/CompositedWindow.vala
-    frontend/widgets/Grid.vala
     frontend/widgets/Indicators.vala
     frontend/widgets/Searchbar.vala
     frontend/Utilities.vala

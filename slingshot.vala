@@ -2,7 +2,7 @@ public class SlingshotWindow : ElementaryWidgets.CompositedWindow {
 
     public GLib.List<Slingshot.Frontend.AppItem> children = new GLib.List<Slingshot.Frontend.AppItem> ();
     public Slingshot.Frontend.Searchbar searchbar;
-    public Slingshot.Frontend.Grid grid;
+    public Gtk.Grid grid;
     
     public Gee.ArrayList<Gee.HashMap<string, string>> apps = new Gee.ArrayList<Gee.HashMap<string, string>> ();
     public Gee.HashMap<string, Gdk.Pixbuf> icons = new Gee.HashMap<string, Gdk.Pixbuf>();
@@ -15,6 +15,9 @@ public class SlingshotWindow : ElementaryWidgets.CompositedWindow {
     public int total_pages;
     public Gtk.Box top_spacer;
 
+    private int grid_x;
+    private int grid_y;
+    
     public SlingshotWindow () {
     
         // Show desktop
@@ -88,12 +91,25 @@ public class SlingshotWindow : ElementaryWidgets.CompositedWindow {
         container.pack_start (bottom, false, true, 20); 
         container.pack_start (top, false, true, 0); 
         
+        this.grid = new Gtk.Grid();
+        this.grid.set_row_spacing (70);
+        this.grid.set_column_spacing (30);
         // Make icon grid and populate
         if (monitor_dimensions.width > monitor_dimensions.height) { // normal landscape orientation
-            this.grid = new Slingshot.Frontend.Grid (4, 6);
+            //Slingshot.Frontend.Grid (4, 6);
+            this.grid_x = 4;
+            this.grid_y = 6;
         } else { // most likely a portrait orientation
-            this.grid = new Slingshot.Frontend.Grid (6, 4);
+            //Slingshot.Frontend.Grid (6, 4);
+            this.grid_x = 6;
+            this.grid_y = 4;
         }
+        // Initialize the grid
+        for (int r = 0; r < this.grid_x; r++)
+            this.grid.insert_row(r);
+        for (int c = 0; c < this.grid_y; c++)
+            this.grid.insert_column(c);
+        
         container.pack_start (this.grid, true, true, 0);
         
         this.populate_grid ();
@@ -124,9 +140,9 @@ public class SlingshotWindow : ElementaryWidgets.CompositedWindow {
     
     private void populate_grid () {        
     
-        for (int r = 0; r < this.grid.n_rows; r++) {
+        for (int r = 0; r < this.grid_x; r++) {
             
-            for (int c = 0; c < this.grid.n_columns; c++) {
+            for (int c = 0; c < this.grid_y; c++) {
                             
                 var item = new Slingshot.Frontend.AppItem (this.icon_size);
                 this.children.append (item);
@@ -137,7 +153,7 @@ public class SlingshotWindow : ElementaryWidgets.CompositedWindow {
                 item.button_release_event.connect ( () => {
                     
                     try {
-                        new GLib.DesktopAppInfo.from_filename (this.filtered.get((int) (this.children.index(item) + (this.pages.active * this.grid.n_columns * this.grid.n_rows)))["desktop_file"]).launch (null, null);
+                        new GLib.DesktopAppInfo.from_filename (this.filtered.get((int) (this.children.index(item) + (this.pages.active * this.grid_y * this.grid_x)))["desktop_file"]).launch (null, null);
                         this.destroy();
                     } catch (GLib.Error e) {
                         stdout.printf("Error! Load application: " + e.message);
@@ -147,7 +163,7 @@ public class SlingshotWindow : ElementaryWidgets.CompositedWindow {
                     
                 });
                 
-                this.grid.attach (item, c, c + 1, r, r + 1, Gtk.AttachOptions.EXPAND, Gtk.AttachOptions.EXPAND, 0, 0);
+                this.grid.attach (item, c, r);
                 
             } 
         }        
@@ -155,12 +171,12 @@ public class SlingshotWindow : ElementaryWidgets.CompositedWindow {
     
     private void update_grid (Gee.ArrayList<Gee.HashMap<string, string>> apps) {    
         
-        int item_iter = (int)(this.pages.active * this.grid.n_columns * this.grid.n_rows);
-        for (int r = 0; r < this.grid.n_rows; r++) {
+        int item_iter = (int)(this.pages.active * this.grid_y * this.grid_x);
+        for (int r = 0; r < this.grid_x; r++) {
             
-            for (int c = 0; c < this.grid.n_columns; c++) {
+            for (int c = 0; c < this.grid_y; c++) {
                 
-                int table_pos = c + (r * (int)this.grid.n_columns); // position in table right now
+                int table_pos = c + (r * (int)this.grid_y); // position in table right now
                 
                 var item = this.children.nth_data(table_pos);
                 if (item_iter < apps.size) {
@@ -204,8 +220,8 @@ public class SlingshotWindow : ElementaryWidgets.CompositedWindow {
     
     private void update_pages (Gee.ArrayList<Gee.HashMap<string, string>> apps) {
         // Find current number of pages and update count
-        var num_pages = (int) (apps.size / (this.grid.n_columns * this.grid.n_rows));
-        (double) apps.size % (double) (this.grid.n_columns * this.grid.n_rows) > 0 ? this.total_pages = num_pages + 1 : this.total_pages = num_pages;
+        var num_pages = (int) (apps.size / (this.grid_y * this.grid_x));
+        (double) apps.size % (double) (this.grid_y * this.grid_x) > 0 ? this.total_pages = num_pages + 1 : this.total_pages = num_pages;
         
         // Update pages
         if (this.total_pages > 1) {
@@ -296,15 +312,14 @@ public class SlingshotWindow : ElementaryWidgets.CompositedWindow {
                 return true;
             case "Left":
                 var current_item = this.grid.get_children ().index (this.get_focus ());
-                if (current_item % this.grid.n_columns == this.grid.n_columns - 1) {
+                if (current_item % this.grid_y == this.grid_y - 1) {
                     this.page_left ();
                     return true;
                 }
-                
                 break;
             case "Right":
                 var current_item = this.grid.get_children ().index (this.get_focus ());
-                if (current_item % this.grid.n_columns == 0) {
+                if (current_item % this.grid_y == 0) {
                     this.page_right ();
                     return true;
                 }

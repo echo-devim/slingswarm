@@ -11,8 +11,6 @@ CMakeFiles/slingscold-launcher.dir/frontend/widgets/AppItem.c.o: frontend/widget
 
 CMakeFiles/slingscold-launcher.dir/frontend/widgets/CompositedWindow.c.o: frontend/widgets/CompositedWindow.c
 
-CMakeFiles/slingscold-launcher.dir/frontend/widgets/Grid.c.o: frontend/widgets/Grid.c
-
 CMakeFiles/slingscold-launcher.dir/frontend/widgets/Indicators.c.o: frontend/widgets/Indicators.c
 
 CMakeFiles/slingscold-launcher.dir/frontend/widgets/Searchbar.c.o: frontend/widgets/Searchbar.c
