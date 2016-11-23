@@ -1,2 +1,0 @@
-# Hashes of file build rules.
-68586db21da9e8cebe45be2428a22c7e slingshot.c

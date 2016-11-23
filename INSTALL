@@ -1,4 +1,4 @@
-To install Slingscold from the source, you need to compile it.
+To install slingswarm from the source, you need to compile it.
 
 == Compilation ==
 
@@ -12,19 +12,19 @@ To install Slingscold from the source, you need to compile it.
     make
     You can also use make -j3 if you have a dual core. (it will be much faster)
 
-== Launch Slingscold ==
+== Launch slingswarm ==
 
-- Just run slingscold:
-    ./slingscold-launcher
+- Just run slingswarm:
+    ./slingswarm-launcher
 
-== Install Slingscold ==
+== Install slingswarm ==
 
 - With the administrator rights, use:
     make install
     Or:
     sudo make install
 
-- You can now launch Slingscold using:
-    slingscold
+- You can now launch slingswarm using:
+    slingswarm
     Or:
-    /usr/local/bin/slingscold-launcher
+    /usr/local/bin/slingswarm-launcher

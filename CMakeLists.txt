@@ -4,7 +4,7 @@
 cmake_minimum_required (VERSION 2.6)
 SET(CMAKE_COLOR_MAKEFILE ON)
 SET(CMAKE_VERBOSE_MAKEFILE OFF)
-project (slingscold-launcher)
+project (slingswarm-launcher)
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/vala )
 # Recurse into the "Hello" and "Demo" subdirectories. This does not actually
 # cause another cmake executable to run. The same process will walk through
@@ -47,11 +47,11 @@ OPTIONS
     --thread
     )
 
-INSTALL (FILES usr/slingscold-launcher.desktop DESTINATION /usr/share/applications/)
-INSTALL (FILES usr/slingscold-launcher.png DESTINATION /usr/share/icons/)
+INSTALL (FILES usr/slingswarm-launcher.desktop DESTINATION /usr/share/applications/)
+INSTALL (FILES usr/slingswarm-launcher.png DESTINATION /usr/share/icons/)
 add_definitions(${CFLAGS} -Wall -Winit-self -Wwrite-strings -Wunreachable-code
                           -Wstrict-prototypes -DGMENU_I_KNOW_THIS_IS_UNSTABLE -DWNCK_I_KNOW_THIS_IS_UNSTABLE )
-add_executable(slingscold-launcher ${VALA_C})
-target_link_libraries(slingscold-launcher m)
+add_executable(slingswarm-launcher ${VALA_C})
+target_link_libraries(slingswarm-launcher m)
 
-install(TARGETS slingscold-launcher RUNTIME DESTINATION bin)
+install(TARGETS slingswarm-launcher RUNTIME DESTINATION bin)

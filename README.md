@@ -1,6 +1,6 @@
-# Slingscold
+# Slingswarm
 
-Slingscold is a fork of Slingshot, i.e. a lightweight application launcher similar to Launchpad in Mac OS X.
+Slingswarm is the GTK+3 version of Slingscold, i.e. a lightweight application launcher similar to Launchpad in Mac OS X.
 
 This project is a fork of Slingscold:
 
@@ -18,10 +18,10 @@ Move the `unique-3.0.vapi` and `unique-3.0.deps` files from the local **fix** fo
 
 ## Post Install
 
-Once installed set shortcut key to access Slingscold.
+Once installed set shortcut key to access Slingswarm.
 
   * System -> Preferences -> Hardware -> Keyboard Shortcuts > click Add
-  * Name: Slingscold
-  * Command: slingscold-launcher
+  * Name: Slingswarm
+  * Command: slingswarm-launcher
 
 Now assign it a shortcut key, such as CTRL+SPACE.
