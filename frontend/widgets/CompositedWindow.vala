@@ -25,10 +25,9 @@ namespace ElementaryWidgets {
         }
         
         public bool clear_background (Gtk.Widget widget, Cairo.Context ctx) {
-            var context = Gdk.cairo_create (widget.get_window ());
-            
-            context.set_operator (Cairo.Operator.CLEAR);
-            context.paint();
+
+            ctx.set_operator (Cairo.Operator.CLEAR);
+            cxt.paint();
             
             return false;
         }
