@@ -20,23 +20,24 @@ public class SlingshotWindow : ElementaryWidgets.CompositedWindow {
     
     public SlingshotWindow () {
     
-        // Show desktop
-        Wnck.Screen.get_default().toggle_showing_desktop (false);
-        
-        // Window properties
-        this.set_title ("Slingscold");
-        this.set_skip_pager_hint (true);
-        this.set_skip_taskbar_hint (true);
-        this.set_type_hint (Gdk.WindowTypeHint.NORMAL);
-        this.fullscreen (); //this.maximize ();
-        this.stick ();
-        this.set_keep_above (true);
-        
-        // Set icon size
         Gdk.Rectangle monitor_dimensions;
         Gdk.Screen screen = Gdk.Screen.get_default();
         screen.get_monitor_geometry(screen.get_primary_monitor(), out monitor_dimensions);
         
+        // Show desktop
+        Wnck.Screen.get_default().toggle_showing_desktop (false);
+        
+        // Window properties
+        this.set_title ("Slingswarm");
+        this.set_skip_pager_hint (true);
+        this.set_skip_taskbar_hint (true);
+        this.set_type_hint (Gdk.WindowTypeHint.NORMAL);
+        this.fullscreen ();
+        this.stick ();
+        this.set_keep_above (true);
+        this.set_default_size (monitor_dimensions.width,  monitor_dimensions.height);
+
+        // Set icon size  
         double suggested_size = (Math.pow (monitor_dimensions.width * monitor_dimensions.height, ((double) (1.0/3.0))) / 1.6);
         if (suggested_size < 27) {
             this.icon_size = 24;
@@ -95,12 +96,10 @@ public class SlingshotWindow : ElementaryWidgets.CompositedWindow {
         this.grid.set_row_spacing (70);
         this.grid.set_column_spacing (30);
         // Make icon grid and populate
-        if (monitor_dimensions.width > monitor_dimensions.height) { // normal landscape orientation
-            //Slingshot.Frontend.Grid (4, 6);
-            this.grid_x = 4;
+        if ((monitor_dimensions.width / monitor_dimensions.height) < 1.4) { // Monitor 5:4, 4:3
+            this.grid_x = 5;
             this.grid_y = 6;
-        } else { // most likely a portrait orientation
-            //Slingshot.Frontend.Grid (6, 4);
+        } else { // Monitor 16:9
             this.grid_x = 6;
             this.grid_y = 4;
         }
