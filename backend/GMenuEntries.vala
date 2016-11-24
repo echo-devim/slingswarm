@@ -2,15 +2,22 @@ namespace Slingshot.Backend {
     public class GMenuEntries : GLib.Object {
 
         public static Gee.ArrayList<GMenu.TreeDirectory> get_categories () {
-
-            var tree = GMenu.Tree.lookup ("applications.menu", GMenu.TreeFlags.INCLUDE_EXCLUDED);
+            var tree = new GMenu.Tree ("applications.menu", GMenu.TreeFlags.INCLUDE_EXCLUDED);
+            try {
+                // initialize the tree
+                tree.load_sync ();
+            } catch (GLib.Error e) {
+                stdout.printf("Initialization of the GMenu.Tree failed: %s\n", e.message);
+            }
             var root = tree.get_root_directory ();
             var main_directory_entries = new Gee.ArrayList<GMenu.TreeDirectory> ();
-
-            foreach (GMenu.TreeItem item in root.get_contents()) {
-                if (item.get_type() == GMenu.TreeItemType.DIRECTORY) {
-                    main_directory_entries.add ((GMenu.TreeDirectory) item);
+            var iter = root.iter ();
+            var item = iter.next();
+            while ( item != GMenu.TreeItemType.INVALID) {
+                if (item == GMenu.TreeItemType.DIRECTORY) {
+                    main_directory_entries.add ((GMenu.TreeDirectory) iter.get_directory ());
                 }
+                item = iter.next ();
             }
             return main_directory_entries;
         }
@@ -19,15 +26,18 @@ namespace Slingshot.Backend {
 
             var entries = new Gee.HashSet<GMenu.TreeEntry>  ( (x) => ((GMenu.TreeEntry)x).get_desktop_file_path ().hash (), (x,y) => ((GMenu.TreeEntry)x).get_desktop_file_path ().hash () == ((GMenu.TreeEntry)y).get_desktop_file_path ().hash ());
 
-            foreach (GMenu.TreeItem item in category.get_contents ()) {
-                switch (item.get_type ()) {
+            var iter = category.iter ();
+            var item = iter.next ();
+            while ( item != GMenu.TreeItemType.INVALID) {
+                switch (item) {
                     case GMenu.TreeItemType.DIRECTORY:
-                        entries.add_all (get_applications_for_category ((GMenu.TreeDirectory) item));
+                        entries.add_all (get_applications_for_category ((GMenu.TreeDirectory) iter.get_directory ()));
                         break;
                     case GMenu.TreeItemType.ENTRY:
-                        entries.add ((GMenu.TreeEntry) item);
+                        entries.add ((GMenu.TreeEntry) iter.get_entry ());
                         break;
                 }
+                item = iter.next ();
             }
             return entries;
         }
@@ -51,15 +61,16 @@ namespace Slingshot.Backend {
             var icon_theme = Gtk.IconTheme.get_default();
 
             list = new Gee.ArrayList<Gee.HashMap<string, string>> ();
-            foreach (GMenu.TreeEntry app in source) {
-               if (app.get_is_nodisplay() == false && app.get_is_excluded() == false && app.get_icon() != null) {
+            foreach (GMenu.TreeEntry entry in source) {
+               var app = entry.get_app_info ();
+               if (app.get_nodisplay() == false && app.get_is_hidden() == false && app.get_icon() != null) {
                     var app_to_add = new Gee.HashMap<string, string> ();
-                    app_to_add["description"] = app.get_comment();
-                    app_to_add["name"] = app.get_name();
-                    app_to_add["command"] = app.get_exec();
-                    app_to_add["desktop_file"] = app.get_desktop_file_path();
+                    app_to_add["description"] = app.get_description();
+                    app_to_add["name"] = app.get_display_name();
+                    app_to_add["command"] = app.get_commandline();
+                    app_to_add["desktop_file"] = entry.get_desktop_file_path();
                     if (!icons.has_key(app_to_add["command"])) {
-                        var app_icon = app.get_icon ();
+                        var app_icon = app.get_icon ().to_string ();
                         try {
                             if (icon_theme.has_icon (app_icon)) {
                                 /* Attention: the icons inside the icon_theme can tell lies about their icon_size, so we need always to scale them */
