@@ -13,7 +13,7 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/vala )
 #add_subdirectory (src)
 
 find_package(PkgConfig)
-pkg_check_modules(DEPS REQUIRED unique-3.0 gtk+-3.0 gee-0.8 gio-unix-2.0 libgnome-menu-3.0 libwnck-3.0)
+pkg_check_modules(DEPS REQUIRED unique-3.0 gtk+-3.0 gee-0.8 gio-unix-2.0 libgnome-menu-3.0)
 pkg_check_modules(GTHREAD REQUIRED "gthread-2.0 >= 2.14.0")
 
 add_definitions(${DEPS_CFLAGS})
@@ -41,7 +41,6 @@ PACKAGES
     gee-0.8
     gio-unix-2.0
     libgnome-menu-3.0
-    libwnck-3.0
     unique-3.0
 OPTIONS
     --thread

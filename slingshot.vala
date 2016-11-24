@@ -25,7 +25,7 @@ public class SlingshotWindow : ElementaryWidgets.CompositedWindow {
         screen.get_monitor_geometry(screen.get_primary_monitor(), out monitor_dimensions);
         
         // Show desktop
-        Wnck.Screen.get_default().toggle_showing_desktop (false);
+        //Wnck.Screen.get_default().toggle_showing_desktop (false);
         
         // Window properties
         this.set_title ("Slingswarm");
@@ -358,7 +358,7 @@ public class SlingshotWindow : ElementaryWidgets.CompositedWindow {
     // Override destroy for fade out and stuff
     public new void destroy () {
         // Restore windows
-        Wnck.Screen.get_default ().toggle_showing_desktop (false);
+        //Wnck.Screen.get_default ().toggle_showing_desktop (false);
         
         base.destroy();
         Gtk.main_quit();
