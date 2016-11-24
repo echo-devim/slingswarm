@@ -96,7 +96,6 @@ public class SlingshotWindow : ElementaryWidgets.CompositedWindow {
         this.grid.set_row_spacing (70);
         this.grid.set_column_spacing (30);
         this.grid.set_halign (Gtk.Align.CENTER);
-        this.grid.set_margin_top (10);
         // Make icon grid and populate
         if ((monitor_dimensions.width / (double)monitor_dimensions.height) < 1.4) { // Monitor 5:4, 4:3
             this.grid_x = 5;
