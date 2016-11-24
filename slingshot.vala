@@ -96,12 +96,12 @@ public class SlingshotWindow : ElementaryWidgets.CompositedWindow {
         this.grid.set_row_spacing (70);
         this.grid.set_column_spacing (30);
         // Make icon grid and populate
-        if ((monitor_dimensions.width / monitor_dimensions.height) < 1.4) { // Monitor 5:4, 4:3
+        if ((monitor_dimensions.width / (double)monitor_dimensions.height) < 1.4) { // Monitor 5:4, 4:3
             this.grid_x = 5;
-            this.grid_y = 6;
+            this.grid_y = 5;
         } else { // Monitor 16:9
-            this.grid_x = 6;
-            this.grid_y = 4;
+            this.grid_x = 4;
+            this.grid_y = 6;
         }
         // Initialize the grid
         for (int r = 0; r < this.grid_x; r++)
