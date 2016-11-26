@@ -27,7 +27,7 @@ namespace ElementaryWidgets {
         public bool clear_background (Gtk.Widget widget, Cairo.Context ctx) {
 
             ctx.set_operator (Cairo.Operator.CLEAR);
-            cxt.paint();
+            ctx.paint();
             
             return false;
         }
