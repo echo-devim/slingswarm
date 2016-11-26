@@ -29,12 +29,12 @@ public class SlingshotWindow : ElementaryWidgets.CompositedWindow {
         
         // Window properties
         this.set_title ("Slingswarm");
-        this.set_skip_pager_hint (true);
-        this.set_skip_taskbar_hint (true);
+        //this.set_skip_pager_hint (true);
+        //this.set_skip_taskbar_hint (true);
         this.set_type_hint (Gdk.WindowTypeHint.NORMAL);
         this.fullscreen ();
-        this.stick ();
-        this.set_keep_above (true);
+        //this.stick ();
+        //this.set_keep_above (true);
         this.set_default_size (monitor_dimensions.width,  monitor_dimensions.height);
 
         // Set icon size  
@@ -134,9 +134,9 @@ public class SlingshotWindow : ElementaryWidgets.CompositedWindow {
         
         // Signals and callbacks
         this.add_events (Gdk.EventMask.SCROLL_MASK);
-        this.button_release_event.connect ( () => { this.destroy(); return false; });
+        //this.button_release_event.connect ( () => { this.destroy(); return false; });
         this.draw.connect (this.draw_background);
-        this.focus_out_event.connect ( () => { this.destroy(); return true; } ); // close slingshot when the window loses focus
+        //this.focus_out_event.connect ( () => { this.destroy(); return true; } ); // close slingshot when the window loses focus
     }
     
     private void populate_grid () {        
@@ -370,22 +370,15 @@ public class SlingshotWindow : ElementaryWidgets.CompositedWindow {
 int main (string[] args) {
 
 	Gtk.init (ref args);
-
-	Unique.App app = new Unique.App ("org.elementary.slingshot", null);
-	
-	if (app.is_running ()) { //close if already running
-		Unique.Command command = Unique.Command.NEW;
-		app.send_message (command, new Unique.MessageData());
-	} else {
-        
-		var main_win = new SlingshotWindow ();
-		main_win.show_all ();
-		
-		app.watch_window (main_win);
-		
-		Gtk.main ();
-	}
-	
+        Gtk.Application app = new Gtk.Application ("org.elementary.slingshot", GLib.ApplicationFlags.FLAGS_NONE);	
+        app.activate.connect( () => {
+            if (app.get_windows ().length () == 0) {
+                var main_win = new SlingshotWindow ();            
+                main_win.set_application (app);
+                main_win.show_all ();
+                Gtk.main ();
+            }});
+        app.run (args);
 	return 1;
 	
 }
