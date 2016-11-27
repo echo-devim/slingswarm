@@ -238,7 +238,9 @@ public class SlingshotWindow : ElementaryWidgets.CompositedWindow {
     
     private void search() {
         
-        var current_text = this.searchbar.text.down ();
+        var current_text = "";
+        if (this.searchbar.text != null)
+            this.searchbar.text.down ();
         
         this.categories.set_active_no_signal (0); // switch to first page
         this.filtered.clear ();

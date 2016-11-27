@@ -1,7 +1,7 @@
 
 namespace Slingshot.Frontend {
 
-    public class Searchbar : Gtk.HBox {
+    public class Searchbar : Gtk.Box {
         
         // Constants
         const int WIDTH = 240; // Search bar width
@@ -42,8 +42,9 @@ namespace Slingshot.Frontend {
             this.buffer.text = this.hint_string;
             
             // HBox properties
-            this.homogeneous = false;
-            this.can_focus = false;
+
+            this.set_homogeneous (false);
+            this.set_can_focus (false);
             this.set_size_request (WIDTH, HEIGHT);
         
             // Wrapper 
@@ -53,7 +54,7 @@ namespace Slingshot.Frontend {
             // Pack gtk-find icon
             var search_icon_wrapper = new Gtk.EventBox ();
             search_icon_wrapper.set_visible_window (false);
-            this.search_icon = new Gtk.Image.from_stock("gtk-find", Gtk.IconSize.MENU); //search icon
+            this.search_icon = new Gtk.Image.from_icon_name("gtk-find", Gtk.IconSize.MENU); //search icon
             search_icon_wrapper.add (this.search_icon);
             search_icon_wrapper.border_width = 4;
             search_icon_wrapper.button_release_event.connect ( () => {return true;});
@@ -66,8 +67,7 @@ namespace Slingshot.Frontend {
             this.label.selectable = true;
             this.label.can_focus = false;
             this.label.set_single_line_mode (true);
-            
-            wrapper.pack_start (this.label);
+            wrapper.pack_start (this.label, true, true, 0);
             
             // Clear icon
             var clear_icon_wrapper = new Gtk.EventBox ();
@@ -79,7 +79,7 @@ namespace Slingshot.Frontend {
             stock_item.modifier = 0;
             stock_item.keyval = 0;
             stock_item.translation_domain = "edit-clear";
-            this.clear_icon = new Gtk.Image.from_stock("edit-clear-symbolic", Gtk.IconSize.MENU);
+            this.clear_icon = new Gtk.Image.from_icon_name("edit-clear-symbolic", Gtk.IconSize.MENU);
             
             clear_icon_wrapper.add (this.clear_icon);
             clear_icon_wrapper.button_release_event.connect ( () => { this.hint (); return true; });
