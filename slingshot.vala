@@ -238,15 +238,13 @@ public class SlingshotWindow : ElementaryWidgets.CompositedWindow {
     
     private void search() {
         
-        var current_text = "";
-        if (this.searchbar.text != null)
-            this.searchbar.text.down ();
+        var current_text = this.searchbar.text.down ();
         
         this.categories.set_active_no_signal (0); // switch to first page
         this.filtered.clear ();
         
         foreach (Gee.HashMap<string, string> app in this.apps) {
-            if (current_text in app["name"].down () || current_text in app["description"].down () || current_text in app["command"].down ()) {
+            if ((app["name"] != null && current_text in app["name"].down ()) || (app["description"] != null && current_text in app["description"].down ()) || (app["command"] != null && current_text in app["command"].down ())) {
                 this.filtered.add (app);
             }
         }     
