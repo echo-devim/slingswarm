@@ -83,6 +83,8 @@ namespace Slingshot.Frontend {
             
             clear_icon_wrapper.add (this.clear_icon);
             clear_icon_wrapper.button_release_event.connect ( () => { this.hint (); return true; });
+            clear_icon_wrapper.set_hexpand (true);
+            clear_icon_wrapper.set_halign (Gtk.Align.END);
             wrapper.pack_end (clear_icon_wrapper, false, true, 3);
             
             // Connect signals and callbacks
