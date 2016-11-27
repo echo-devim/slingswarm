@@ -21,5 +21,7 @@ Once installed set shortcut key to access Slingswarm.
 Now assign it a shortcut key, such as CTRL+SPACE.
 
 ## Changelog
-1.1 - Removed libunique dependency (Wayland compatibility)
-1.0 - Ported Slingscold to GTK3 + several improvements and bug fixes
+1.0
+* Removed libunique dependency (Wayland compatibility)
+* Several code improvements and bug fixes
+* Ported Slingscold to GTK3
