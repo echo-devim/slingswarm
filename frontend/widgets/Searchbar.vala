@@ -51,10 +51,10 @@ namespace Slingshot.Frontend {
             var wrapper = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 3); // space between the icon and the phrase search
             this.add (wrapper);
             
-            // Pack gtk-find icon
+            // Pack edit-find-symbolic icon
             var search_icon_wrapper = new Gtk.EventBox ();
             search_icon_wrapper.set_visible_window (false);
-            this.search_icon = new Gtk.Image.from_icon_name("gtk-find", Gtk.IconSize.MENU); //search icon
+            this.search_icon = new Gtk.Image.from_icon_name("edit-find-symbolic", Gtk.IconSize.MENU); //search icon
             search_icon_wrapper.add (this.search_icon);
             search_icon_wrapper.border_width = 4;
             search_icon_wrapper.button_release_event.connect ( () => {return true;});
