@@ -81,7 +81,8 @@ namespace Slingshot.Backend {
                                 icons[app_to_add["command"]] = icon_theme.load_icon("application-default-icon", icon_size, 0);
                             }
                         } catch  (GLib.Error e) {
-                            stdout.printf("No icon found.\n");
+                            stdout.printf("No icon found for %s.\n", app_to_add["name"]);
+                            continue;
                         }
                     }
                     list.add (app_to_add);
