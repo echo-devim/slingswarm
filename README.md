@@ -20,6 +20,12 @@ Once installed set shortcut key to access Slingswarm.
 
 Now assign it a shortcut key, such as CTRL+SPACE.
 
+Note: Some themes don't have the 'application-default-icon'. Slingswarm needs to have this icon, so please download it from the [FlatWoken](https://github.com/alecive/FlatWoken) icon pack and execute the following commands:
+```
+# cp application-default-icon.svg /usr/share/icons/hicolor/scalable/apps/
+# gtk-update-icon-cache /usr/share/icons/hicolor
+```
+
 ## Changelog
 1.0
 * Removed libunique dependency (Wayland compatibility)
