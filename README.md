@@ -1,8 +1,8 @@
 # Slingswarm
 
-Slingswarm is the GTK+3 version of Slingscold, i.e. a lightweight application launcher similar to Launchpad in Mac OS X.
+Slingswarm is the GTK+3 version of Slingscold, i.e. a lightweight application launcher similar to Launchpad in Mac OS X. It is also Wayland compatible.
 
-This project is a fork of Slingscold:
+This project was originally forked from Slingscold:
 
   * http://sourceforge.net/projects/slingscold/
 
@@ -28,6 +28,6 @@ Note: Some themes don't have the 'application-default-icon'. Slingswarm needs to
 
 ## Changelog
 1.0
-* Removed libunique dependency (Wayland compatibility)
+* Removed libunique dependency (for Wayland compatibility)
 * Several code improvements and bug fixes
 * Ported Slingscold to GTK3
