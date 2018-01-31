@@ -164,7 +164,7 @@ public class SlingshotWindow : ElementaryWidgets.CompositedWindow {
                     
                 });
                 
-                this.grid.attach (item, c, r);
+                this.grid.attach (item, c, r, 1, 1);
                 
             } 
         }        
